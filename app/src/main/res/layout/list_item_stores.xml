@@ -4,11 +4,58 @@
     android:layout_height="match_parent">
 
     <!-- Product Name -->
-    <TextView android:id="@+id/store_name"
+    <TextView
+        android:id="@+id/nombre_tienda"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:padding="10dip"
         android:textSize="16dip"
-        android:textStyle="bold"/>
+        android:textStyle="bold"
+        android:textColor="@color/colorPrimary"
+        android:layout_alignParentTop="true"
+        android:textAppearance="@android:style/TextAppearance.Holo.Medium"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dip"
+        android:id="@+id/id_tienda"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dip"
+        android:id="@+id/cadena_tienda"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dip"
+        android:id="@+id/formato_tienda"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dip"
+        android:id="@+id/calle_tienda"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dip"
+        android:id="@+id/numero_tienda"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dip"
+        android:id="@+id/colonia_tienda"
+        />
 
 </LinearLayout>

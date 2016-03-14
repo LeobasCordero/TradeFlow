@@ -1,4 +1,4 @@
-package com.pedron.tradeflow.tradeflow;
+package com.pedron.tradeflow.tradeflow.activities;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -30,7 +30,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.pedron.tradeflow.tradeflow.stores.StoresManager;
+import com.pedron.tradeflow.tradeflow.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,7 +49,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
     /**
      * A dummy authentication store containing known user names and passwords.
-     * TODO: remove after connecting to a real authentication system.
      */
     private static final String[] DUMMY_CREDENTIALS = new String[]{
             "12345:leobas", "01234:password"
@@ -338,7 +337,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             if (success) {
                 //finish();
                 Intent intent =
-                        new Intent(LoginActivity.this, StoresManager.class);
+                        new Intent(LoginActivity.this, StoresActivity.class);
+
                 //start the new activity
                 startActivity(intent);
             } else {
