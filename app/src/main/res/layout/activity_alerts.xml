@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/fondo">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="@drawable/encabezadogris"
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal"
+        >
+    <TextView
+        android:id="@+id/legend_alert"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/alert_header"
+        android:textColor="@color/colorLegends"
+        android:textSize="20dp"
+        android:gravity="center_vertical"
+        android:textAlignment="center" />
+
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignRight="@+id/legend_alert"
+        android:src="@drawable/logoblanco"
+        android:gravity="center_vertical"
+        />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:orientation="horizontal"
+        >
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/logoblanco"
+            android:layout_gravity="left"
+            android:scaleType="fitEnd"
+            android:layout_margin="5dp"/>
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/configuraw"
+            android:layout_gravity="center"
+            android:scaleType="fitEnd"
+            android:layout_margin="5dp"/>
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/tfblanco"
+            android:layout_gravity="right"
+            android:scaleType="fitEnd"
+            android:layout_margin="5dp"/>
+    </LinearLayout>
+
+</LinearLayout>

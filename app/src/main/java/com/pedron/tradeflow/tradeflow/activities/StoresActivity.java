@@ -2,12 +2,14 @@ package com.pedron.tradeflow.tradeflow.activities;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -57,6 +59,13 @@ public class StoresActivity extends AppCompatActivity {
         // Adding items to listview
         adapter = new AdapterStores(this, storeList);
         lv.setAdapter(adapter);
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent launchActivity = new Intent(StoresActivity.this, TrademarkActivity.class);
+                startActivity(launchActivity);
+            }
+        });
 /**
  * TODO El texto descriptivo ya no funciona
  */
