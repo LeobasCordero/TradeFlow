@@ -1,6 +1,5 @@
 package com.pedron.tradeflow.tradeflow.activities;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +11,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import com.pedron.tradeflow.tradeflow.R;
@@ -19,7 +19,6 @@ import com.pedron.tradeflow.tradeflow.adapters.AdapterStores;
 import com.pedron.tradeflow.tradeflow.entity.Store;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -32,7 +31,7 @@ public class StoresActivity extends AppCompatActivity {
     EditText inputSearch;
 //    ArrayList<HashMap<String, String>> storeList;
     List<Store> storeList;
-
+    ImageView config;
 
     // Listview Data
     String stores[] = {
@@ -47,6 +46,7 @@ public class StoresActivity extends AppCompatActivity {
 
         lv = (ListView) findViewById(R.id.list_view_stores);
         inputSearch = (EditText) findViewById(R.id.inputSearch);
+        config = (ImageView) findViewById(R.id.config);
 
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowTitleEnabled(false);
@@ -55,6 +55,14 @@ public class StoresActivity extends AppCompatActivity {
         View v = inflator.inflate(R.layout.custom_imageview, null);
         actionBar.setCustomView(v);
 
+        config.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent act = new Intent(StoresActivity.this, AlertsActivity.class);
+                startActivity(act);
+            }
+        });
+
         storeList = getStores();
         // Adding items to listview
         adapter = new AdapterStores(this, storeList);
@@ -62,7 +70,7 @@ public class StoresActivity extends AppCompatActivity {
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent launchActivity = new Intent(StoresActivity.this, TrademarkActivity.class);
+                Intent launchActivity = new Intent(StoresActivity.this, AlertsActivity.class);
                 startActivity(launchActivity);
             }
         });

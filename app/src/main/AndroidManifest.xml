@@ -29,6 +29,9 @@
         <activity android:name=".activities.TrademarkActivity"/>
         <activity android:name=".activities.AlertsActivity"/>
         <activity android:name=".activities.NewsActivity"/>
+        <activity android:name=".activities.ClientsActivity"/>
+        <activity android:name=".activities.ProductsActivity"/>
+        <activity android:name=".activities.MenuActivity"/>
     </application>
 
 </manifest>

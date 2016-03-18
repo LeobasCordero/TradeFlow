@@ -1,97 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.android.scrollapp2.noticiasActivity"
-    android:id="@+id/news_activity">
-
-    <ScrollView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
-
-        <LinearLayout
-            android:id="@+id/clientesImg"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/fondo"
-            android:orientation="vertical">
-
-            <RelativeLayout
-                android:id="@+id/noticias"
-                android:layout_width="fill_parent"
-                android:layout_height="50dp"
-                android:layout_alignParentTop="true">
-
-                <TextView
-                    android:id="@+id/NoticiasText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    android:text="NOTICIAS"
-                    android:textColor="#504e4e"
-                    android:textSize="20sp" />
-
-
-            </RelativeLayout>
-
-            <TextView
-                android:id="@+id/textView1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/clientes"
-                android:onClick="sendMessage2"
-                android:text="MES DEL BEBE = Capent Participará en las promociones que implemente la campaña de Comercial Mexicana"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
-
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true"
-                android:layout_below="@+id/clientes"
-                android:onClick="sendMessage2"
-                android:text="Asegurar precio de venta de HINDS nutritiva (Edicion especial)"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
-        </LinearLayout>
-    </ScrollView>
-
-    <RelativeLayout
-        android:id="@+id/footer"
-        android:layout_width="fill_parent"
-        android:layout_height="50dp"
-        android:layout_alignParentBottom="true"
-        android:background="#000">
-
-        <TextView
-            android:id="@+id/texthere2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:text=""
-            android:textSize="20sp" />
-
-    </RelativeLayout>
+    android:layout_height="wrap_content"
+    android:background="@drawable/fondo"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center">
-    <Button
-        android:id="@+id/next"
-        style="?android:textAppearanceSmall"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/action_next"
-        android:background="@color/colorPrimary"
-        android:textColor="@color/colorLegends"
-        android:textStyle="bold"
-        android:gravity="center"/>
+        android:layout_gravity="center"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="NOTICIAS"
+            android:textSize="20dp"
+            android:textStyle="bold"/>
+
     </LinearLayout>
-</RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="15dp"
+        android:paddingTop="15dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/estrella" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="MES DEL BEBE = Capent Participará en las promociones que implemente la campaña de Comercial Mexicana"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:paddingLeft="5dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/estrella" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Asegurar precio de venta de HINDS nutritiva (Edicion especial)"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:paddingLeft="5dp"/>
+
+        </LinearLayout>
+
+
+        <!--<RelativeLayout
+            android:id="@+id/footer"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            android:background="#000">
+
+            <TextView
+                android:id="@+id/texthere2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:text=""
+                android:textSize="20sp" />
+
+        </RelativeLayout>-->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/next"
+                style="?android:textAppearanceSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@color/colorPrimary"
+                android:gravity="center"
+                android:text="@string/action_next"
+                android:textColor="@color/colorLegends"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

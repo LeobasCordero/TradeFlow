@@ -44,7 +44,7 @@ public class NewsActivity extends AppCompatActivity {
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(NewsActivity.this, StoresActivity.class));
+                startActivity(new Intent(NewsActivity.this, TrademarkActivity.class));
             }
         });
 

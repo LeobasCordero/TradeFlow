@@ -51,7 +51,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      * A dummy authentication store containing known user names and passwords.
      */
     private static final String[] DUMMY_CREDENTIALS = new String[]{
-            "12345:leobas", "01234:password"
+            "00000:leobas", "01234:password", "123456:123456"
     };
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
@@ -337,7 +337,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             if (success) {
                 //finish();
                 Intent intent =
-                        new Intent(LoginActivity.this, NewsActivity.class);
+                        new Intent(LoginActivity.this, StoresActivity.class);
 
                 //start the new activity
                 startActivity(intent);
