@@ -20,6 +20,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -31,6 +32,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.pedron.tradeflow.tradeflow.R;
+import com.pedron.tradeflow.tradeflow.util.DatabaseHandler;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,6 +66,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private View mProgressView;
     private View mLoginFormView;
 
+    private DatabaseHandler db;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,6 +75,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         // Set up the login form.
         mUserView = (AutoCompleteTextView) findViewById(R.id.user);
         populateAutoComplete();
+
+        setUsers();
 
         mPasswordView = (EditText) findViewById(R.id.password);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -325,6 +331,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 }
             }
 
+
+
             // TODO: register the new account here.
             return true;
         }
@@ -352,6 +360,13 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             mAuthTask = null;
             showProgress(false);
         }
+    }
+
+    public void setUsers(){
+        db = new DatabaseHandler(this);
+        db.AddUserTradeflow("admin", "admin", "admin", "active");
+        db.close();
+        Log.i("Leobas", "Creo la DB");
     }
 }
 
