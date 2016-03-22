@@ -6,10 +6,9 @@ package com.pedron.tradeflow.tradeflow.util;
 public class Constant {
 
 
-    private static String URL_IMAGES     = "/storage/emulated/0/Pictures/TRADEFLOW/TRADEMARKS/";
+    public static String ERROR_DIR     = "No se puede crear el directorio";
+    public static String TRADEMARK     = "TRADEMARK";
+    public static String TRADEFLOW     = "READEFLOW";
 
-    public static String getUrlImages() {
-        return URL_IMAGES;
-    }
 
 }

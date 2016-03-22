@@ -32,6 +32,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.pedron.tradeflow.tradeflow.R;
+import com.pedron.tradeflow.tradeflow.entity.User;
 import com.pedron.tradeflow.tradeflow.util.DatabaseHandler;
 
 import java.util.ArrayList;
@@ -68,6 +69,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
     private DatabaseHandler db;
 
+    private List<User> uList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,6 +79,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mUserView = (AutoCompleteTextView) findViewById(R.id.user);
         populateAutoComplete();
 
+        // add usr to database
         setUsers();
 
         mPasswordView = (EditText) findViewById(R.id.password);
@@ -100,6 +104,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
+
+        uList = db.getUsers();
     }
 
     private void populateAutoComplete() {
@@ -323,18 +329,26 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 return false;
             }
 
-            for (String credential : DUMMY_CREDENTIALS) {
+            Boolean okLogin = false;
+            /*for (String credential : DUMMY_CREDENTIALS) {
                 String[] pieces = credential.split(":");
                 if (pieces[0].equals(mUser)) {
                     // Account exists, return true if the password matches.
                     return pieces[1].equals(mPassword);
                 }
+            }*/
+
+            for (int i = 0 ; i < uList.size() ; i++){
+                User u = uList.get(i);
+                if(mUser.equals(u.getUsuario())){
+                    if(mPassword.equals(u.getContrasena())){
+                        okLogin = true;
+                    }
+                }
             }
 
-
-
             // TODO: register the new account here.
-            return true;
+            return okLogin;
         }
 
         @Override
@@ -364,7 +378,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
     public void setUsers(){
         db = new DatabaseHandler(this);
-        db.AddUserTradeflow("admin", "admin", "admin", "active");
+        db.AddUserTradeflow("12345", "admin123", "admin", "active");
         db.close();
         Log.i("Leobas", "Creo la DB");
     }

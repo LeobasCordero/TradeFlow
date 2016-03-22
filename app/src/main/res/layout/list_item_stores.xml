@@ -9,10 +9,10 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:padding="10dip"
+        android:padding="5dp"
         android:textAppearance="@android:style/TextAppearance.Holo.Medium"
         android:textColor="@color/colorPrimary"
-        android:textSize="16dip"
+        android:textSize="20dp"
         android:textStyle="bold" />
 
     <LinearLayout
