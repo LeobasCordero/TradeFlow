@@ -45,9 +45,9 @@ public class AdapterStores extends ArrayAdapter<Store> {
         TextView idTienda = (TextView) listItemView.findViewById(R.id.id_tienda);
         TextView cadena = (TextView) listItemView.findViewById(R.id.cadena_tienda);
         TextView formato = (TextView) listItemView.findViewById(R.id.formato_tienda);
-        TextView calle = (TextView) listItemView.findViewById(R.id.calle_tienda);
+//        TextView calle = (TextView) listItemView.findViewById(R.id.calle_tienda);
         TextView noExt = (TextView) listItemView.findViewById(R.id.numero_tienda);
-        TextView colonia = (TextView) listItemView.findViewById(R.id.colonia_tienda);
+        TextView colonia = (TextView) listItemView.findViewById(R.id.direccion_tienda);
 
         //Obteniendo instancia de la Tarea en la posición actual
         Store store = (Store) getItem(position);
@@ -57,9 +57,9 @@ public class AdapterStores extends ArrayAdapter<Store> {
         idTienda.setText(store.getIdTienda());
         cadena.setText(store.getCadena());
         formato.setText(store.getFormato());
-        calle.setText(store.getCalle());
-        noExt.setText(store.getNoExt());
-        colonia.setText(store.getColonia());
+//        calle.setText(store.getCalle());
+        noExt.setText(store.getNumTiendas());
+        colonia.setText(store.getDireccion());
 
         //Devolver al ListView la fila creada
         return listItemView;

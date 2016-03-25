@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -13,10 +14,12 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.pedron.tradeflow.tradeflow.R;
 import com.pedron.tradeflow.tradeflow.adapters.AdapterStores;
 import com.pedron.tradeflow.tradeflow.entity.Store;
+import com.pedron.tradeflow.tradeflow.util.DatabaseHandler;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,12 +35,13 @@ public class StoresActivity extends AppCompatActivity {
 //    ArrayList<HashMap<String, String>> storeList;
     List<Store> storeList;
     ImageView config;
+    TextView textView;
 
     // Listview Data
-    String stores[] = {
+    /*String stores[] = {
             "Ruiz Cortinez","Constitucion","Morones Prieto","Centro Apodaca","Cuahutemoc",
             "Santa Rosa","Azteca","Vicente Guerrero","Churubusco","Los Angeles","San Jose",
-            "Plaza Linda Vista","Aeropuerto"};
+            "Plaza Linda Vista","Aeropuerto"};*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,12 +52,15 @@ public class StoresActivity extends AppCompatActivity {
         inputSearch = (EditText) findViewById(R.id.inputSearch);
         config = (ImageView) findViewById(R.id.config);
 
+
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowTitleEnabled(false);
         actionBar.setDisplayShowCustomEnabled(true);
         LayoutInflater inflator = (LayoutInflater) this .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View v = inflator.inflate(R.layout.custom_imageview, null);
         actionBar.setCustomView(v);
+        textView = (TextView) findViewById(R.id.screen_title);
+        textView.setText("Tiendas");
 
         config.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,6 +78,13 @@ public class StoresActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent launchActivity = new Intent(StoresActivity.this, AlertsActivity.class);
+                Bundle extras = new Bundle();
+                storeList.get(position);
+                Log.i("Leobas", "idTienda: " + storeList.get(position).getIdTienda());
+                extras.putString("idTienda", storeList.get(position).getIdTienda());
+//                extras.putString("idTienda", storeList.get(position).get);
+                launchActivity.putExtras(extras);
+
                 startActivity(launchActivity);
             }
         });
@@ -102,9 +116,11 @@ public class StoresActivity extends AppCompatActivity {
     }
 
     public List<Store> getStores(){
-        List<Store> stores = new ArrayList<>();
+//        List<Store> stores = new ArrayList<>();
 
-        Store s = new Store("Ruiz Cortinez", "31122", "Walmart", "Supercenter", "Circuito", "2214", "Pablo Livas");
+        DatabaseHandler db = new DatabaseHandler(this);
+//        stores = db.getStores();
+/*        Store s = new Store("Ruiz Cortinez", "31122", "Walmart", "Supercenter", "Circuito", "2214", "Pablo Livas");
         stores.add(s);
         s = new Store("Morones Prieto", "1122", "Cadena", "Formato", "Calle Principal", "1020", "Tres Caminos");
         stores.add(s);
@@ -115,9 +131,9 @@ public class StoresActivity extends AppCompatActivity {
         s = new Store("Cuahutemoc", "605", "Mi Tiendita", "Supercenter", "Paricutin", "400", "Ave Roma");
         stores.add(s);
         s = new Store("Churubusco", "3500", "Comercial Treviño", "Minicuper", "Garza Sada", "S/N", "Juarez");
-        stores.add(s);
+        stores.add(s);*/
 
-        return stores;
+        return db.getStores();
     }
 
 }

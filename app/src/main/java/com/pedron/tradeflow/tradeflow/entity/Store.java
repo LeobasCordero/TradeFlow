@@ -8,22 +8,22 @@ public class Store {
     private String nombreTienda;
     private String cadena;
     private String formato;
-    private String calle;
+//    private String calle;
     private String idTienda;
-    private String colonia;
+//    private String colonia;
+    private String direccion;
 
     public Store(){
     }
 
     public Store(String numTiendas, String nombreTienda, String cadena, String formato,
-                 String calle, String idTienda, String colonia){
+                 String idTienda, String direccion){
         this.numTiendas = numTiendas;
         this.nombreTienda = nombreTienda;
         this.cadena = cadena;
         this.formato = formato;
-        this.calle = calle;
         this.idTienda = idTienda;
-        this.colonia = colonia;
+        this.direccion = direccion;
     }
 
     public String getNumTiendas() {
@@ -58,14 +58,6 @@ public class Store {
         this.formato = formato;
     }
 
-    public String getCalle() {
-        return calle;
-    }
-
-    public void setCalle(String calle) {
-        this.calle = calle;
-    }
-
     public String getIdTienda() {
         return idTienda;
     }
@@ -74,11 +66,11 @@ public class Store {
         this.idTienda = idTienda;
     }
 
-    public String getColonia() {
-        return colonia;
+    public String getDireccion() {
+        return direccion;
     }
 
-    public void setColonia(String colonia) {
-        this.colonia = colonia;
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
     }
 }

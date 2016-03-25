@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.pedron.tradeflow.tradeflow.R;
 
@@ -16,6 +17,7 @@ import com.pedron.tradeflow.tradeflow.R;
 public class MenuActivity extends AppCompatActivity {
 
     ImageView piso;
+    TextView textView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +30,9 @@ public class MenuActivity extends AppCompatActivity {
         LayoutInflater inflator = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View v = inflator.inflate(R.layout.custom_imageview, null);
         actionBar.setCustomView(v);
+        textView = (TextView) findViewById(R.id.screen_title);
+        textView.setText("Actividades");
+//        textView.setPadding(75,10,0,10);
 
         piso = (ImageView)findViewById(R.id.piso_clic);
         piso.setOnClickListener(new View.OnClickListener() {

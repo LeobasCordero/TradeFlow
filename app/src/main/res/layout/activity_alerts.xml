@@ -5,7 +5,7 @@
     android:background="@drawable/fondo"
     android:orientation="vertical">
 
-    <LinearLayout
+   <!-- <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -17,9 +17,17 @@
             android:text="@string/alert_header"
             android:textStyle="bold"
             android:textSize="20dp" />
-    </LinearLayout>
+    </LinearLayout>-->
 
-    <LinearLayout
+
+    <!-- List View -->
+    <ListView
+        android:paddingTop="20dp"
+        android:id="@+id/list_view_alerts"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+    <!--android:id="@android:id/list"-->
+    <!--<LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -36,6 +44,7 @@
                 android:src="@drawable/estrella" />
 
             <TextView
+                android:id="@+id/textAlert"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="10dp"
@@ -43,24 +52,7 @@
                 android:textAppearance="?android:attr/textAppearanceMedium" />
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <ImageView
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@drawable/estrella" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:text="Excedrim Dolores Fuertes"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
-        </LinearLayout>
-    </LinearLayout>
+    </LinearLayout>-->
 
     <!--    <LinearLayout
             android:layout_width="match_parent"
@@ -87,38 +79,6 @@
             android:gravity="center_vertical"
             />
         </LinearLayout>-->
-
-    <!--<LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        android:orientation="horizontal"
-        >
-
-        <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@drawable/logoblanco"
-            android:layout_gravity="left"
-            android:scaleType="fitEnd"
-            android:layout_margin="5dp"/>
-
-        <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@drawable/configuraw"
-            android:layout_gravity="center"
-            android:scaleType="fitEnd"
-            android:layout_margin="5dp"/>
-
-        <ImageView
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@drawable/tfblanco"
-            android:layout_gravity="right"
-            android:scaleType="fitEnd"
-            android:layout_margin="5dp"/>
-    </LinearLayout>-->
 
     <LinearLayout
         android:layout_width="match_parent"

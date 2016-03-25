@@ -1,14 +1,24 @@
 package com.pedron.tradeflow.tradeflow.activities;
 
+import android.app.ActionBar;
+import android.app.ListActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
+import android.widget.TextView;
 
 import com.pedron.tradeflow.tradeflow.R;
+import com.pedron.tradeflow.tradeflow.util.DatabaseHandler;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by leocg on 15/03/2016.
@@ -16,6 +26,9 @@ import com.pedron.tradeflow.tradeflow.R;
 public class AlertsActivity extends AppCompatActivity {
 
     Button next;
+    List alertas;
+    ListView listView;
+    TextView textView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +41,19 @@ public class AlertsActivity extends AppCompatActivity {
         LayoutInflater inflator = (LayoutInflater) this .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View v = inflator.inflate(R.layout.custom_imageview, null);
         actionBar.setCustomView(v);
+        textView = (TextView) findViewById(R.id.screen_title);
+        textView.setText("Alertas");
+
+        Intent intent = getIntent();
+        Bundle b = intent.getExtras();
+        String idTienda = b.getString("idTienda");
+
+        DatabaseHandler db = new DatabaseHandler(this);
+        alertas = db.getAlerts(idTienda);
+        listView = (ListView)findViewById(R.id.list_view_alerts);
+
+        listView.setAdapter(new ArrayAdapter<String>(
+                this, R.layout.list_item_alert, R.id.textAlert, alertas));
 
         next = (Button)findViewById(R.id.next_alert);
         next.setOnClickListener(new View.OnClickListener() {

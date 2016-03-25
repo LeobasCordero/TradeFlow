@@ -80,7 +80,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         populateAutoComplete();
 
         // add usr to database
-        setUsers();
+        populateDB();
 
         mPasswordView = (EditText) findViewById(R.id.password);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -330,13 +330,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             }
 
             Boolean okLogin = false;
-            /*for (String credential : DUMMY_CREDENTIALS) {
-                String[] pieces = credential.split(":");
-                if (pieces[0].equals(mUser)) {
-                    // Account exists, return true if the password matches.
-                    return pieces[1].equals(mPassword);
-                }
-            }*/
 
             for (int i = 0 ; i < uList.size() ; i++){
                 User u = uList.get(i);
@@ -376,11 +369,29 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         }
     }
 
-    public void setUsers(){
+    public void populateDB(){
         db = new DatabaseHandler(this);
-        db.AddUserTradeflow("12345", "admin123", "admin", "active");
+        db.populateDB();
+        /*db.addUserTradeflow("12345", "admin123", "admin", "0");
+
+        db.addStoreTradeflow("441", "Ruiz Cortinez", "Walmart", "Supermercado", "1225", "Rodesia del Nte #402, col. San Roque, cp. 65008, San Pedro, Nuevo Leon");
+        db.addStoreTradeflow("610", "Centro", "Soriana", "Almacen", "855", "Jacarandas #233, col. Linda Vista, cp. 63005, Guadalupe, Nuevo Leon");
+        db.addStoreTradeflow("9405", "Los Angeles", "HEB", "Supermercado", "322", "Romulo Garza #2988, col. Los Morales, cp. 24452, San Nicolas de los Garza, Nuevo Leon");
+        db.addStoreTradeflow("102", "Escobedo", "OXXO", "CEDIS", "650", "Lazaro Cardenas #2011, col. Centrito Valle, cp. 66305, San Pedro, Nuevo Leon");
+        db.addStoreTradeflow("3365", "Universidad", "Famosa", "Almacen", "100", "Cuahutemoc #522, col. Centro, cp.68000, Monterrey, Nuevo Leon");
+
+        db.addAlertTradeflow("100", "SQL completo, donde indicamos los campos", "0");
+        db.addAlertTradeflow("100", "La polémica por la manera en la que son tratados los refugiados ", "0");
+        db.addAlertTradeflow("100", "Developing a custom adapter", "0");
+        db.addAlertTradeflow("322", "Como en el caso de los métodos de modificación de datos", "0");
+        db.addAlertTradeflow("650", "Tutorial describes how to use the ListView view together with activities and fragments in A", "0");
+        db.addAlertTradeflow("650", "Above syntax is calling startActivity method", "0");
+        db.addAlertTradeflow("1225", "Intent is an abstract description of an operation", "0");
+        db.addAlertTradeflow("855", "Existen 5 continentes, no 2. solo por que seas un continente con gran cultura", "0");
+        db.addAlertTradeflow("855", "Durante un breve periodo de tiempo la solidaridad con el pueblo", "0");*/
+
+//        db.addActivityTradeflow("", "", "");
         db.close();
-        Log.i("Leobas", "Creo la DB");
     }
 }
 

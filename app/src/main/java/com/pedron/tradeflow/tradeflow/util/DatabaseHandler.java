@@ -5,7 +5,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
+import com.pedron.tradeflow.tradeflow.entity.Alert;
 import com.pedron.tradeflow.tradeflow.entity.Store;
 import com.pedron.tradeflow.tradeflow.entity.User;
 
@@ -27,6 +29,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     // Tables name
     private static final String USUARIOS_TRADEFLOW_TABLE = "usuarios_tradeflow";
     private static final String TIENDAS_TRADEFLOW_TABLE = "tiendas_tradeflow";
+    private static final String ALERTAS_TRADEFLOW_TABLE = "alertas_tradeflow";
+    private static final String ACTIVIDADES_TRADEFLOW_TABLE = "actividades_tradeflow";
 
     // Users Table Columns names
     private static final String USUARIO = "nombre_usuario";
@@ -34,14 +38,22 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String PERFIL = "perfil";
     private static final String ESTATUS = "estatus";
 
-    // Sstores Table Column names
+    // Stores Table Column names
     private static final String NUM_TIENDAS = "numero_tiendas";
     private static final String NOM_TIENDA = "nombre_tienda";
     private static final String CADENA = "cadena";
     private static final String FORMATO = "formato";
-    private static final String CALLE = "calle";
+//    private static final String CALLE = "calle";
     private static final String ID_TIENDA = "id_tienda";
-    private static final String COLONIA = "colonia";
+    private static final String DIRECCION = "direccion";
+
+    // Alerts Table Columns names
+    private static final String ALERTA = "alerta";
+
+    // Activities Table Columns names
+    private static final String ACTIVIDAD = "actividad";
+    private static final String ID_CLIENTE = "id_cliente";
+
 
     public DatabaseHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -50,6 +62,11 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     // Creating Tables
     @Override
     public void onCreate(SQLiteDatabase db) {
+        db.execSQL("DROP TABLE IF EXISTS " + USUARIOS_TRADEFLOW_TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + TIENDAS_TRADEFLOW_TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + ALERTAS_TRADEFLOW_TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + ACTIVIDADES_TRADEFLOW_TABLE);
+
         String CREATE_USUARIOS_TABLE = "CREATE TABLE " + USUARIOS_TRADEFLOW_TABLE + "("
                 + USUARIO + " TEXT, " + CONTRASENA + " TEXT, "
                 + PERFIL + " TEXT, " + ESTATUS + " TEXT);";
@@ -58,9 +75,38 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         String CREATE_TIENDAS_TABLE = "CREATE TABLE " + TIENDAS_TRADEFLOW_TABLE + "("
                 + NUM_TIENDAS + " TEXT, " + NOM_TIENDA + " TEXT, "
                 + CADENA + " TEXT, " + FORMATO + " TEXT, " + ID_TIENDA + " TEXT, "
-                + CALLE + " TEXT, " + COLONIA + " TEXT);";
+                + DIRECCION + " TEXT);";
         db.execSQL(CREATE_TIENDAS_TABLE);
 
+        String CREATE_ALERTAS_TABLE = "CREATE TABLE " + ALERTAS_TRADEFLOW_TABLE + "("
+                + ID_TIENDA + " TEXT, " + ALERTA + " TEXT, " + PERFIL + " TEXT);";
+        db.execSQL(CREATE_ALERTAS_TABLE);
+
+        String CREATE_ACTIVIDADES_TABLE = "CREATE TABLE " + ACTIVIDADES_TRADEFLOW_TABLE + "("
+                + PERFIL + " TEXT, " + ACTIVIDAD + " TEXT, " + ID_CLIENTE + " TEXT);";
+        db.execSQL(CREATE_ACTIVIDADES_TABLE);
+
+    }
+
+    public void populateDB(){
+
+        addUserTradeflow("12345", "admin123", "admin", "0");
+
+        addStoreTradeflow("441", "Ruiz Cortinez", "Walmart", "Supermercado", "1225", "Rodesia del Nte #402, col. San Roque, cp. 65008, San Pedro, Nuevo Leon");
+        addStoreTradeflow("610", "Centro", "Soriana", "Almacen", "855", "Jacarandas #233, col. Linda Vista, cp. 63005, Guadalupe, Nuevo Leon");
+        addStoreTradeflow("9405", "Los Angeles", "HEB", "Supermercado", "322", "Romulo Garza #2988, col. Los Morales, cp. 24452, San Nicolas de los Garza, Nuevo Leon");
+        addStoreTradeflow("102", "Escobedo", "OXXO", "CEDIS", "650", "Lazaro Cardenas #2011, col. Centrito Valle, cp. 66305, San Pedro, Nuevo Leon");
+        addStoreTradeflow("3365", "Universidad", "Famosa", "Almacen", "100", "Cuahutemoc #522, col. Centro, cp.68000, Monterrey, Nuevo Leon");
+
+        addAlertTradeflow("100", "SQL completo, donde indicamos los campos", "0");
+        addAlertTradeflow("100", "La polémica por la manera en la que son tratados los refugiados ", "0");
+        addAlertTradeflow("100", "Developing a custom adapter", "0");
+        addAlertTradeflow("322", "Como en el caso de los métodos de modificación de datos", "0");
+        addAlertTradeflow("650", "Tutorial describes how to use the ListView view together with activities and fragments in A", "0");
+        addAlertTradeflow("650", "Above syntax is calling startActivity method", "0");
+        addAlertTradeflow("1225", "Intent is an abstract description of an operation", "0");
+        addAlertTradeflow("855", "Existen 5 continentes, no 2. solo por que seas un continente con gran cultura", "0");
+        addAlertTradeflow("855", "Durante un breve periodo de tiempo la solidaridad con el pueblo", "0");
     }
 
     // Upgrading database
@@ -69,12 +115,14 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         // Drop older table if existed
         db.execSQL("DROP TABLE IF EXISTS " + USUARIOS_TRADEFLOW_TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + TIENDAS_TRADEFLOW_TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + ALERTAS_TRADEFLOW_TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + ACTIVIDADES_TRADEFLOW_TABLE);
         // Create tables again
         onCreate(db);
     }
 
     // Adding new User
-    public void AddUserTradeflow(String u, String c, String p, String e) {
+    public void addUserTradeflow(String u, String c, String p, String e) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(USUARIO, u);
@@ -87,8 +135,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     }
 
     // Adding new Store
-    public void AddStoreTradeflow(String num, String nom, String cad, String fo,
-                                  String id, String ca, String co) {
+    public void addStoreTradeflow(String num, String nom, String cad, String fo,
+                                  String id, String di) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(NUM_TIENDAS, num);
@@ -96,12 +144,36 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(CADENA, cad);
         values.put(FORMATO, fo);
         values.put(ID_TIENDA, id);
-        values.put(CALLE, ca);
-        values.put(COLONIA, co);
+//        values.put(CALLE, ca);
+        values.put(DIRECCION, di);
         // Inserting Row
         db.insert(TIENDAS_TRADEFLOW_TABLE, null, values);
         db.close(); // Closing database connection
     }
+
+    // Adding new Alerts
+    public void addAlertTradeflow(String i, String a, String p) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(ID_TIENDA, i);
+        values.put(ALERTA, a);
+        values.put(PERFIL, p);
+        // Inserting Row
+        db.insert(ALERTAS_TRADEFLOW_TABLE, null, values);
+        db.close(); // Closing database connection
+    }
+
+    public void addActivityTradeflow(String p, String a, String i) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(PERFIL, p);
+        values.put(ACTIVIDAD, a);
+        values.put(ID_CLIENTE, i);
+        // Inserting Row
+        db.insert(ACTIVIDADES_TRADEFLOW_TABLE, null, values);
+        db.close(); // Closing database connection
+    }
+
 
     // Getting Users
     public List<User> getUsers() {
@@ -134,8 +206,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         List<Store> listStores = new ArrayList<>();
 
         Cursor cursor = db.rawQuery(" SELECT " + NUM_TIENDAS + ", " + NOM_TIENDA +
-                ", " + CADENA + ", " + FORMATO + ", " + ID_TIENDA + ", " + CALLE +
-                ", " + COLONIA + " FROM " + TIENDAS_TRADEFLOW_TABLE + "; ", null);
+                ", " + CADENA + ", " + FORMATO + ", " + ID_TIENDA + ", " + DIRECCION +
+                " FROM " + TIENDAS_TRADEFLOW_TABLE + "; ", null);
 
         if (cursor.moveToFirst()) {
             do {
@@ -145,8 +217,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 u.setCadena(cursor.getString(2));
                 u.setFormato(cursor.getString(3));
                 u.setIdTienda(cursor.getString(4));
-                u.setCalle(cursor.getString(5));
-                u.setColonia(cursor.getString(6));
+//                u.setCalle(cursor.getString(5));
+                u.setDireccion(cursor.getString(5));
                 listStores.add(u);
             }while (cursor.moveToNext());
         }
@@ -155,6 +227,54 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.close();
 
         return listStores;
+    }
+
+    // Getting Alerts
+    public List getAlerts(String idTienda) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        List listAlerts = new ArrayList<>();
+
+        Cursor cursor = db.rawQuery(" SELECT " + ALERTA + " FROM " + ALERTAS_TRADEFLOW_TABLE + " WHERE " +
+                    ID_TIENDA + " = '" + idTienda + "' ; ", null);
+
+
+        if (cursor.moveToFirst()) {
+            do {
+                Log.i("Leobas",cursor.getString(0));
+                /*Alert alert = new Alert();
+                alert.setId_tienda(cursor.getString(0));
+                alert.setAlerta(cursor.getString(1));
+                alert.setPerfil(cursor.getString(2));
+                listAlerts.add(alert);*/
+                listAlerts.add(cursor.getString(0));
+            }while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+
+        return listAlerts;
+    }
+
+    // Getting Activities
+    public List<String> getActivities(String perfil, String idCliente) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        List<String> listActivities = new ArrayList<>();
+
+        Cursor cursor = db.rawQuery(" SELECT " + ACTIVIDAD + " FROM " + ACTIVIDADES_TRADEFLOW_TABLE
+                + " WHERE " + ID_CLIENTE + "='" + idCliente + "' AND " + PERFIL +
+                "='" + perfil + "' ; ", null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                listActivities.add(cursor.getString(0));
+            }while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+
+        return listActivities;
     }
 
 }
