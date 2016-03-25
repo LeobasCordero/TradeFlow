@@ -14,7 +14,6 @@ import android.view.View;
 
 import com.pedron.tradeflow.tradeflow.R;
 import com.pedron.tradeflow.tradeflow.adapters.AdapterTrademark;
-import com.pedron.tradeflow.tradeflow.util.Constant;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -40,7 +39,7 @@ public class TrademarkActivity extends AppCompatActivity implements AdapterTrade
             actionBar.setDisplayShowCustomEnabled(true);
 
             LayoutInflater inflator = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            View v = inflator.inflate(R.layout.custom_imageview, null);
+            View v = inflator.inflate(R.layout.custom_imageview_marcas, null);
 
             actionBar.setCustomView(v);
         }
@@ -76,14 +75,14 @@ public class TrademarkActivity extends AppCompatActivity implements AdapterTrade
         String directory = "";
 
         File folder = new File(Environment.getExternalStorageDirectory() +
-                File.separator + Constant.TRADEFLOW);
+                File.separator + "TRADEFLOW");
         boolean success = true;
         if (!folder.exists()) {
             success = folder.mkdir();
         }
         if (success) {
             File subfolder = new File(Environment.getExternalStorageDirectory() +
-                    File.separator + Constant.TRADEFLOW + File.separator + Constant.TRADEMARK);
+                    File.separator + "TRADEFLOW" + File.separator + "TRADEMARK");
 
 
             if (!subfolder.exists()) {
@@ -94,7 +93,7 @@ public class TrademarkActivity extends AppCompatActivity implements AdapterTrade
                 Log.i("Leo","Directorio ya creado: " + directory);
             }
         } else {
-            new Throwable(Constant.ERROR_DIR);
+            new Throwable("No se puede crear el directorio");
         }
 
         return directory;

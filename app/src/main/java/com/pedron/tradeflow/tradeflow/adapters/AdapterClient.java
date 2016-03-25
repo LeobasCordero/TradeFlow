@@ -87,7 +87,7 @@ public class AdapterClient extends RecyclerView.Adapter<AdapterClient.ViewHolder
         if(null != urlImage) {
             Glide.with(context)
                     .load(urlImage)
-                    .centerCrop()
+                    //.centerCrop()
                     .override(700,300)
 //                .placeholder(R.drawable.loading_spinner) aqui se agrega lo que se va mostrar cuando una de las imagenes no esta disponible
                     .into(viewHolder.image);

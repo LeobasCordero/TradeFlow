@@ -1,38 +1,656 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <LinearLayout
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.android.scrollapp2.ProductosActivity">
+    <ScrollView
         android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="vertical"
-        android:paddingLeft="15dp"
-        >
+        android:layout_height="fill_parent"
+         >
+        <LinearLayout
+            android:id="@+id/clientesImg"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/fondo">
+
+            <RelativeLayout
+                android:id="@+id/noticias"
+                android:layout_width="fill_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/transparent"
+                android:layout_alignParentTop="true">
+
+
+
+
+
+
+
+            </RelativeLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="CANDIMON"
+                android:id="@+id/textView1"
+                android:layout_below="@+id/clientes"
+                android:layout_alignParentLeft="true"
+                  android:layout_alignParentStart="true"
+                android:gravity="center"
+                android:paddingBottom="@dimen/activity_vertical_margin"
+                android:background="@drawable/black" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="PASTA DE LASSAR"
+                android:id="@+id/textView2"
+                android:layout_below="@+id/clientes"
+                android:layout_alignParentLeft="true"
+                  android:layout_alignParentStart="true"                            android:gravity="center"
+                android:paddingBottom="@dimen/activity_vertical_margin"
+                android:background="@drawable/black"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="HIPOGLOS"
+                android:id="@+id/textView3"
+                android:layout_below="@+id/clientes"
+                android:layout_alignParentLeft="true"
+                 android:layout_alignParentStart="true"                 android:gravity="center"
+                android:paddingBottom="@dimen/activity_vertical_margin"
+                android:background="@drawable/black"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="CHIPOTLE ADOBADO"
+                android:id="@+id/textView4"
+                android:layout_below="@+id/clientes"
+                android:layout_alignParentLeft="true"
+                 android:layout_alignParentStart="true"                 android:gravity="center"
+                android:paddingBottom="@dimen/activity_vertical_margin"
+                android:background="@drawable/black"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="JALAPENOS"
+                android:id="@+id/textView5"
+                android:layout_below="@+id/clientes"
+                android:layout_alignParentLeft="true"
+                 android:layout_alignParentStart="true"                 android:gravity="center"
+                android:paddingBottom="@dimen/activity_vertical_margin"
+                android:background="@drawable/black"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="JALAPENO RELLENO"
+                android:id="@+id/textView6"
+                android:layout_below="@+id/clientes"
+                android:layout_alignParentLeft="true"
+                 android:layout_alignParentStart="true"                 android:gravity="center"
+                android:paddingBottom="@dimen/activity_vertical_margin"
+                android:background="@drawable/black"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="RAJAS ROJAS"
+                android:id="@+id/textView7"
+                android:layout_below="@+id/clientes"
+                android:layout_alignParentLeft="true"
+                 android:layout_alignParentStart="true"                 android:gravity="center"
+                android:paddingBottom="@dimen/activity_vertical_margin"
+                android:background="@drawable/black"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="RAJAS VERDES"
+                android:id="@+id/textView9"
+                android:layout_below="@+id/clientes"
+                android:layout_alignParentLeft="true"
+                 android:layout_alignParentStart="true"                 android:gravity="center"
+                android:paddingBottom="@dimen/activity_vertical_margin"
+                android:background="@drawable/black"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="RODAJAS NACHOS"
+                android:id="@+id/textView10"
+                android:layout_below="@+id/clientes"
+                android:layout_alignParentLeft="true"
+                 android:layout_alignParentStart="true"                 android:gravity="center"
+                android:paddingBottom="@dimen/activity_vertical_margin"
+                android:background="@drawable/black"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="SERRANOS"
+                android:id="@+id/textView11"
+                android:layout_below="@+id/clientes"
+                android:layout_alignParentLeft="true"
+                 android:layout_alignParentStart="true"                 android:gravity="center"
+                android:paddingBottom="@dimen/activity_vertical_margin"
+                android:background="@drawable/black"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="JALAPENO EN ESCABECHE"
+                android:id="@+id/textView12"
+                android:layout_below="@+id/clientes"
+                android:layout_alignParentLeft="true"
+                 android:layout_alignParentStart="true"                 android:gravity="center"
+                android:paddingBottom="@dimen/activity_vertical_margin"
+                android:background="@drawable/black"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="RAJAS VERDES"
+                android:id="@+id/textView13"
+                android:layout_below="@+id/clientes"
+                android:layout_alignParentLeft="true"
+                 android:layout_alignParentStart="true"                 android:gravity="center"
+                android:paddingBottom="@dimen/activity_vertical_margin"
+                android:background="@drawable/black"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="RODAJAS EN ESCABECHE"
+                android:id="@+id/textView14"
+                android:layout_below="@+id/clientes"
+                android:layout_alignParentLeft="true"
+                 android:layout_alignParentStart="true"                 android:gravity="center"
+                android:paddingBottom="@dimen/activity_vertical_margin"
+                android:background="@drawable/black"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="FRIJOLES BAYOS"
+                android:id="@+id/textView15"
+                android:layout_below="@+id/clientes"
+                android:layout_alignParentLeft="true"
+                 android:layout_alignParentStart="true"                 android:gravity="center"
+                android:paddingBottom="@dimen/activity_vertical_margin"
+                android:background="@drawable/black"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="FRIJOLES NEGROS"
+                android:id="@+id/textView16"
+                android:layout_below="@+id/clientes"
+                android:layout_alignParentLeft="true"
+                 android:layout_alignParentStart="true"                 android:gravity="center"
+                android:paddingBottom="@dimen/activity_vertical_margin"
+                android:background="@drawable/black"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="PINA"
+                android:id="@+id/textView17"
+                android:layout_below="@+id/clientes"
+                android:layout_alignParentLeft="true"
+                 android:layout_alignParentStart="true"                 android:gravity="center"
+                android:paddingBottom="@dimen/activity_vertical_margin"
+                android:background="@drawable/black"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="MAGO"
+                android:id="@+id/textView18"
+                android:layout_below="@+id/clientes"
+                android:layout_alignParentLeft="true"
+                 android:layout_alignParentStart="true"                 android:gravity="center"
+                android:paddingBottom="@dimen/activity_vertical_margin"
+                android:background="@drawable/black"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="DURAZNO"
+                android:id="@+id/textView19"
+                android:layout_below="@+id/clientes"
+                android:layout_alignParentLeft="true"
+                 android:layout_alignParentStart="true"                 android:gravity="center"
+                android:paddingBottom="@dimen/activity_vertical_margin"
+                android:background="@drawable/black"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="SALSA ROJA"
+                android:id="@+id/textView20"
+                android:layout_below="@+id/clientes"
+                android:layout_alignParentLeft="true"
+                 android:layout_alignParentStart="true"                 android:gravity="center"
+                android:paddingBottom="@dimen/activity_vertical_margin"
+                android:background="@drawable/black"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="SALSA PICANTE"
+                android:id="@+id/textView21"
+                android:layout_below="@+id/clientes"
+                android:layout_alignParentLeft="true"
+                 android:layout_alignParentStart="true"                 android:gravity="center"
+                android:paddingBottom="@dimen/activity_vertical_margin"
+                android:background="@drawable/black"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="SALSA VERDE"
+                android:id="@+id/textView22"
+                android:layout_below="@+id/clientes"
+                android:layout_alignParentLeft="true"
+                 android:layout_alignParentStart="true"                 android:gravity="center"
+                android:paddingBottom="@dimen/activity_vertical_margin"
+                android:background="@drawable/black"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="ZANAHORIAS"
+                android:id="@+id/textView23"
+                android:layout_below="@+id/clientes"
+                android:layout_alignParentLeft="true"
+                 android:layout_alignParentStart="true"                 android:gravity="center"
+                android:paddingBottom="@dimen/activity_vertical_margin"
+                android:background="@drawable/black"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="PURE DE TOMATE"
+                android:id="@+id/textView24"
+                android:layout_below="@+id/clientes"
+                android:layout_alignParentLeft="true"
+                 android:layout_alignParentStart="true"                 android:gravity="center"
+                android:paddingBottom="@dimen/activity_vertical_margin"
+                android:background="@drawable/black"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="BROCHAS"
+                android:id="@+id/textView25"
+                android:layout_below="@+id/clientes"
+                android:layout_alignParentLeft="true"
+                 android:layout_alignParentStart="true"                 android:gravity="center"
+                android:paddingBottom="@dimen/activity_vertical_margin"
+                android:background="@drawable/black"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="RODILLOS"
+                android:id="@+id/textView26"
+                android:layout_below="@+id/clientes"
+                android:layout_alignParentLeft="true"
+                 android:layout_alignParentStart="true"                 android:gravity="center"
+                android:paddingBottom="@dimen/activity_vertical_margin"
+                android:background="@drawable/black"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="SOLVENTE"
+                android:id="@+id/textView27"
+                android:layout_below="@+id/clientes"
+                android:layout_alignParentLeft="true"
+                 android:layout_alignParentStart="true"                 android:gravity="center"
+                android:paddingBottom="@dimen/activity_vertical_margin"
+                android:background="@drawable/black"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="IMPERMEABILIZANTES"
+                android:id="@+id/textView28"
+                android:layout_below="@+id/clientes"
+                android:layout_alignParentLeft="true"
+                 android:layout_alignParentStart="true"                 android:gravity="center"
+                android:paddingBottom="@dimen/activity_vertical_margin"
+                android:background="@drawable/black"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="10 ANOS"
+                android:id="@+id/textView29"
+                android:layout_below="@+id/clientes"
+                android:layout_alignParentLeft="true"
+                 android:layout_alignParentStart="true"                 android:gravity="center"
+                android:paddingBottom="@dimen/activity_vertical_margin"
+                android:background="@drawable/black"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="AEROSOLES"
+                android:id="@+id/textView30"
+                android:layout_below="@+id/clientes"
+                android:layout_alignParentLeft="true"
+                 android:layout_alignParentStart="true"                 android:gravity="center"
+                android:paddingBottom="@dimen/activity_vertical_margin"
+                android:background="@drawable/black"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="PREMIER 10 ANOS"
+                android:id="@+id/textView31"
+                android:layout_below="@+id/clientes"
+                android:layout_alignParentLeft="true"
+                 android:layout_alignParentStart="true"                 android:gravity="center"
+                android:paddingBottom="@dimen/activity_vertical_margin"
+                android:background="@drawable/black"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="PLUS 5 ANOS"
+                android:id="@+id/textView32"
+                android:layout_below="@+id/clientes"
+                android:layout_alignParentLeft="true"
+                 android:layout_alignParentStart="true"                 android:gravity="center"
+                android:paddingBottom="@dimen/activity_vertical_margin"
+                android:background="@drawable/black"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="ESTANDAR"
+                android:id="@+id/textView33"
+                android:layout_below="@+id/clientes"
+                android:layout_alignParentLeft="true"
+                 android:layout_alignParentStart="true"                 android:gravity="center"
+                android:paddingBottom="@dimen/activity_vertical_margin"
+                android:background="@drawable/black"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="CLASICA"
+                android:id="@+id/textView34"
+                android:layout_below="@+id/clientes"
+                android:layout_alignParentLeft="true"
+                 android:layout_alignParentStart="true"                 android:gravity="center"
+                android:paddingBottom="@dimen/activity_vertical_margin"
+                android:background="@drawable/black"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="SEMIECONOMICA"
+                android:id="@+id/textView35"
+                android:layout_below="@+id/clientes"
+                android:layout_alignParentLeft="true"
+                 android:layout_alignParentStart="true"                 android:gravity="center"
+                android:paddingBottom="@dimen/activity_vertical_margin"
+                android:background="@drawable/black"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="ECONOMICA"
+                android:id="@+id/textView36"
+                android:layout_below="@+id/clientes"
+                android:layout_alignParentLeft="true"
+                 android:layout_alignParentStart="true"                 android:gravity="center"
+                android:paddingBottom="@dimen/activity_vertical_margin"
+                android:background="@drawable/black"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="EXCEDRIN"
+                android:id="@+id/textView37"
+                android:layout_below="@+id/clientes"
+                android:layout_alignParentLeft="true"
+                 android:layout_alignParentStart="true"                 android:gravity="center"
+                android:paddingBottom="@dimen/activity_vertical_margin"
+                android:background="@drawable/black"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="CAPENT"
+                android:id="@+id/textView38"
+                android:layout_below="@+id/clientes"
+                android:layout_alignParentLeft="true"
+                 android:layout_alignParentStart="true"                 android:gravity="center"
+                android:paddingBottom="@dimen/activity_vertical_margin"
+                android:background="@drawable/black"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="VOLTAREN"
+                android:id="@+id/textView39"
+                android:layout_below="@+id/clientes"
+                android:layout_alignParentLeft="true"
+                 android:layout_alignParentStart="true"                 android:gravity="center"
+                android:paddingBottom="@dimen/activity_vertical_margin"
+                android:background="@drawable/black"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="LAMISIL"
+                android:id="@+id/textView40"
+                android:layout_below="@+id/clientes"
+                android:layout_alignParentLeft="true"
+                 android:layout_alignParentStart="true"                 android:gravity="center"
+                android:paddingBottom="@dimen/activity_vertical_margin"
+                android:background="@drawable/black"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="TESALON"
+                android:id="@+id/textView41"
+                android:layout_below="@+id/clientes"
+                android:layout_alignParentLeft="true"
+                 android:layout_alignParentStart="true"                 android:gravity="center"
+                android:paddingBottom="@dimen/activity_vertical_margin"
+                android:background="@drawable/black"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="THERAFLU"
+                android:id="@+id/textView42"
+                android:layout_below="@+id/clientes"
+                android:layout_alignParentLeft="true"
+                 android:layout_alignParentStart="true"                 android:gravity="center"
+                android:paddingBottom="@dimen/activity_vertical_margin"
+                android:background="@drawable/black"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="SENOKOT"
+                android:id="@+id/textView43"
+                android:layout_below="@+id/clientes"
+                android:layout_alignParentLeft="true"
+                 android:layout_alignParentStart="true"                 android:gravity="center"
+                android:paddingBottom="@dimen/activity_vertical_margin"
+                android:background="@drawable/black"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="SALSAS"
+                android:id="@+id/textView44"
+                android:layout_below="@+id/clientes"
+                android:layout_alignParentLeft="true"
+                 android:layout_alignParentStart="true"                 android:gravity="center"
+                android:paddingBottom="@dimen/activity_vertical_margin"
+                android:background="@drawable/black"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="COREGA"
+                android:id="@+id/textView45"
+                android:layout_below="@+id/clientes"
+                android:layout_alignParentLeft="true"
+                 android:layout_alignParentStart="true"                 android:gravity="center"
+                android:paddingBottom="@dimen/activity_vertical_margin"
+                android:background="@drawable/black"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="ECLIPSOL"
+                android:id="@+id/textView46"
+                android:layout_below="@+id/clientes"
+                android:layout_alignParentLeft="true"
+                 android:layout_alignParentStart="true"                 android:gravity="center"
+                android:paddingBottom="@dimen/activity_vertical_margin"
+                android:background="@drawable/black"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="PROZONE"
+                android:id="@+id/textView47"
+                android:layout_below="@+id/clientes"
+                android:layout_alignParentLeft="true"
+                 android:layout_alignParentStart="true"                 android:gravity="center"
+                android:paddingBottom="@dimen/activity_vertical_margin"
+                android:background="@drawable/black"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="SENSODYNE"
+                android:id="@+id/textView48"
+                android:layout_below="@+id/clientes"
+                android:layout_alignParentLeft="true"
+                 android:layout_alignParentStart="true"                 android:gravity="center"
+                android:paddingBottom="@dimen/activity_vertical_margin"
+                android:background="@drawable/black"
+                />
+
+
+        </LinearLayout>
+    </ScrollView>
+    <RelativeLayout
+        android:id="@+id/footer"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:background="#000"
+        android:layout_alignParentBottom="true">
 
         <TextView
+            android:id="@+id/texthere2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/products_header"
-            android:textStyle="bold"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text=""
             android:textSize="20sp" />
 
-        <!-- Editext for Search -->
-        <EditText
-            android:id="@+id/search_products"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:hint="Buscar..."
-            android:inputType="textVisiblePassword" />
-
-        <!-- List View -->
-        <ListView
-            android:id="@+id/list_view_products"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content" />
-
-    </LinearLayout>
-
-</LinearLayout>
+    </RelativeLayout>
+</RelativeLayout>

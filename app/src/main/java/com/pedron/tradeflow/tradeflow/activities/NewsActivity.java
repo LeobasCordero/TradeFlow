@@ -36,7 +36,7 @@ public class NewsActivity extends AppCompatActivity {
             actionBar.setDisplayShowCustomEnabled(true);
 
             LayoutInflater inflator = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            View v = inflator.inflate(R.layout.custom_imageview, null);
+            View v = inflator.inflate(R.layout.custom_imageview_noticias, null);
 
             actionBar.setCustomView(v);
         }

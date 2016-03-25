@@ -19,9 +19,10 @@ import java.util.List;
  * Created by leocg on 17/03/2016.
  */
 public class ProductsActivity extends AppCompatActivity {
-
+/*
     ListView listProducts;
     EditText inputSearch;
+*/
     ArrayAdapter<String> adapter;
     String products[] = {
             "Hinds Clasica","Hinds Mama","Cloralex 250ml","Pinol 1L","Jabon Zest 180g", "Fabuloso 500ml",
@@ -32,17 +33,17 @@ public class ProductsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_products);
-
+/*
         listProducts = (ListView) findViewById(R.id.list_view_products);
         inputSearch = (EditText) findViewById(R.id.search_products);
-
+*/
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowTitleEnabled(false);
         actionBar.setDisplayShowCustomEnabled(true);
         LayoutInflater inflator = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View v = inflator.inflate(R.layout.custom_imageview, null);
+        View v = inflator.inflate(R.layout.custom_imageview_productos, null);
         actionBar.setCustomView(v);
-
+/*
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1 ,products);
         listProducts.setAdapter(adapter);
 
@@ -66,6 +67,7 @@ public class ProductsActivity extends AppCompatActivity {
                 // TODO Auto-generated method stub
             }
         });
+        */
     }
 
     }

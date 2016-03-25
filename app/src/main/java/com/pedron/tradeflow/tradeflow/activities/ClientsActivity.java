@@ -39,7 +39,7 @@ public class ClientsActivity extends AppCompatActivity implements AdapterClient.
             actionBar.setDisplayShowCustomEnabled(true);
 
             LayoutInflater inflator = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            View v = inflator.inflate(R.layout.custom_imageview, null);
+            View v = inflator.inflate(R.layout.custom_imageview_cliente, null);
 
             actionBar.setCustomView(v);
         }
