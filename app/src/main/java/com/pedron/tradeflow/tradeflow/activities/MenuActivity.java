@@ -31,7 +31,7 @@ public class MenuActivity extends AppCompatActivity {
         View v = inflator.inflate(R.layout.custom_imageview, null);
         actionBar.setCustomView(v);
         textView = (TextView) findViewById(R.id.screen_title);
-        textView.setText("Actividades");
+        textView.setText("Tareas");
 //        textView.setPadding(75,10,0,10);
 
         piso = (ImageView)findViewById(R.id.piso_clic);

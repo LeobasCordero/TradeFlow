@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.pedron.tradeflow.tradeflow.R;
 
@@ -23,6 +24,7 @@ public class ProductsActivity extends AppCompatActivity {
     ListView listProducts;
     EditText inputSearch;
 */
+    TextView textView;
     ArrayAdapter<String> adapter;
     String products[] = {
             "Hinds Clasica","Hinds Mama","Cloralex 250ml","Pinol 1L","Jabon Zest 180g", "Fabuloso 500ml",
@@ -40,9 +42,11 @@ public class ProductsActivity extends AppCompatActivity {
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowTitleEnabled(false);
         actionBar.setDisplayShowCustomEnabled(true);
-        LayoutInflater inflator = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View v = inflator.inflate(R.layout.custom_imageview_productos, null);
+        LayoutInflater inflator = (LayoutInflater) this .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View v = inflator.inflate(R.layout.custom_imageview, null);
         actionBar.setCustomView(v);
+        textView = (TextView) findViewById(R.id.screen_title);
+        textView.setText("Productos");
 /*
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1 ,products);
         listProducts.setAdapter(adapter);

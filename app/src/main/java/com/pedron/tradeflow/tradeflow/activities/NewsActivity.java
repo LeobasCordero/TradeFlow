@@ -11,6 +11,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.pedron.tradeflow.tradeflow.R;
 import com.pedron.tradeflow.tradeflow.util.SwipeDetector;
@@ -21,25 +22,25 @@ import com.pedron.tradeflow.tradeflow.util.SwipeDetector;
 public class NewsActivity extends AppCompatActivity {
 
     Button b;
+    TextView textView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_news);
 
-        b = (Button)findViewById(R.id.next);
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayShowTitleEnabled(false);
+        actionBar.setDisplayShowCustomEnabled(true);
+        LayoutInflater inflator = (LayoutInflater) this .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View v = inflator.inflate(R.layout.custom_imageview, null);
+        actionBar.setCustomView(v);
+        textView = (TextView) findViewById(R.id.screen_title);
+        textView.setText("Noticias");
 
-        if (actionBar != null) {
-            actionBar.setDisplayShowTitleEnabled(false);
 
-            actionBar.setDisplayShowCustomEnabled(true);
+        b = (Button)findViewById(R.id.next_news);
 
-            LayoutInflater inflator = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            View v = inflator.inflate(R.layout.custom_imageview_noticias, null);
-
-            actionBar.setCustomView(v);
-        }
 
         b.setOnClickListener(new View.OnClickListener() {
             @Override

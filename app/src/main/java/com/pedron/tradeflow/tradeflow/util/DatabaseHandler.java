@@ -21,7 +21,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     // All Static variables
     // Database Version
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = Constant.DBVERSION;
 
     // Database Name
     private static final String DATABASE_NAME = "tradeflow.db";
@@ -31,6 +31,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String TIENDAS_TRADEFLOW_TABLE = "tiendas_tradeflow";
     private static final String ALERTAS_TRADEFLOW_TABLE = "alertas_tradeflow";
     private static final String ACTIVIDADES_TRADEFLOW_TABLE = "actividades_tradeflow";
+    private static final String VISITAS_TRADEFLOW_TABLE = "visitas_tradeflow";
 
     // Users Table Columns names
     private static final String USUARIO = "nombre_usuario";
@@ -54,6 +55,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String ACTIVIDAD = "actividad";
     private static final String ID_CLIENTE = "id_cliente";
 
+    // Visits Table Column names
+    private static final String FECHA = "fecha";
+    private static final String UBICACION = "ubicacion";
+
 
     public DatabaseHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -66,6 +71,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TIENDAS_TRADEFLOW_TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + ALERTAS_TRADEFLOW_TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + ACTIVIDADES_TRADEFLOW_TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + VISITAS_TRADEFLOW_TABLE);
 
         String CREATE_USUARIOS_TABLE = "CREATE TABLE " + USUARIOS_TRADEFLOW_TABLE + "("
                 + USUARIO + " TEXT, " + CONTRASENA + " TEXT, "
@@ -85,18 +91,24 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         String CREATE_ACTIVIDADES_TABLE = "CREATE TABLE " + ACTIVIDADES_TRADEFLOW_TABLE + "("
                 + PERFIL + " TEXT, " + ACTIVIDAD + " TEXT, " + ID_CLIENTE + " TEXT);";
         db.execSQL(CREATE_ACTIVIDADES_TABLE);
+        //populateDB(db);
+        String CREATE_VISITAS_TABLE = "CREATE TABLE " + VISITAS_TRADEFLOW_TABLE + "("
+                + USUARIO + " TEXT, " + FECHA + " TEXT, " + UBICACION + " TEXT, " + ID_TIENDA + " TEXT, "
+                + ESTATUS + " TEXT);";
+        db.execSQL(CREATE_VISITAS_TABLE);
 
     }
 
     public void populateDB(){
 
+        SQLiteDatabase db = this.getReadableDatabase();
         addUserTradeflow("12345", "admin123", "admin", "0");
 
-        addStoreTradeflow("441", "Ruiz Cortinez", "Walmart", "Supermercado", "1225", "Rodesia del Nte #402, col. San Roque, cp. 65008, San Pedro, Nuevo Leon");
-        addStoreTradeflow("610", "Centro", "Soriana", "Almacen", "855", "Jacarandas #233, col. Linda Vista, cp. 63005, Guadalupe, Nuevo Leon");
-        addStoreTradeflow("9405", "Los Angeles", "HEB", "Supermercado", "322", "Romulo Garza #2988, col. Los Morales, cp. 24452, San Nicolas de los Garza, Nuevo Leon");
-        addStoreTradeflow("102", "Escobedo", "OXXO", "CEDIS", "650", "Lazaro Cardenas #2011, col. Centrito Valle, cp. 66305, San Pedro, Nuevo Leon");
-        addStoreTradeflow("3365", "Universidad", "Famosa", "Almacen", "100", "Cuahutemoc #522, col. Centro, cp.68000, Monterrey, Nuevo Leon");
+        addStoreTradeflow("441", "Ruiz Cortinez(1522)", "Walmart", "Supermercado", "1225", "Rodesia del Nte #402, col. San Roque, cp. 65008, San Pedro, Nuevo Leon");
+        addStoreTradeflow("610", "Centro(3323)", "Soriana", "Almacen", "855", "Jacarandas #233, col. Linda Vista, cp. 63005, Guadalupe, Nuevo Leon");
+        addStoreTradeflow("9405", "Los Angeles(1982)", "HEB", "Supermercado", "322", "Romulo Garza #2988, col. Los Morales, cp. 24452, San Nicolas de los Garza, Nuevo Leon");
+        addStoreTradeflow("102", "Escobedo(3004)", "OXXO", "CEDIS", "650", "Lazaro Cardenas #2011, col. Centrito Valle, cp. 66305, San Pedro, Nuevo Leon");
+        addStoreTradeflow("3365", "Universidad(1800)", "Famosa", "Almacen", "100", "Cuahutemoc #522, col. Centro, cp.68000, Monterrey, Nuevo Leon");
 
         addAlertTradeflow("100", "SQL completo, donde indicamos los campos", "0");
         addAlertTradeflow("100", "La polémica por la manera en la que son tratados los refugiados ", "0");
@@ -117,8 +129,26 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TIENDAS_TRADEFLOW_TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + ALERTAS_TRADEFLOW_TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + ACTIVIDADES_TRADEFLOW_TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + VISITAS_TRADEFLOW_TABLE);
         // Create tables again
         onCreate(db);
+    }
+
+    public int checkTables(String table){
+        int x = 0;
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.rawQuery(" SELECT  *  FROM " + table + "; ", null);
+
+        if (cursor.moveToFirst()) {
+            x = 1;
+        }
+Log.i("Leobas", x + " valor de la x");
+        cursor.close();
+        db.close();
+
+        return x;
     }
 
     // Adding new User
@@ -174,6 +204,19 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.close(); // Closing database connection
     }
 
+    // Adding new Visit
+    public void addVisitTradeflow(String u, String f, String ub, String t, String s) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(USUARIO, u);
+        values.put(FECHA, f);
+        values.put(UBICACION, ub);
+        values.put(ID_TIENDA, t);
+        values.put(ESTATUS, s);
+        // Inserting Row
+        db.insert(VISITAS_TRADEFLOW_TABLE, null, values);
+        db.close(); // Closing database connection
+    }
 
     // Getting Users
     public List<User> getUsers() {

@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.TextView;
 
 import com.pedron.tradeflow.tradeflow.R;
 import com.pedron.tradeflow.tradeflow.adapters.AdapterClient;
@@ -26,13 +27,14 @@ public class ClientsActivity extends AppCompatActivity implements AdapterClient.
 
     private RecyclerView recycler;
     private List<String> clientList;
+    TextView textView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.trademark_list);
 
-        android.support.v7.app.ActionBar actionBar = getSupportActionBar();
+        /*android.support.v7.app.ActionBar actionBar = getSupportActionBar();
 
         if (actionBar != null) {
             actionBar.setDisplayShowTitleEnabled(false);
@@ -42,7 +44,16 @@ public class ClientsActivity extends AppCompatActivity implements AdapterClient.
             View v = inflator.inflate(R.layout.custom_imageview_cliente, null);
 
             actionBar.setCustomView(v);
-        }
+        }*/
+
+        android.support.v7.app.ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayShowTitleEnabled(false);
+        actionBar.setDisplayShowCustomEnabled(true);
+        LayoutInflater inflator = (LayoutInflater) this .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View v = inflator.inflate(R.layout.custom_imageview, null);
+        actionBar.setCustomView(v);
+        textView = (TextView) findViewById(R.id.screen_title);
+        textView.setText("Clientes");
 
         recycler = (RecyclerView) findViewById(R.id.recycler);
         recycler.hasFixedSize();

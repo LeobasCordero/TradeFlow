@@ -32,65 +32,34 @@
             <TableRow>
 
                 <ImageView
-                    android:layout_width="75dp"
-                    android:layout_height="75dp"
-                    android:padding="10dp"
-                    android:src="@drawable/bodega" />
-
-                <ImageView
-                    android:layout_width="75dp"
-                    android:layout_height="75dp"
-                    android:padding="10dp"
-                    android:src="@drawable/bodega" />
-
-                <ImageView
-                    android:layout_width="75dp"
-                    android:layout_height="75dp"
-                    android:padding="10dp"
-                    android:src="@drawable/bodega" />
-            </TableRow>
-
-            <TableRow>
-
-                <ImageView
-                    android:layout_width="75dp"
-                    android:layout_height="75dp"
-                    android:padding="10dp"
-                    android:src="@drawable/resurtido" />
-
-                <ImageView
-                    android:layout_width="75dp"
-                    android:layout_height="75dp"
-                    android:padding="10dp"
-                    android:src="@drawable/resurtido" />
-
-                <ImageView
-                    android:layout_width="75dp"
-                    android:layout_height="75dp"
-                    android:padding="10dp"
-                    android:src="@drawable/resurtido" />
-            </TableRow>
-
-            <TableRow>
-
-                <ImageView
                     android:id="@+id/piso_clic"
-                    android:layout_width="75dp"
-                    android:layout_height="75dp"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
                     android:padding="10dp"
                     android:src="@drawable/piso_venta" />
 
                 <ImageView
-                    android:layout_width="75dp"
-                    android:layout_height="75dp"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
                     android:padding="10dp"
-                    android:src="@drawable/piso_venta" />
+                    android:src="@drawable/bodega" />
 
                 <ImageView
-                    android:layout_width="75dp"
-                    android:layout_height="75dp"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
                     android:padding="10dp"
-                    android:src="@drawable/piso_venta" />
+                    android:src="@drawable/resurtido" />
+
+            </TableRow>
+
+            <TableRow>
+                <ImageView
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:padding="10dp"
+                    android:src="@drawable/precio" />
+
+
             </TableRow>
 
         </TableLayout>

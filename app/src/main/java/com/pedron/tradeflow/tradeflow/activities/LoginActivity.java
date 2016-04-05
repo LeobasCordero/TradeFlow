@@ -33,6 +33,7 @@ import android.widget.TextView;
 
 import com.pedron.tradeflow.tradeflow.R;
 import com.pedron.tradeflow.tradeflow.entity.User;
+import com.pedron.tradeflow.tradeflow.util.Constant;
 import com.pedron.tradeflow.tradeflow.util.DatabaseHandler;
 
 import java.util.ArrayList;
@@ -78,7 +79,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         // Set up the login form.
         mUserView = (AutoCompleteTextView) findViewById(R.id.user);
         populateAutoComplete();
-
+        db = new DatabaseHandler(this);
         // add usr to database
         populateDB();
 
@@ -371,25 +372,34 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
     public void populateDB(){
         db = new DatabaseHandler(this);
-        db.populateDB();
-        /*db.addUserTradeflow("12345", "admin123", "admin", "0");
 
-        db.addStoreTradeflow("441", "Ruiz Cortinez", "Walmart", "Supermercado", "1225", "Rodesia del Nte #402, col. San Roque, cp. 65008, San Pedro, Nuevo Leon");
-        db.addStoreTradeflow("610", "Centro", "Soriana", "Almacen", "855", "Jacarandas #233, col. Linda Vista, cp. 63005, Guadalupe, Nuevo Leon");
-        db.addStoreTradeflow("9405", "Los Angeles", "HEB", "Supermercado", "322", "Romulo Garza #2988, col. Los Morales, cp. 24452, San Nicolas de los Garza, Nuevo Leon");
-        db.addStoreTradeflow("102", "Escobedo", "OXXO", "CEDIS", "650", "Lazaro Cardenas #2011, col. Centrito Valle, cp. 66305, San Pedro, Nuevo Leon");
-        db.addStoreTradeflow("3365", "Universidad", "Famosa", "Almacen", "100", "Cuahutemoc #522, col. Centro, cp.68000, Monterrey, Nuevo Leon");
+        int x = db.checkTables("usuarios_tradeflow");
+        //db.checkTables("tiendas_tradeflow");
+        //db.checkTables("alertas_tradeflow");
+        //db.checkTables("actividades_tradeflow");
+        //db.checkTables("visitas_tradeflow");
 
-        db.addAlertTradeflow("100", "SQL completo, donde indicamos los campos", "0");
-        db.addAlertTradeflow("100", "La polémica por la manera en la que son tratados los refugiados ", "0");
-        db.addAlertTradeflow("100", "Developing a custom adapter", "0");
-        db.addAlertTradeflow("322", "Como en el caso de los métodos de modificación de datos", "0");
-        db.addAlertTradeflow("650", "Tutorial describes how to use the ListView view together with activities and fragments in A", "0");
-        db.addAlertTradeflow("650", "Above syntax is calling startActivity method", "0");
-        db.addAlertTradeflow("1225", "Intent is an abstract description of an operation", "0");
-        db.addAlertTradeflow("855", "Existen 5 continentes, no 2. solo por que seas un continente con gran cultura", "0");
-        db.addAlertTradeflow("855", "Durante un breve periodo de tiempo la solidaridad con el pueblo", "0");*/
 
+
+        if(x != Constant.DBVERSION) {
+            db.addUserTradeflow("12345", "admin123", "admin", "0");
+
+            db.addStoreTradeflow("441", "Ruiz Cortinez (3512)", "Walmart", "Supermercado", "1225", "Rodesia del Nte #402, col. San Roque, cp. 65008, San Pedro, Nuevo Leon");
+            db.addStoreTradeflow("610", "Centro (3022)", "Soriana", "Almacen", "855", "Jacarandas #233, col. Linda Vista, cp. 63005, Guadalupe, Nuevo Leon");
+            db.addStoreTradeflow("9405", "Los Angeles (5114)", "HEB", "Supermercado", "322", "Romulo Garza #2988, col. Los Morales, cp. 24452, San Nicolas de los Garza, Nuevo Leon");
+            db.addStoreTradeflow("102", "Escobedo (9663)", "OXXO", "CEDIS", "650", "Lazaro Cardenas #2011, col. Centrito Valle, cp. 66305, San Pedro, Nuevo Leon");
+            db.addStoreTradeflow("3365", "Universidad (1025)", "Famosa", "Almacen", "100", "Cuahutemoc #522, col. Centro, cp.68000, Monterrey, Nuevo Leon");
+
+            db.addAlertTradeflow("100", "SQL completo, donde indicamos los campos", "0");
+            db.addAlertTradeflow("100", "La polémica por la manera en la que son tratados los refugiados ", "0");
+            db.addAlertTradeflow("100", "Developing a custom adapter", "0");
+            db.addAlertTradeflow("322", "Como en el caso de los métodos de modificación de datos", "0");
+            db.addAlertTradeflow("650", "Tutorial describes how to use the ListView view together with activities and fragments in A", "0");
+            db.addAlertTradeflow("650", "Above syntax is calling startActivity method", "0");
+            db.addAlertTradeflow("1225", "Intent is an abstract description of an operation", "0");
+            db.addAlertTradeflow("855", "Existen 5 continentes, no 2. solo por que seas un continente con gran cultura", "0");
+            db.addAlertTradeflow("855", "Durante un breve periodo de tiempo la solidaridad con el pueblo", "0");
+        }
 //        db.addActivityTradeflow("", "", "");
         db.close();
     }
