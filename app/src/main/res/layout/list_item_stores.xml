@@ -18,7 +18,8 @@
                 android:layout_width="15dp"
                 android:layout_height="15dp"
                 android:layout_gravity="center_vertical"
-                android:src="@drawable/cruz" />
+                android:src="@drawable/cruz"
+                android:visibility="invisible" />
         </RelativeLayout>
 
         <LinearLayout
@@ -33,64 +34,57 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">-->
 
-                <LinearLayout
+            <RelativeLayout
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                >
+
+                <TextView
+                    android:id="@+id/nombre_tienda"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_alignParentTop="true"
+                    android:textAppearance="@android:style/TextAppearance.Holo.Medium"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
 
-                        <RelativeLayout
-                            android:layout_height="wrap_content"
-                            android:layout_width="wrap_content">
-                        <TextView
-                            android:id="@+id/nombre_tienda"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentTop="true"
-                            android:textAppearance="@android:style/TextAppearance.Holo.Medium"
-                            android:textColor="@color/colorPrimary"
-                            android:textSize="15dp"
-                            android:textStyle="bold" />
-                        </RelativeLayout>
-                        <RelativeLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="right"
-                            android:paddingTop="5dp"
-                            >
+                <ImageView
+                    android:id="@+id/sem_rojo"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_alignParentRight="true"
+                    android:src="@drawable/semaforo_rojo" />
 
-                            <ImageView
-                                android:id="@+id/sem_rojo"
-                                android:layout_width="15dp"
-                                android:layout_height="15dp"
-                                android:layout_gravity="center_vertical"
-                                android:src="@drawable/semaforo_rojo" />
+                <ImageView
+                    android:id="@+id/sem_ama"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_alignParentRight="true"
+                    android:src="@drawable/semaforo_amarillo"
+                    android:visibility="invisible" />
 
-                            <ImageView
-                                android:id="@+id/sem_ama"
-                                android:layout_width="15dp"
-                                android:layout_height="15dp"
-                                android:layout_gravity="center_vertical"
-                                android:src="@drawable/semaforo_amarillo"
-                                android:visibility="invisible" />
+                <ImageView
+                    android:id="@+id/sem_nar"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_alignParentRight="true"
+                    android:src="@drawable/semaforo_naranja"
+                    android:visibility="invisible" />
 
-                            <ImageView
-                                android:id="@+id/sem_nar"
-                                android:layout_width="15dp"
-                                android:layout_height="15dp"
-                                android:layout_gravity="center_vertical"
-                                android:src="@drawable/semaforo_naranja"
-                                android:visibility="invisible" />
+                <ImageView
+                    android:id="@+id/sem_verde"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_alignParentRight="true"
+                    android:src="@drawable/semaforo_verde"
+                    android:visibility="invisible" />
 
-                            <ImageView
-                                android:id="@+id/sem_verde"
-                                android:layout_width="15dp"
-                                android:layout_height="15dp"
-                                android:layout_gravity="center_vertical"
-                                android:src="@drawable/semaforo_verde"
-                                android:visibility="invisible" />
-                        </RelativeLayout>
-
-                </LinearLayout>
+            </RelativeLayout>
             <!--</LinearLayout>-->
 
 
@@ -115,21 +109,20 @@
             <TableLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="top"
-                >
+                android:layout_marginRight="10dp">
 
                 <TableRow>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="No. de Tienda: "
-                        android:textSize="10dp" />
+                        android:textSize="10sp" />
 
                     <TextView
                         android:id="@+id/id_tienda"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="10dp"
+                        android:textSize="10sp"
                         android:textStyle="bold" />
                 </TableRow>
 
@@ -138,13 +131,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Cadena: "
-                        android:textSize="10dp" />
+                        android:textSize="10sp" />
 
                     <TextView
                         android:id="@+id/cadena_tienda"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="10dp"
+                        android:textSize="10sp"
                         android:textStyle="bold" />
                 </TableRow>
 
@@ -153,13 +146,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Formato: "
-                        android:textSize="10dp" />
+                        android:textSize="10sp" />
 
                     <TextView
                         android:id="@+id/formato_tienda"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="10dp"
+                        android:textSize="10sp"
                         android:textStyle="bold" />
                 </TableRow>
 
@@ -168,14 +161,15 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Dirección: "
-                        android:textSize="10dp" />
+                        android:textSize="10sp" />
 
                     <TextView
                         android:id="@+id/direccion_tienda"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="10dp"
+                        android:textSize="10sp"
                         android:textStyle="bold" />
+
                 </TableRow>
             </TableLayout>
             <!--<LinearLayout
@@ -242,24 +236,15 @@
                     android:text="61 "
                     />-->
 
-                <!--<TextView
-                    android:id="@+id/direccion_tienda"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="12dp"
-                    android:textStyle="bold" />-->
+            <!--<TextView
+                android:id="@+id/direccion_tienda"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="12dp"
+                android:textStyle="bold" />-->
             <!--</LinearLayout>-->
 
         </LinearLayout>
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="40 "
-                />
-            </LinearLayout>
     </LinearLayout>
 </LinearLayout>

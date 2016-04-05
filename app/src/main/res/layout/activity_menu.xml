@@ -10,6 +10,7 @@
         android:layout_width="fill_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:layout_marginTop="10dp"
         android:orientation="vertical">
 
 <!--        <TextView
@@ -33,20 +34,20 @@
 
                 <ImageView
                     android:id="@+id/piso_clic"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
                     android:padding="10dp"
                     android:src="@drawable/piso_venta" />
 
                 <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
                     android:padding="10dp"
                     android:src="@drawable/bodega" />
 
                 <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
                     android:padding="10dp"
                     android:src="@drawable/resurtido" />
 
@@ -54,14 +55,33 @@
 
             <TableRow>
                 <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
                     android:padding="10dp"
                     android:src="@drawable/precio" />
 
+                <ImageView
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    android:padding="10dp"
+                    android:src="@drawable/exhib_adicionales" />
+
+                <ImageView
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    android:padding="10dp"
+                    android:src="@drawable/exhib_regulares" />
 
             </TableRow>
 
+            <TableRow>
+                <ImageView
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    android:padding="10dp"
+                    android:src="@drawable/competencia" />
+
+            </TableRow>
         </TableLayout>
     </LinearLayout>
 </LinearLayout>

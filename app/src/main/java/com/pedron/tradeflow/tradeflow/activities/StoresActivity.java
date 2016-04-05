@@ -107,27 +107,12 @@ public class StoresActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 LocationManager locManager = (LocationManager)getSystemService(LOCATION_SERVICE);
-                List<String> listaProviders = locManager.getAllProviders();
-
-                LocationProvider provider = locManager.getProvider(listaProviders.get(0));
-                int precision = provider.getAccuracy();
-                boolean obtieneAltitud = provider.supportsAltitude();
-                int consumoRecursos = provider.getPowerRequirement();
-
-                Criteria req = new Criteria();
-                req.setAccuracy(Criteria.ACCURACY_FINE);
-                req.setAltitudeRequired(true);
-
-                //Mejor proveedor por criterio
-                String mejorProviderCrit = locManager.getBestProvider(req, false);
-
-                //Lista de proveedores por criterio
-                List<String> listaProvidersCrit = locManager.getProviders(req, false);
 
                 //Si el GPS no está habilitado
                 if (!locManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
                     Log.i("Leobas", "GPS Apagado");
                 }
+
 
                 LocationListener locListener = new LocationListener() {
 
@@ -147,6 +132,13 @@ public class StoresActivity extends AppCompatActivity {
 //                        lblEstado.setText("Provider Status: " + status);
                     }
                 };
+                if ( Build.VERSION.SDK_INT >= 23 &&
+                        ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION ) != PackageManager.PERMISSION_GRANTED &&
+                        ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+//                    return true;
+                }
+
+                locManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 10000, 1, locListener);
 
                 /*LocationHelper locationHelper = new LocationHelper(getApplicationContext());
                 if(locationHelper.canGetLocation()){
@@ -166,8 +158,8 @@ public class StoresActivity extends AppCompatActivity {
 //                extras.putString("idTienda", storeList.get(position).get);
                 launchActivity.putExtras(extras);
 
-                ImageView imR = (ImageView)findViewById(R.id.sem_rojo);
-                ImageView imA = (ImageView)findViewById(R.id.sem_ama);
+                ImageView imR = (ImageView)view.findViewById(R.id.sem_rojo);
+                ImageView imA = (ImageView)view.findViewById(R.id.sem_ama);
                 imR.setVisibility(View.INVISIBLE);
                 imA.setVisibility(View.VISIBLE);
                 startActivity(launchActivity);
