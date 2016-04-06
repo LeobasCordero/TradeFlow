@@ -80,7 +80,7 @@ public class StoresActivity extends AppCompatActivity {
         textView = (TextView) findViewById(R.id.screen_title);
         textView.setText("Tiendas");
 
-        turnGPSOn();
+//        turnGPSOn();
 
         config.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -141,7 +141,12 @@ public class StoresActivity extends AppCompatActivity {
                 locListener.onLocationChanged(loc);
 
 //                Log.i("Leobas", "Location " + loc.getAltitude() + ", " + loc.getLongitude());
-
+                try {
+                    // Simulate network access.
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    Log.i("Leobas", e.getMessage());
+                }
                 Toast.makeText(getApplicationContext(), R.string.check_in_toast, Toast.LENGTH_LONG).show();
 //                Log.i("Leobas", "location " + location.getLongitude() + ", " + location.getAltitude());
 

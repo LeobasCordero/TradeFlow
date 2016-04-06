@@ -10,7 +10,7 @@
     <string name="action_sign_in_short">Entrar</string>
     <string name="action_next">Siguiente</string>
     <string name="error_invalid_user">Usuario invalido</string>
-    <string name="error_invalid_password">Contrseña muy corta</string>
+    <string name="error_invalid_password">Contraseña muy corta</string>
     <string name="error_incorrect_password">Contraseña incorrecta</string>
     <string name="error_field_required">Campo requerido</string>
     <string name="alert_header">ALERTAS</string>
