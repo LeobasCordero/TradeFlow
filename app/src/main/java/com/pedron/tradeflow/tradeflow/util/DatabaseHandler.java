@@ -109,6 +109,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         addStoreTradeflow("9405", "Los Angeles(1982)", "HEB", "Supermercado", "322", "Romulo Garza #2988, col. Los Morales, cp. 24452, San Nicolas de los Garza, Nuevo Leon");
         addStoreTradeflow("102", "Escobedo(3004)", "OXXO", "CEDIS", "650", "Lazaro Cardenas #2011, col. Centrito Valle, cp. 66305, San Pedro, Nuevo Leon");
         addStoreTradeflow("3365", "Universidad(1800)", "Famosa", "Almacen", "100", "Cuahutemoc #522, col. Centro, cp.68000, Monterrey, Nuevo Leon");
+        addStoreTradeflow("6631", "Juarez(9085)", "Comercial Treviño", "Almacen", "600", "Mariano Escobedo #2223, col. Santa Fe, cp. 69908, Santa Catarina, Nuevo Leon");
 
         addAlertTradeflow("100", "SQL completo, donde indicamos los campos", "0");
         addAlertTradeflow("100", "La polémica por la manera en la que son tratados los refugiados ", "0");
@@ -119,6 +120,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         addAlertTradeflow("1225", "Intent is an abstract description of an operation", "0");
         addAlertTradeflow("855", "Existen 5 continentes, no 2. solo por que seas un continente con gran cultura", "0");
         addAlertTradeflow("855", "Durante un breve periodo de tiempo la solidaridad con el pueblo", "0");
+        addAlertTradeflow("600", "Todo comenzó mal con el nuevo plan de Hoy No Circula, pues en el primer día de operación se registraron nuevamente niveles altos de partículas", "0");
+        addAlertTradeflow("600", "Se registró un índice de contaminación superior a los 150 puntos IMECA", "0");
+        addAlertTradeflow("600", "Entre las medidas que se podrían aplicar en la Fase 1 de Contingencia, se contempla el Doble No Circula", "0");
     }
 
     // Upgrading database

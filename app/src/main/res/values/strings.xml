@@ -17,6 +17,7 @@
     <string name="clients_header">CLIENTES</string>
     <string name="products_header">PRODUCTOS</string>
     <string name="activities_header">ACTIVIDADES</string>
+    <string name="check_in_toast">Check In Exitoso</string>
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>

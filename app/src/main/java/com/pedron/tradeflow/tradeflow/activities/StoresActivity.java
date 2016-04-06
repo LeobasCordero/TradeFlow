@@ -10,8 +10,10 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.location.LocationProvider;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
@@ -25,6 +27,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.pedron.tradeflow.tradeflow.R;
 import com.pedron.tradeflow.tradeflow.adapters.AdapterStores;
@@ -50,16 +53,10 @@ public class StoresActivity extends AppCompatActivity {
     ListView lv;
     ArrayAdapter adapter;
     EditText inputSearch;
-//    ArrayList<HashMap<String, String>> storeList;
     List<Store> storeList;
     ImageView config;
     TextView textView, dateFooter;
 
-    // Listview Data
-    /*String stores[] = {
-            "Ruiz Cortinez","Constitucion","Morones Prieto","Centro Apodaca","Cuahutemoc",
-            "Santa Rosa","Azteca","Vicente Guerrero","Churubusco","Los Angeles","San Jose",
-            "Plaza Linda Vista","Aeropuerto"};*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +79,8 @@ public class StoresActivity extends AppCompatActivity {
         actionBar.setCustomView(v);
         textView = (TextView) findViewById(R.id.screen_title);
         textView.setText("Tiendas");
+
+        turnGPSOn();
 
         config.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,60 +107,57 @@ public class StoresActivity extends AppCompatActivity {
 
                 LocationManager locManager = (LocationManager)getSystemService(LOCATION_SERVICE);
 
-                //Si el GPS no está habilitado
-                if (!locManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-                    Log.i("Leobas", "GPS Apagado");
-                }
-
-
                 LocationListener locListener = new LocationListener() {
 
                     public void onLocationChanged(Location location) {
+                        //Hacer la insercion del registro en BDD
                         Log.i("Leobas", "location " + location.getLongitude() + ", " + location.getAltitude());
                     }
 
                     public void onProviderDisabled(String provider){
-//                        lblEstado.setText("Provider OFF");
+                        Log.i("Leobas", "GPS apagado");
                     }
 
                     public void onProviderEnabled(String provider){
-//                        lblEstado.setText("Provider ON");
+                        Log.i("Leobas", "GPS encendido");
                     }
 
                     public void onStatusChanged(String provider, int status, Bundle extras){
-//                        lblEstado.setText("Provider Status: " + status);
+                        Log.i("Leobas", "Status Changed");
                     }
                 };
+
                 if ( Build.VERSION.SDK_INT >= 23 &&
                         ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION ) != PackageManager.PERMISSION_GRANTED &&
                         ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 //                    return true;
                 }
 
-                locManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 10000, 1, locListener);
+//                Log.i("Leobas", "GPS encendido: " + locManager.isProviderEnabled(LocationManager.GPS_PROVIDER));
+                locManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locListener);
+                Location loc = locManager.getLastKnownLocation("gps");
 
-                /*LocationHelper locationHelper = new LocationHelper(getApplicationContext());
-                if(locationHelper.canGetLocation()){
-                    Log.i("Leobas", "latitud: " + locationHelper.getLatitude());
-                    Log.i("Leobas", "longitud: " + locationHelper.getLongitude());
-                    Log.i("Leobas", "direccion: " + locationHelper.getLocation());
+//                Log.i("Leobas", "Location: " + loc.getProvider());
+                locListener.onLocationChanged(loc);
 
-                }else{
-                    locationHelper.showSettingsAlert();
-                }*/
+//                Log.i("Leobas", "Location " + loc.getAltitude() + ", " + loc.getLongitude());
+
+                Toast.makeText(getApplicationContext(), R.string.check_in_toast, Toast.LENGTH_LONG).show();
+//                Log.i("Leobas", "location " + location.getLongitude() + ", " + location.getAltitude());
+
 
                 Intent launchActivity = new Intent(StoresActivity.this, AlertsActivity.class);
                 Bundle extras = new Bundle();
                 storeList.get(position);
                 Log.i("Leobas", "idTienda: " + storeList.get(position).getIdTienda());
                 extras.putString("idTienda", storeList.get(position).getIdTienda());
-//                extras.putString("idTienda", storeList.get(position).get);
                 launchActivity.putExtras(extras);
 
                 ImageView imR = (ImageView)view.findViewById(R.id.sem_rojo);
                 ImageView imA = (ImageView)view.findViewById(R.id.sem_ama);
                 imR.setVisibility(View.INVISIBLE);
                 imA.setVisibility(View.VISIBLE);
+                turnGPSOff();
                 startActivity(launchActivity);
             }
         });
@@ -190,6 +186,34 @@ public class StoresActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    public void turnGPSOn(){
+        Intent intent = new Intent("android.location.GPS_ENABLED_CHANGE");
+        intent.putExtra("enabled", true);
+        this.sendBroadcast(intent);
+
+        String provider = Settings.Secure.getString(this.getContentResolver(), Settings.Secure.LOCATION_PROVIDERS_ALLOWED);
+        if(!provider.contains("gps")){ //if gps is disabled
+            final Intent poke = new Intent();
+            poke.setClassName("com.android.settings", "com.android.settings.widget.SettingsAppWidgetProvider");
+            poke.addCategory(Intent.CATEGORY_ALTERNATIVE);
+            poke.setData(Uri.parse("3"));
+            this.sendBroadcast(poke);
+            Log.i("Leobas", "habilito el GPS");
+        }
+    }
+
+    // automatic turn off the gps
+    public void turnGPSOff(){
+        String provider = Settings.Secure.getString(this.getContentResolver(), Settings.Secure.LOCATION_PROVIDERS_ALLOWED);
+        if(provider.contains("gps")){ //if gps is enabled
+            final Intent poke = new Intent();
+            poke.setClassName("com.android.settings", "com.android.settings.widget.SettingsAppWidgetProvider");
+            poke.addCategory(Intent.CATEGORY_ALTERNATIVE);
+            poke.setData(Uri.parse("3"));
+            this.sendBroadcast(poke);
+        }
     }
 
     public List<Store> getStores(){
