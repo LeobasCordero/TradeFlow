@@ -34,20 +34,20 @@
 
                 <ImageView
                     android:id="@+id/piso_clic"
-                    android:layout_width="90dp"
-                    android:layout_height="90dp"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
                     android:padding="10dp"
                     android:src="@drawable/piso_venta" />
 
                 <ImageView
-                    android:layout_width="90dp"
-                    android:layout_height="90dp"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
                     android:padding="10dp"
                     android:src="@drawable/bodega" />
 
                 <ImageView
-                    android:layout_width="90dp"
-                    android:layout_height="90dp"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
                     android:padding="10dp"
                     android:src="@drawable/resurtido" />
 
@@ -55,20 +55,20 @@
 
             <TableRow>
                 <ImageView
-                    android:layout_width="90dp"
-                    android:layout_height="90dp"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
                     android:padding="10dp"
                     android:src="@drawable/precio" />
 
                 <ImageView
-                    android:layout_width="90dp"
-                    android:layout_height="90dp"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
                     android:padding="10dp"
                     android:src="@drawable/exhib_adicionales" />
 
                 <ImageView
-                    android:layout_width="90dp"
-                    android:layout_height="90dp"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
                     android:padding="10dp"
                     android:src="@drawable/exhib_regulares" />
 
@@ -76,8 +76,8 @@
 
             <TableRow>
                 <ImageView
-                    android:layout_width="90dp"
-                    android:layout_height="90dp"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
                     android:padding="10dp"
                     android:src="@drawable/competencia" />
 

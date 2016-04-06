@@ -111,7 +111,7 @@ public class StoresActivity extends AppCompatActivity {
 
                     public void onLocationChanged(Location location) {
                         //Hacer la insercion del registro en BDD
-                        Log.i("Leobas", "location " + location.getLongitude() + ", " + location.getAltitude());
+//                        Log.i("Leobas", "location " + location.getLongitude() + ", " + location.getAltitude());
                     }
 
                     public void onProviderDisabled(String provider){

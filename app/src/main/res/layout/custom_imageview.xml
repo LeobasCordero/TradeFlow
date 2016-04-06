@@ -24,7 +24,7 @@
     <TextView
         android:id="@+id/screen_title"
         android:textColor="@color/colorLegends"
-        android:textSize="20dp"
+        android:textSize="19sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
