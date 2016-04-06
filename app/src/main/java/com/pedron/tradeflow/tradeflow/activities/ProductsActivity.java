@@ -4,19 +4,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.pedron.tradeflow.tradeflow.R;
-
-import java.util.List;
 
 /**
  * Created by leocg on 17/03/2016.
@@ -26,7 +19,7 @@ public class ProductsActivity extends AppCompatActivity {
     ListView listProducts;
     EditText inputSearch;
 */
-    TextView textView, candimon;
+    TextView textView, candimon, pasta, hipo;
     ArrayAdapter<String> adapter;
     String products[] = {
             "Hinds Clasica","Hinds Mama","Cloralex 250ml","Pinol 1L","Jabon Zest 180g", "Fabuloso 500ml",
@@ -34,7 +27,7 @@ public class ProductsActivity extends AppCompatActivity {
             "Cerillos Talisman","Sardinas El Puerto"};
 
     public void onClick(View v) {
-        Intent intent = new Intent(ProductsActivity.this, PisoPresentacionActivity.class);
+        Intent intent = new Intent(ProductsActivity.this, ResurtidoActivity.class);
         TextView tv = (TextView)v;
 //        Log.i("producto", tv.getText().toString());
 //        Log.i("producto", ((TextView) v).getText().toString());
@@ -60,16 +53,39 @@ public class ProductsActivity extends AppCompatActivity {
         textView.setText("Productos");
 
         candimon = (TextView)findViewById(R.id.candimon);
+        pasta = (TextView)findViewById(R.id.pasta);
+        hipo = (TextView)findViewById(R.id.hipo);
 
         candimon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent act = new Intent(ProductsActivity.this, PisoPresentacionActivity.class);
-                TextView tv = (TextView)v;
+                Intent act = new Intent(ProductsActivity.this, ResurtidoActivity.class);
+//                TextView tv = (TextView)v;
                 act.putExtra("producto", ((TextView) v).getText().toString());
                 startActivity(act);
             }
         });
+
+        pasta.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent act = new Intent(ProductsActivity.this, BodegaActivity.class);
+//                TextView tv = (TextView)v;
+                act.putExtra("producto", ((TextView) v).getText().toString());
+                startActivity(act);
+            }
+        });
+
+        hipo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent act = new Intent(ProductsActivity.this, PisoPresentacionActivity.class);
+//                TextView tv = (TextView)v;
+                act.putExtra("producto", ((TextView) v).getText().toString());
+                startActivity(act);
+            }
+        });
+
 /*
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1 ,products);
         listProducts.setAdapter(adapter);

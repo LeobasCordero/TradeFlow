@@ -50,6 +50,8 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".activities.BodegaActivity"
             android:screenOrientation="portrait"/>
+        <activity android:name=".activities.ResurtidoActivity"
+            android:screenOrientation="portrait"/>
         <activity android:name=".activities.PisoPresentacionActivity"
             android:screenOrientation="portrait"/>
     </application>

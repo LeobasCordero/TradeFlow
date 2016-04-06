@@ -5,9 +5,9 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -15,36 +15,36 @@ import android.widget.TextView;
 
 import com.pedron.tradeflow.tradeflow.R;
 
-public class BodegaActivity extends AppCompatActivity {
-    TextView textView, subtitle;
+public class ResurtidoActivity extends AppCompatActivity {
+    TextView textTitle, textSub;
     ImageView btnTackPic;
     Bitmap bitMap;
     ImageView ivThumbnailPhoto;
     static int TAKE_PICTURE = 1;
-    int pict = 1;
-    String prod = "";
-
+    int pict=1;
+    String prod="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_bodega);
+        setContentView(R.layout.activity_resurtido);
         Intent i = getIntent();
-
-        btnTackPic = (ImageView) findViewById(R.id.camara);
         prod = i.getStringExtra("producto");
+        btnTackPic = (ImageView) findViewById(R.id.camara);
 
         if(pict == 1){
             ivThumbnailPhoto = (ImageView) findViewById(R.id.imagen1);
             pict++;
-        }else{
+        }
+        else{
             ivThumbnailPhoto = (ImageView) findViewById(R.id.imagen2);
         }
 
-        textView = (TextView) findViewById(R.id.producto0);
-        textView.setText(prod);
-        textView = (TextView) findViewById(R.id.producto2);
-        textView.setText(prod);
+//        textTitle = (TextView) findViewById(R.id.producto0);
+//        textTitle.setText(prod);
+//        textView = (TextView) findViewById(R.id.producto2);
+//        textView.setText(prod);
+
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowTitleEnabled(false);
         actionBar.setDisplayShowCustomEnabled(true);
@@ -52,10 +52,11 @@ public class BodegaActivity extends AppCompatActivity {
         View v = inflator.inflate(R.layout.custom_imageview_gray, null);
         actionBar.setCustomView(v);
 
-        textView = (TextView)findViewById(R.id.screen_title);
-        textView.setText(R.string.bodega_header);
-        subtitle = (TextView)findViewById(R.id.screen_subtitle);
-        subtitle.setText(prod);
+        textTitle = (TextView) findViewById(R.id.screen_title);
+        textTitle.setText(R.string.resurtido_header);
+
+        textSub = (TextView) findViewById(R.id.screen_subtitle);
+        textSub.setText(prod);
 
         actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#555D52")));
 
@@ -69,6 +70,13 @@ public class BodegaActivity extends AppCompatActivity {
         startActivityForResult(intent, TAKE_PICTURE);
 
     }
+    public void save(View v) {
+        Intent intent = new Intent(ResurtidoActivity.this, BodegaActivity.class);
+
+        intent.putExtra("producto", prod);
+        startActivity(intent);
+
+    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
 
@@ -78,10 +86,7 @@ public class BodegaActivity extends AppCompatActivity {
 
             // get bitmap
             bitMap = (Bitmap) extras.get("data");
-
                 ivThumbnailPhoto.setImageBitmap(bitMap);
-
-            
 
         }
     }

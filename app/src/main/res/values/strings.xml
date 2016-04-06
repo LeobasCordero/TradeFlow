@@ -18,6 +18,8 @@
     <string name="products_header">PRODUCTOS</string>
     <string name="activities_header">ACTIVIDADES</string>
     <string name="resurtido_header">PISO DE VENTA RESURTIDO</string>
+    <string name="piso_header">PISO DE VENTA</string>
+    <string name="bodega_header">BODEGA</string>
     <string name="check_in_toast">Check In Exitoso</string>
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
