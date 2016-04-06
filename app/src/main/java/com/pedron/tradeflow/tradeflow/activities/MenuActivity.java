@@ -16,7 +16,7 @@ import com.pedron.tradeflow.tradeflow.R;
  */
 public class MenuActivity extends AppCompatActivity {
 
-    ImageView piso;
+    ImageView piso, bodega, resurtido, precio;
     TextView textView;
 
     @Override
@@ -35,7 +35,35 @@ public class MenuActivity extends AppCompatActivity {
 //        textView.setPadding(75,10,0,10);
 
         piso = (ImageView)findViewById(R.id.piso_clic);
+        bodega = (ImageView)findViewById(R.id.bodega_clic);
+        resurtido = (ImageView)findViewById(R.id.resurtido_clic);
+        precio = (ImageView)findViewById(R.id.precio_clic);
+
         piso.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent act = new Intent(MenuActivity.this, NewsActivity.class);
+                startActivity(act);
+            }
+        });
+
+        bodega.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent act = new Intent(MenuActivity.this, TrademarkActivity.class);
+                startActivity(act);
+            }
+        });
+
+        resurtido.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent act = new Intent(MenuActivity.this, TrademarkActivity.class);
+                startActivity(act);
+            }
+        });
+
+        precio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent act = new Intent(MenuActivity.this, NewsActivity.class);

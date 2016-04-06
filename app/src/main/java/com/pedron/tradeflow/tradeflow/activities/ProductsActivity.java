@@ -1,10 +1,12 @@
 package com.pedron.tradeflow.tradeflow.activities;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -24,12 +26,21 @@ public class ProductsActivity extends AppCompatActivity {
     ListView listProducts;
     EditText inputSearch;
 */
-    TextView textView;
+    TextView textView, candimon;
     ArrayAdapter<String> adapter;
     String products[] = {
             "Hinds Clasica","Hinds Mama","Cloralex 250ml","Pinol 1L","Jabon Zest 180g", "Fabuloso 500ml",
             "Head & Shoulders 970ml","Jabon Polvo Foca","Rocainol","Ariel 500g","Alcohol San Jose",
             "Cerillos Talisman","Sardinas El Puerto"};
+
+    public void onClick(View v) {
+        Intent intent = new Intent(ProductsActivity.this, PisoPresentacionActivity.class);
+        TextView tv = (TextView)v;
+//        Log.i("producto", tv.getText().toString());
+//        Log.i("producto", ((TextView) v).getText().toString());
+        intent.putExtra("producto", ((TextView) v).getText().toString());
+        startActivity(intent);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +58,18 @@ public class ProductsActivity extends AppCompatActivity {
         actionBar.setCustomView(v);
         textView = (TextView) findViewById(R.id.screen_title);
         textView.setText("Productos");
+
+        candimon = (TextView)findViewById(R.id.candimon);
+
+        candimon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent act = new Intent(ProductsActivity.this, PisoPresentacionActivity.class);
+                TextView tv = (TextView)v;
+                act.putExtra("producto", ((TextView) v).getText().toString());
+                startActivity(act);
+            }
+        });
 /*
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1 ,products);
         listProducts.setAdapter(adapter);

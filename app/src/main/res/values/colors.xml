@@ -5,4 +5,6 @@
     <color name="colorAccent">#DF333A</color>
     <color name="colorLegends">#FFFFFF</color>
     <color name="colorFooter">#000000</color>
+    <color name="colorHeader">#555D52</color>
+
 </resources>

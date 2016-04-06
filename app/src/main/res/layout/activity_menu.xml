@@ -40,12 +40,14 @@
                     android:src="@drawable/piso_venta" />
 
                 <ImageView
+                    android:id="@+id/bodega_clic"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:padding="10dp"
                     android:src="@drawable/bodega" />
 
                 <ImageView
+                    android:id="@+id/resurtido_clic"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:padding="10dp"
@@ -55,6 +57,7 @@
 
             <TableRow>
                 <ImageView
+                    android:id="@+id/precio_clic"
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:padding="10dp"

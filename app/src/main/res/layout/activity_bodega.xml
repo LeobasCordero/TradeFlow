@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".activities.PisoPresentacionActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Almacen"
+        android:id="@+id/producto1"
+        android:layout_marginRight="74dp"
+        android:layout_marginEnd="74dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pre"
+        android:id="@+id/textView8"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/imagen2"
+        android:layout_alignEnd="@+id/imagen2" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/producto0"
+        android:layout_below="@+id/producto1"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="34dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/producto2"
+        android:layout_below="@+id/producto0"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="41dp" />
+
+    <RelativeLayout
+        android:id="@+id/footer"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:background="#cf0303"
+        android:layout_alignParentBottom="true">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_gravity="left"
+            android:src="@drawable/logoblanco"
+            android:id="@+id/imageView4" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_gravity="left"
+            android:src="@drawable/camara"
+            android:id="@+id/camara"
+            android:clickable="true"
+            android:onClick="onClickPicture"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/imageView4"
+            android:layout_toEndOf="@+id/imageView4" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_gravity="left"
+            android:src="@drawable/home"
+            android:id="@+id/home"
+            android:layout_alignTop="@+id/camara"
+            android:layout_centerHorizontal="true" />
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+
+            android:src="@drawable/save"
+            android:layout_alignTop="@+id/camara"
+            android:layout_toRightOf="@+id/camara"
+            android:layout_toEndOf="@+id/camara"
+            android:id="@+id/save" />
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:src="@drawable/tfblanco"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:id="@+id/imageView3" />
+
+    </RelativeLayout>
+
+    <ImageView
+        android:layout_width="158dp"
+        android:layout_height="158dp"
+        android:id="@+id/imagen1"
+        android:layout_above="@+id/footer"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:clickable="true" />
+
+    <ImageView
+        android:layout_width="158dp"
+        android:layout_height="158dp"
+        android:id="@+id/imagen2"
+        android:layout_alignTop="@+id/imagen1"
+        android:layout_toRightOf="@+id/imagen1"
+        android:layout_toEndOf="@+id/imagen1"
+        android:clickable="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/editText"
+        android:layout_alignBottom="@+id/producto0"
+        android:layout_alignRight="@+id/producto1"
+        android:layout_alignEnd="@+id/producto1"
+        android:layout_alignLeft="@+id/producto1"
+        android:layout_alignStart="@+id/producto1" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/editText2"
+        android:layout_alignBottom="@+id/producto2"
+        android:layout_alignLeft="@+id/editText"
+        android:layout_alignStart="@+id/editText"
+        android:layout_alignRight="@+id/editText"
+        android:layout_alignEnd="@+id/editText" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/checkBox"
+        android:layout_above="@+id/producto2"
+        android:layout_alignLeft="@+id/textView8"
+        android:layout_alignStart="@+id/textView8" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/checkBox2"
+        android:layout_alignBottom="@+id/editText2"
+        android:layout_alignLeft="@+id/checkBox"
+        android:layout_alignStart="@+id/checkBox" />
+
+</RelativeLayout>
