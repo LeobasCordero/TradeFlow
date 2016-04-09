@@ -7,22 +7,31 @@
 
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_height="match_parent"
         android:orientation="vertical"
+        android:layout_gravity="center_vertical"
         android:paddingLeft="15dp">
 
-        <ListView
-            android:id="@+id/list_view_news"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:paddingTop="20dp" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+            <TextView
+                android:id="@+id/legend_not_found"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:textStyle="bold"/>
+        </RelativeLayout>
+
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_gravity="bottom">
 
         <Button
             android:id="@+id/next_news"

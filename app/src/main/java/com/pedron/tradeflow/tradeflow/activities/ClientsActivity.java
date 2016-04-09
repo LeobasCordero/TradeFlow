@@ -11,13 +11,16 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.pedron.tradeflow.tradeflow.R;
 import com.pedron.tradeflow.tradeflow.adapters.AdapterClient;
+import com.pedron.tradeflow.tradeflow.util.DatabaseHandler;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -28,23 +31,13 @@ public class ClientsActivity extends AppCompatActivity implements AdapterClient.
     private RecyclerView recycler;
     private List<String> clientList;
     TextView textView;
+    String idTienda, idCliente;
+    List clientes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.trademark_list);
-
-        /*android.support.v7.app.ActionBar actionBar = getSupportActionBar();
-
-        if (actionBar != null) {
-            actionBar.setDisplayShowTitleEnabled(false);
-            actionBar.setDisplayShowCustomEnabled(true);
-
-            LayoutInflater inflator = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            View v = inflator.inflate(R.layout.custom_imageview_cliente, null);
-
-            actionBar.setCustomView(v);
-        }*/
 
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowTitleEnabled(false);
@@ -52,6 +45,15 @@ public class ClientsActivity extends AppCompatActivity implements AdapterClient.
         LayoutInflater inflator = (LayoutInflater) this .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View v = inflator.inflate(R.layout.custom_imageview, null);
         actionBar.setCustomView(v);
+
+        Intent intent = getIntent();
+        Bundle b = intent.getExtras();
+        idTienda = b.getString("idTienda");
+
+        //obtengo la lista de clientes de la BDD
+        DatabaseHandler db = new DatabaseHandler(this);
+        clientes = db.getClients(idTienda);
+
         textView = (TextView) findViewById(R.id.screen_title);
         textView.setText("Clientes");
 
@@ -74,10 +76,12 @@ public class ClientsActivity extends AppCompatActivity implements AdapterClient.
         //File root = Environment.getExternalStorageDirectory();
         File dir = new File(directory);
         for (File f : dir.listFiles()) {
-    Log.i("Leobas", f.getAbsolutePath());
+
             if (f.isAbsolute())
                 tmList.add(f.getAbsolutePath());
         }
+        Collections.sort(tmList);
+        printList(tmList);
 
         return tmList;
     }
@@ -101,7 +105,6 @@ public class ClientsActivity extends AppCompatActivity implements AdapterClient.
                 directory = subfolder.getAbsolutePath();
             }else{
                 directory = subfolder.getAbsolutePath();
-                Log.i("Leo", "Directorio ya creado: " + directory);
             }
         } else {
             new Throwable("No se puede crear el directorio");
@@ -112,9 +115,30 @@ public class ClientsActivity extends AppCompatActivity implements AdapterClient.
 
     @Override
     public void onItemClick(AdapterClient.ViewHolder item, int position) {
-        Intent intent = new Intent(ClientsActivity.this, MenuActivity.class);
-
-        startActivity(intent);
+        Intent launchActivity = new Intent(ClientsActivity.this, MenuActivity.class);
+        Bundle extras = new Bundle();
+        position++;
+        extras.putString("idCliente", String.valueOf(position));
+        launchActivity.putExtras(extras);
+        startActivity(launchActivity);
     }
 
+    /**
+     * Basado en una lista de los nombres de las imagenes, podemos obtener que cliente buscar
+     *
+     * @param clientes
+     * @return el idCliente seleccionado
+     */
+    public String selectCliente(List clientes){
+        String cliente = "0";
+
+
+        return cliente;
+    }
+
+    public void printList(List<String> list){
+        for (String e : list){
+            Log.i("Leobas", "elemento: " + e);
+        }
+    }
 }

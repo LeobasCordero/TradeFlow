@@ -42,7 +42,7 @@ public class AdapterStores extends ArrayAdapter<Store> {
 
         //Obteniendo instancias de los text views
         TextView nombreTienda = (TextView) listItemView.findViewById(R.id.nombre_tienda);
-        TextView idTienda = (TextView) listItemView.findViewById(R.id.id_tienda);
+//        TextView idTienda = (TextView) listItemView.findViewById(R.id.id_tienda);
         TextView cadena = (TextView) listItemView.findViewById(R.id.cadena_tienda);
         TextView formato = (TextView) listItemView.findViewById(R.id.formato_tienda);
 //        TextView calle = (TextView) listItemView.findViewById(R.id.calle_tienda);
@@ -54,7 +54,7 @@ public class AdapterStores extends ArrayAdapter<Store> {
 
 
         nombreTienda.setText(store.getNombreTienda());
-        idTienda.setText(store.getIdTienda());
+//        idTienda.setText(store.getIdTienda());
         cadena.setText(store.getCadena());
         formato.setText(store.getFormato());
 //        calle.setText(store.getCalle());

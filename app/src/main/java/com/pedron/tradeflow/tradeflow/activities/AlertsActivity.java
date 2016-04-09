@@ -29,6 +29,7 @@ public class AlertsActivity extends AppCompatActivity {
     List alertas;
     ListView listView;
     TextView textView;
+    String idTienda;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,21 +47,24 @@ public class AlertsActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         Bundle b = intent.getExtras();
-        String idTienda = b.getString("idTienda");
+        idTienda = b.getString("idTienda");
 
         DatabaseHandler db = new DatabaseHandler(this);
         alertas = db.getAlerts(idTienda);
         listView = (ListView)findViewById(R.id.list_view_alerts);
 
         listView.setAdapter(new ArrayAdapter<String>(
-                this, R.layout.list_item_alert, R.id.textAlert, alertas));
+                this, R.layout.list_item_alert, R.id.text_alert, alertas));
 
         next = (Button)findViewById(R.id.next_alert);
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent act = new Intent(AlertsActivity.this, ClientsActivity.class);
-                startActivity(act);
+                Intent launchActivity = new Intent(AlertsActivity.this, ClientsActivity.class);
+                Bundle extras = new Bundle();
+                extras.putString("idTienda", idTienda);
+                launchActivity.putExtras(extras);
+                startActivity(launchActivity);
             }
         });
 

@@ -12,7 +12,7 @@
         android:src="@drawable/estrella" />
 
     <TextView
-        android:id="@+id/text_alert"
+        android:id="@+id/text_news"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="10dp"

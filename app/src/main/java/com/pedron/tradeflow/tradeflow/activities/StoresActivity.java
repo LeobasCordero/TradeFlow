@@ -1,5 +1,8 @@
 package com.pedron.tradeflow.tradeflow.activities;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -11,6 +14,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.location.LocationProvider;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
@@ -56,6 +60,8 @@ public class StoresActivity extends AppCompatActivity {
     List<Store> storeList;
     ImageView config;
     TextView textView, dateFooter;
+    private View mProgressView, mStoresView, mSFooterView;
+    private CheckinTask mCheckinTask = null;
 
 
     @Override
@@ -70,6 +76,9 @@ public class StoresActivity extends AppCompatActivity {
         String todayDate = getFecha();
         dateFooter.setText(todayDate);
 
+        mProgressView = findViewById(R.id.login_progress);
+        mStoresView = findViewById(R.id.stores_form);
+        mSFooterView = findViewById(R.id.stores_footer);
 
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowTitleEnabled(false);
@@ -80,7 +89,7 @@ public class StoresActivity extends AppCompatActivity {
         textView = (TextView) findViewById(R.id.screen_title);
         textView.setText("Tiendas");
 
-//        turnGPSOn();
+        turnGPSOn();
 
         config.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,7 +114,20 @@ public class StoresActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                LocationManager locManager = (LocationManager)getSystemService(LOCATION_SERVICE);
+                if (mCheckinTask != null) {
+                    return;
+                }
+
+                ImageView imR = (ImageView)view.findViewById(R.id.sem_rojo);
+                ImageView imA = (ImageView)view.findViewById(R.id.sem_ama);
+                imR.setVisibility(View.INVISIBLE);
+                imA.setVisibility(View.VISIBLE);
+
+                showProgress(true);
+                mCheckinTask = new CheckinTask(position);
+                mCheckinTask.execute((Void) null);
+
+                /*LocationManager locManager = (LocationManager)getSystemService(LOCATION_SERVICE);
 
                 LocationListener locListener = new LocationListener() {
 
@@ -146,24 +168,24 @@ public class StoresActivity extends AppCompatActivity {
                     Thread.sleep(2000);
                 } catch (InterruptedException e) {
                     Log.i("Leobas", e.getMessage());
-                }
-                Toast.makeText(getApplicationContext(), R.string.check_in_toast, Toast.LENGTH_LONG).show();
+                }*/
+
+//                Toast.makeText(getApplicationContext(), R.string.check_in_toast, Toast.LENGTH_LONG).show();
 //                Log.i("Leobas", "location " + location.getLongitude() + ", " + location.getAltitude());
 
-
-                Intent launchActivity = new Intent(StoresActivity.this, AlertsActivity.class);
+            /*    Intent launchActivity = new Intent(StoresActivity.this, AlertsActivity.class);
                 Bundle extras = new Bundle();
                 storeList.get(position);
                 Log.i("Leobas", "idTienda: " + storeList.get(position).getIdTienda());
                 extras.putString("idTienda", storeList.get(position).getIdTienda());
-                launchActivity.putExtras(extras);
+                launchActivity.putExtras(extras);*/
 
-                ImageView imR = (ImageView)view.findViewById(R.id.sem_rojo);
-                ImageView imA = (ImageView)view.findViewById(R.id.sem_ama);
-                imR.setVisibility(View.INVISIBLE);
-                imA.setVisibility(View.VISIBLE);
-                turnGPSOff();
-                startActivity(launchActivity);
+//                ImageView imR = (ImageView)view.findViewById(R.id.sem_rojo);
+//                ImageView imA = (ImageView)view.findViewById(R.id.sem_ama);
+//                imR.setVisibility(View.INVISIBLE);
+//                imA.setVisibility(View.VISIBLE);
+//                turnGPSOff();
+//                startActivity(launchActivity);
             }
         });
 /**
@@ -222,27 +244,10 @@ public class StoresActivity extends AppCompatActivity {
     }
 
     public List<Store> getStores(){
-//        List<Store> stores = new ArrayList<>();
-
         DatabaseHandler db = new DatabaseHandler(this);
-//        stores = db.getStores();
-/*        Store s = new Store("Ruiz Cortinez", "31122", "Walmart", "Supercenter", "Circuito", "2214", "Pablo Livas");
-        stores.add(s);
-        s = new Store("Morones Prieto", "1122", "Cadena", "Formato", "Calle Principal", "1020", "Tres Caminos");
-        stores.add(s);
-        s = new Store("Centro Apodaca", "1233", "Soriana", "Supercenter", "Miguel Aleman", "S/N", "Zozaya");
-        stores.add(s);
-        s = new Store("Constitucion", "3005", "Modelorama", "Minisuper", "Lopez Mateos", "2005", "Juan Pablo II");
-        stores.add(s);
-        s = new Store("Cuahutemoc", "605", "Mi Tiendita", "Supercenter", "Paricutin", "400", "Ave Roma");
-        stores.add(s);
-        s = new Store("Churubusco", "3500", "Comercial Treviño", "Minicuper", "Garza Sada", "S/N", "Juarez");
-        stores.add(s);*/
 
         return db.getStores();
     }
-
-
 
     public String getFecha(){
         String date;
@@ -253,4 +258,162 @@ public class StoresActivity extends AppCompatActivity {
 
         return date;
     }
+
+    /**
+     * Shows the progress UI and hides the login form.
+     */
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
+    private void showProgress(final boolean show) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
+            int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
+
+            mStoresView.setVisibility(show ? View.GONE : View.VISIBLE);
+            mSFooterView.setVisibility(show ? View.GONE : View.VISIBLE);
+
+            mStoresView.animate().setDuration(shortAnimTime).alpha(
+                    show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    mStoresView.setVisibility(show ? View.GONE : View.VISIBLE);
+                }
+            });
+
+            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+            mProgressView.animate().setDuration(shortAnimTime).alpha(
+                    show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+                }
+            });
+        } else {
+            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+            mStoresView.setVisibility(show ? View.GONE : View.VISIBLE);
+        }
+    }
+
+
+    /**
+     * Represents an asynchronous check in for the store
+     */
+    public class CheckinTask extends AsyncTask<Void, Void, Boolean> {
+
+        private final int position;
+        Boolean checkin = true;
+
+        CheckinTask(int pos){
+            position = pos;
+        }
+
+        @Override
+        protected Boolean doInBackground(Void... params) {
+            // TODO: attempt authentication against a network service.
+
+            Log.i("Stores", "1");
+            try {
+                // Simulate network access.
+                LocationManager locManager = (LocationManager)getSystemService(LOCATION_SERVICE);
+                Log.i("Stores", "2");
+                LocationListener locListener = new LocationListener() {
+                    public void onLocationChanged(Location location) {
+                        //Hacer la insercion del registro en BDD
+//                        Log.i("Leobas", "location " + location.getLongitude() + ", " + location.getAltitude());
+                    }
+
+                    public void onProviderDisabled(String provider){
+                        Log.i("Leobas", "GPS apagado");
+                    }
+
+                    public void onProviderEnabled(String provider){
+                        Log.i("Leobas", "GPS encendido");
+                    }
+
+                    public void onStatusChanged(String provider, int status, Bundle extras){
+                        Log.i("Leobas", "Status Changed");
+                    }
+                };
+                Log.i("Stores", "3");
+                if ( Build.VERSION.SDK_INT >= 23 &&
+                        ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION ) != PackageManager.PERMISSION_GRANTED &&
+                        ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+//                    return true;
+                    Log.i("Stores", "4");
+                }
+                Log.i("Stores", "5");
+
+//                Log.i("Leobas", "GPS encendido: " + locManager.isProviderEnabled(LocationManager.GPS_PROVIDER));
+//                locManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locListener);
+//                Log.i("Stores", "6");
+//                Location loc = locManager.getLastKnownLocation("gps");
+//                Log.i("Stores", "7");
+//                Log.i("Leobas", "Location: " + loc.getProvider());
+//                locListener.onLocationChanged(loc);
+//                Log.i("Stores", "8");
+//                Log.i("Leobas", "Location " + loc.getAltitude() + ", " + loc.getLongitude());
+                /*try {
+                    // Simulate network access.
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    Log.i("Leobas", e.getMessage());
+                }*/
+//                Log.i("Leobas", "location " + location.getLongitude() + ", " + location.getAltitude());
+/*                Toast.makeText(getApplicationContext(), R.string.check_in_toast, Toast.LENGTH_LONG).show();
+
+
+                Intent launchActivity = new Intent(StoresActivity.this, AlertsActivity.class);
+                Bundle extras = new Bundle();
+                storeList.get(position);
+                Log.i("Leobas", "idTienda: " + storeList.get(position).getIdTienda());
+                extras.putString("idTienda", storeList.get(position).getIdTienda());
+                launchActivity.putExtras(extras);
+
+                ImageView imR = (ImageView)view.findViewById(R.id.sem_rojo);
+                ImageView imA = (ImageView)view.findViewById(R.id.sem_ama);
+                imR.setVisibility(View.INVISIBLE);
+                imA.setVisibility(View.VISIBLE);
+                turnGPSOff();
+                startActivity(launchActivity);*/
+//                viewRed.setVisibility(View.INVISIBLE);
+//                viewYellow.setVisibility(View.VISIBLE);
+                Thread.sleep(5000);
+//                Log.i("Stores", "9");
+            } catch (Exception e) {
+                Log.i("Leobas", e.getMessage());
+                return false;
+            }
+            // TODO: register the new account here.
+            return checkin;
+        }
+
+        @Override
+        protected void onPostExecute(final Boolean success) {
+            mCheckinTask = null;
+            showProgress(false);
+
+            Log.i("Leobas", "1");
+            if (success) {
+                //finish();
+                Intent launchActivity = new Intent(StoresActivity.this, AlertsActivity.class);
+                Bundle extras = new Bundle();
+                storeList.get(position);
+//                Log.i("Leobas", "idTienda: " + storeList.get(position).getIdTienda());
+                extras.putString("idTienda", storeList.get(position).getIdTienda());
+                launchActivity.putExtras(extras);
+                turnGPSOff();
+                startActivity(launchActivity);
+//                Toast.makeText(getApplicationContext(), R.string.check_in_toast, Toast.LENGTH_LONG).show();
+            } else {
+                Log.i("Leobas", "10");
+                //Seria regresar los foquitos como estaban
+            }
+            Log.i("Leobas", "11");
+        }
+
+        @Override
+        protected void onCancelled() {
+            mCheckinTask = null;
+            showProgress(false);
+        }
+    }
+
 }

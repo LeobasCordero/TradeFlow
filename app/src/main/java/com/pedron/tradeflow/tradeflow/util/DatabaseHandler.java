@@ -32,6 +32,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String ALERTAS_TRADEFLOW_TABLE = "alertas_tradeflow";
     private static final String ACTIVIDADES_TRADEFLOW_TABLE = "actividades_tradeflow";
     private static final String VISITAS_TRADEFLOW_TABLE = "visitas_tradeflow";
+    private static final String NOTICIAS_TRADEFLOW_TABLE = "noticias_tradeflow";
+    private static final String CLIENTES_TRADEFLOW_TABLE = "clientes_tradeflow";
+    private static final String PRODUCTOS_TRADEFLOW_TABLE = "productos_tradeflow";
 
     // Users Table Columns names
     private static final String USUARIO = "nombre_usuario";
@@ -59,6 +62,14 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String FECHA = "fecha";
     private static final String UBICACION = "ubicacion";
 
+    // News Table Columns names
+    private static final String NOTICIA = "noticia";
+
+    // Products Table Columns names
+    private static final String PRODUCTO = "producto";
+    private static final String ID_PRODUCTO = "id_producto";
+    private static final String ID_MARCA = "id_marca";
+
 
     public DatabaseHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -72,6 +83,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + ALERTAS_TRADEFLOW_TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + ACTIVIDADES_TRADEFLOW_TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + VISITAS_TRADEFLOW_TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + NOTICIAS_TRADEFLOW_TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + CLIENTES_TRADEFLOW_TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + PRODUCTOS_TRADEFLOW_TABLE);
 
         String CREATE_USUARIOS_TABLE = "CREATE TABLE " + USUARIOS_TRADEFLOW_TABLE + "("
                 + USUARIO + " TEXT, " + CONTRASENA + " TEXT, "
@@ -97,9 +111,20 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 + ESTATUS + " TEXT);";
         db.execSQL(CREATE_VISITAS_TABLE);
 
+        String CREATE_NOTICIAS_TABLE = "CREATE TABLE " + NOTICIAS_TRADEFLOW_TABLE + "("
+                + ID_CLIENTE + " TEXT, " + NOTICIA + " TEXT);";
+        db.execSQL(CREATE_NOTICIAS_TABLE);
+
+        String CREATE_CLIENTES_TABLE = "CREATE TABLE " + CLIENTES_TRADEFLOW_TABLE + "("
+                + ID_TIENDA + " TEXT, " + ID_CLIENTE + " TEXT);";
+        db.execSQL(CREATE_CLIENTES_TABLE);
+
+        String CREATE_PRODUCTOS_TABLE = "CREATE TABLE " + PRODUCTOS_TRADEFLOW_TABLE + "("
+                + ID_PRODUCTO + " TEXT, " + ID_MARCA + " TEXT, " + PRODUCTO + " TEXT);";
+        db.execSQL(CREATE_PRODUCTOS_TABLE);
     }
 
-    public void populateDB(){
+    /*public void populateDB(){
 
         SQLiteDatabase db = this.getReadableDatabase();
         addUserTradeflow("12345", "admin123", "admin", "0");
@@ -123,7 +148,43 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         addAlertTradeflow("600", "Todo comenzó mal con el nuevo plan de Hoy No Circula, pues en el primer día de operación se registraron nuevamente niveles altos de partículas", "0");
         addAlertTradeflow("600", "Se registró un índice de contaminación superior a los 150 puntos IMECA", "0");
         addAlertTradeflow("600", "Entre las medidas que se podrían aplicar en la Fase 1 de Contingencia, se contempla el Doble No Circula", "0");
-    }
+
+        addNewsTradeflow("1", "MES DEL BEBE = Capent Participará en las promociones que implemente la campaña de Comercial Mexicana");
+        addNewsTradeflow("1", "Asegurar precio de venta de HINDS nutritiva (Edicion especial)");
+        addNewsTradeflow("2", "AsyncTask allows you to perform asynchronous work on your user interface");
+        addNewsTradeflow("3", "Las espantosas condiciones en las que vivían los niños conmocionaron al mundo y las organizaciones humanitarias");
+        addNewsTradeflow("22", "Cientos de niños fueron adoptados por familias en Occidente");
+        addNewsTradeflow("14", "Tras poco más de cuatro meses de haber llegado a Colombia, el corresponsal de BBC");
+        addNewsTradeflow("14", "Así lo cuenta en este texto de corte personal y algo lúdico.");
+        addNewsTradeflow("11", "Él intentará evitarlo en su cicla. Y por la noche se juntarán a hacer parche.");
+        addNewsTradeflow("11", "Estas son algunas de ellas, una pequeña muestra, con la aclaración de que, como vivo en Bogotá");
+        addNewsTradeflow("10", "El Breve Diccionario de Colombianismos de la Academia Colombiana de la Lengua la define como encogerse para dormir, hacerse un ovillo");
+        addNewsTradeflow("19", "Tras poco más de cuatro meses de haber llegado a Colombia, el corresponsal de BBC");
+        addNewsTradeflow("8", "Así lo cuenta en este texto de corte personal y algo lúdico.");
+        addNewsTradeflow("9", "Él intentará evitarlo en su cicla. Y por la noche se juntarán a hacer parche.");
+        addNewsTradeflow("25", "Estas son algunas de ellas, una pequeña muestra, con la aclaración de que, como vivo en Bogotá");
+        addNewsTradeflow("22", "El Breve Diccionario de Colombianismos de la Academia Colombiana de la Lengua la define como encogerse para dormir, hacerse un ovillo");
+
+        addClientTradeflow("1", "1");
+        addClientTradeflow("1", "2");
+        addClientTradeflow("1", "3");
+        addClientTradeflow("1", "22");
+        addClientTradeflow("1", "14");
+        addClientTradeflow("2", "11");
+        addClientTradeflow("2", "10");
+        addClientTradeflow("2", "1");
+        addClientTradeflow("3", "19");
+        addClientTradeflow("4", "11");
+        addClientTradeflow("4", "10");
+        addClientTradeflow("4", "8");
+        addClientTradeflow("4", "22");
+        addClientTradeflow("5", "25");
+        addClientTradeflow("5", "18");
+        addClientTradeflow("6", "2");
+        addClientTradeflow("6", "1");
+        addClientTradeflow("6", "15");
+        addClientTradeflow("7", "21");
+    }*/
 
     // Upgrading database
     @Override
@@ -134,6 +195,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + ALERTAS_TRADEFLOW_TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + ACTIVIDADES_TRADEFLOW_TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + VISITAS_TRADEFLOW_TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + NOTICIAS_TRADEFLOW_TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + CLIENTES_TRADEFLOW_TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + PRODUCTOS_TRADEFLOW_TABLE);
         // Create tables again
         onCreate(db);
     }
@@ -142,13 +206,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         int x = 0;
 
         SQLiteDatabase db = this.getReadableDatabase();
-
         Cursor cursor = db.rawQuery(" SELECT  *  FROM " + table + "; ", null);
 
         if (cursor.moveToFirst()) {
-            x = 1;
+            x = 2;
         }
-Log.i("Leobas", x + " valor de la x");
+
         cursor.close();
         db.close();
 
@@ -222,6 +285,42 @@ Log.i("Leobas", x + " valor de la x");
         db.close(); // Closing database connection
     }
 
+    // Adding new News
+    public void addNewsTradeflow(String i, String n) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(ID_CLIENTE, i);
+        values.put(NOTICIA, n);
+        Log.i("Leobas", "ID: " + i + " NOTICIA " + n);
+        // Inserting Row
+        db.insert(NOTICIAS_TRADEFLOW_TABLE, null, values);
+        db.close(); // Closing database connection
+    }
+
+    // Adding new Clients
+    public void addClientTradeflow(String it, String ic) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(ID_TIENDA, it);
+        values.put(ID_CLIENTE, ic);
+        // Inserting Row
+        db.insert(CLIENTES_TRADEFLOW_TABLE, null, values);
+        db.close(); // Closing database connection
+    }
+
+    // Adding new Product
+    public void addProductTradeflow(String ip, String im, String p) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(ID_PRODUCTO, ip);
+        values.put(ID_MARCA, im);
+        values.put(PRODUCTO, p);
+
+        // Inserting Row
+        db.insert(PRODUCTOS_TRADEFLOW_TABLE, null, values);
+        db.close(); // Closing database connection
+    }
+
     // Getting Users
     public List<User> getUsers() {
         SQLiteDatabase db = this.getReadableDatabase();
@@ -287,12 +386,7 @@ Log.i("Leobas", x + " valor de la x");
 
         if (cursor.moveToFirst()) {
             do {
-                Log.i("Leobas",cursor.getString(0));
-                /*Alert alert = new Alert();
-                alert.setId_tienda(cursor.getString(0));
-                alert.setAlerta(cursor.getString(1));
-                alert.setPerfil(cursor.getString(2));
-                listAlerts.add(alert);*/
+                Log.i("Leobas", cursor.getString(0));
                 listAlerts.add(cursor.getString(0));
             }while (cursor.moveToNext());
         }
@@ -324,4 +418,69 @@ Log.i("Leobas", x + " valor de la x");
         return listActivities;
     }
 
+    // Getting News
+    public List getNews(String idCliente) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        List listNews = new ArrayList<>();
+
+        Cursor cursor = db.rawQuery(" SELECT " + NOTICIA + " FROM " + NOTICIAS_TRADEFLOW_TABLE + " WHERE " +
+                ID_CLIENTE + " = '" + idCliente + "' ; ", null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                Log.i("Leobas",cursor.getString(0));
+                listNews.add(cursor.getString(0));
+            }while (cursor.moveToNext());
+        }else{
+            Log.i("Leobas", "nada");
+        }
+
+        cursor.close();
+        db.close();
+
+        return listNews;
+    }
+
+    // Getting Clients
+    public List getClients(String idTienda) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        List listClients = new ArrayList<>();
+
+        Cursor cursor = db.rawQuery(" SELECT " + ID_CLIENTE + " FROM " + CLIENTES_TRADEFLOW_TABLE + " WHERE " +
+                ID_TIENDA + " = '" + idTienda + "' ; ", null);
+
+
+        if (cursor.moveToFirst()) {
+            do {
+                Log.i("Leobas", cursor.getString(0));
+                listClients.add(cursor.getString(0));
+            }while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+
+        return listClients;
+    }
+
+    // Getting Clients
+    public List getProducts(String idMarca) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        List listProductos = new ArrayList<>();
+
+        Cursor cursor = db.rawQuery(" SELECT " + PRODUCTO + " FROM " + PRODUCTOS_TRADEFLOW_TABLE + " WHERE " +
+                ID_MARCA + " = '" + idMarca + "' ; ", null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                Log.i("Leobas", cursor.getString(0));
+                listProductos.add(cursor.getString(0));
+            }while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+
+        return listProductos;
+    }
 }

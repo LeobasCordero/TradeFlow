@@ -64,6 +64,8 @@ public class AdapterClient extends RecyclerView.Adapter<AdapterClient.ViewHolder
         public void onClick(View v) {
 
             final OnItemClickListener listener = adapt.getOnItemClickListener();
+//            String i = v.findViewById(R.id.image_logo_client).getTag().toString();
+//            Log.i("Leobas", "id de la imagen: " + i);
 
             if (listener != null) {
                 listener.onItemClick(this, getAdapterPosition());

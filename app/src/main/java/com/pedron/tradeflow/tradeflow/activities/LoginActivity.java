@@ -391,6 +391,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             db.addStoreTradeflow("3365", "Universidad (1025)", "Famosa", "Almacen", "100", "Cuahutemoc #522, col. Centro, cp.68000, Monterrey, Nuevo Leon");
             db.addStoreTradeflow("6631", "Juarez(9085)", "Comercial Treviño", "Almacen", "600", "Mariano Escobedo #2223, col. Santa Fe, cp. 69908, Santa Catarina, Nuevo Leon");
 
+
             db.addAlertTradeflow("100", "SQL completo, donde indicamos los campos", "0");
             db.addAlertTradeflow("100", "La polémica por la manera en la que son tratados los refugiados ", "0");
             db.addAlertTradeflow("100", "Developing a custom adapter", "0");
@@ -403,6 +404,53 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             db.addAlertTradeflow("600", "Todo comenzó mal con el nuevo plan de Hoy No Circula, pues en el primer día de operación se registraron nuevamente niveles altos de partículas", "0");
             db.addAlertTradeflow("600", "Se registró un índice de contaminación superior a los 150 puntos IMECA", "0");
             db.addAlertTradeflow("600", "Entre las medidas que se podrían aplicar en la Fase 1 de Contingencia, se contempla el Doble No Circula", "0");
+
+            db.addNewsTradeflow("1", "MES DEL BEBE = Capent Participará en las promociones que implemente la campaña de Comercial Mexicana");
+            db.addNewsTradeflow("1", "Asegurar precio de venta de HINDS nutritiva (Edicion especial)");
+            db.addNewsTradeflow("2", "AsyncTask allows you to perform asynchronous work on your user interface");
+            db.addNewsTradeflow("3", "Las espantosas condiciones en las que vivían los niños conmocionaron al mundo y las organizaciones humanitarias");
+            db.addNewsTradeflow("22", "Cientos de niños fueron adoptados por familias en Occidente");
+            db.addNewsTradeflow("14", "Tras poco más de cuatro meses de haber llegado a Colombia, el corresponsal de BBC");
+            db.addNewsTradeflow("14", "Así lo cuenta en este texto de corte personal y algo lúdico.");
+            db.addNewsTradeflow("11", "Él intentará evitarlo en su cicla. Y por la noche se juntarán a hacer parche.");
+            db.addNewsTradeflow("11", "Estas son algunas de ellas, una pequeña muestra, con la aclaración de que, como vivo en Bogotá");
+            db.addNewsTradeflow("10", "El Breve Diccionario de Colombianismos de la Academia Colombiana de la Lengua la define como encogerse para dormir, hacerse un ovillo");
+            db.addNewsTradeflow("19", "Tras poco más de cuatro meses de haber llegado a Colombia, el corresponsal de BBC");
+            db.addNewsTradeflow("8", "Así lo cuenta en este texto de corte personal y algo lúdico.");
+            db.addNewsTradeflow("9", "Él intentará evitarlo en su cicla. Y por la noche se juntarán a hacer parche.");
+            db.addNewsTradeflow("25", "Estas son algunas de ellas, una pequeña muestra, con la aclaración de que, como vivo en Bogotá");
+            db.addNewsTradeflow("22", "El Breve Diccionario de Colombianismos de la Academia Colombiana de la Lengua la define como encogerse para dormir, hacerse un ovillo");
+
+            db.addClientTradeflow("1", "1");
+            db.addClientTradeflow("1", "2");
+            db.addClientTradeflow("1", "3");
+            db.addClientTradeflow("1", "22");
+            db.addClientTradeflow("1", "14");
+            db.addClientTradeflow("2", "11");
+            db.addClientTradeflow("2", "10");
+            db.addClientTradeflow("2", "1");
+            db.addClientTradeflow("3", "19");
+            db.addClientTradeflow("4", "11");
+            db.addClientTradeflow("4", "10");
+            db.addClientTradeflow("4", "8");
+            db.addClientTradeflow("4", "22");
+            db.addClientTradeflow("5", "25");
+            db.addClientTradeflow("5", "18");
+            db.addClientTradeflow("6", "2");
+            db.addClientTradeflow("6", "1");
+            db.addClientTradeflow("6", "15");
+            db.addClientTradeflow("7", "21");
+
+            db.addProductTradeflow("1", "1", "CANDIMON");
+            db.addProductTradeflow("2", "1", "PASTA DE LASSAR");
+            db.addProductTradeflow("3", "1", "HIPOGLOS");
+            db.addProductTradeflow("4", "1", "CHIPOTLE ADOBADO");
+            db.addProductTradeflow("5", "1", "JALAPENOS");
+            db.addProductTradeflow("6", "1", "JALAPENOS RELLENOS");
+            db.addProductTradeflow("7", "1", "AGUA CIEL");
+            db.addProductTradeflow("8", "1", "RAJAS ROJAS");
+            db.addProductTradeflow("9", "1", "RAJAS VERDES");
+            db.addProductTradeflow("10", "1", "RODAJAS NACHOS");
         }
 //        db.addActivityTradeflow("", "", "");
         db.close();

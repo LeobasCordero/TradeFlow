@@ -111,7 +111,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="10dp">
 
-                <TableRow>
+                <!--<TableRow>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -124,7 +124,7 @@
                         android:layout_height="wrap_content"
                         android:textSize="10sp"
                         android:textStyle="bold" />
-                </TableRow>
+                </TableRow>-->
 
                 <TableRow>
                     <TextView

@@ -18,6 +18,7 @@ public class MenuActivity extends AppCompatActivity {
 
     ImageView piso, bodega, resurtido, precio;
     TextView textView;
+    String idCliente;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,11 +40,18 @@ public class MenuActivity extends AppCompatActivity {
         resurtido = (ImageView)findViewById(R.id.resurtido_clic);
         precio = (ImageView)findViewById(R.id.precio_clic);
 
+        Intent intent = getIntent();
+        Bundle b = intent.getExtras();
+        idCliente = b.getString("idCliente");
+
         piso.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent act = new Intent(MenuActivity.this, NewsActivity.class);
-                startActivity(act);
+                Intent launchActivity = new Intent(MenuActivity.this, NewsActivity.class);
+                Bundle extras = new Bundle();
+                extras.putString("idCliente", idCliente);
+                launchActivity.putExtras(extras);
+                startActivity(launchActivity);
             }
         });
 
@@ -66,8 +74,11 @@ public class MenuActivity extends AppCompatActivity {
         precio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent act = new Intent(MenuActivity.this, NewsActivity.class);
-                startActivity(act);
+                Intent launchActivity = new Intent(MenuActivity.this, NewsActivity.class);
+                Bundle extras = new Bundle();
+                extras.putString("idCliente", idCliente);
+                launchActivity.putExtras(extras);
+                startActivity(launchActivity);
             }
         });
 
