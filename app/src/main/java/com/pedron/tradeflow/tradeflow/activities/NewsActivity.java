@@ -24,7 +24,7 @@ public class NewsActivity extends AppCompatActivity {
 
     Button b;
     TextView textView, noElements;
-    String idCliente;
+    String idCliente, opMenu;
     List noticias;
     ListView listViewNews;
 
@@ -40,19 +40,18 @@ public class NewsActivity extends AppCompatActivity {
         View v = inflator.inflate(R.layout.custom_imageview, null);
         actionBar.setCustomView(v);
         textView = (TextView) findViewById(R.id.screen_title);
-        textView.setText("Noticias");
+        textView.setText(R.string.news_header);
 
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         idCliente = bundle.getString("idCliente");
-        Log.i("Leobas", "idCliente " + idCliente);
+        opMenu = bundle.getString("opMenu");
         DatabaseHandler db = new DatabaseHandler(this);
 
         noticias = db.getNews(idCliente);
         listViewNews = (ListView)findViewById(R.id.list_view_news);
 
         if(null != noticias && 0 < noticias.size()) {
-            Log.i("Leobas", "entro");
             listViewNews.setAdapter(new ArrayAdapter<String>(
                     this, R.layout.list_item_new, R.id.text_news, noticias));
         }else{
@@ -66,7 +65,11 @@ public class NewsActivity extends AppCompatActivity {
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(NewsActivity.this, TrademarkActivity.class));
+                Intent launchActivity = new Intent(NewsActivity.this, TrademarkActivity.class);
+                Bundle extras = new Bundle();
+                extras.putString("opMenu", opMenu);
+                launchActivity.putExtras(extras);
+                startActivity(launchActivity);
             }
         });
     }

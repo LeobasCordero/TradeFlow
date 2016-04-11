@@ -55,7 +55,7 @@ public class ClientsActivity extends AppCompatActivity implements AdapterClient.
         clientes = db.getClients(idTienda);
 
         textView = (TextView) findViewById(R.id.screen_title);
-        textView.setText("Clientes");
+        textView.setText(R.string.clients_header);
 
         recycler = (RecyclerView) findViewById(R.id.recycler);
         recycler.hasFixedSize();

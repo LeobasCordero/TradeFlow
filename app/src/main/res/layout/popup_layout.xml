@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/cardview_dark_background"
+    android:orientation="vertical" >
+
+    <!-- layout title -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/txt_dialog_title"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:gravity="center"
+            android:text="@string/title_app"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textColor="@color/cardview_light_background" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/cardview_dark_background" />
+    </LinearLayout>
+    <!-- layout dialog content -->
+
+    <RelativeLayout
+        android:id="@+id/layout_dialog_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp" >
+
+        <ImageView
+            android:id="@+id/img_dialog_icon"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:contentDescription="@null"
+            android:scaleType="centerCrop"
+            android:src="@drawable/question_mark" />
+
+        <TextView
+            android:id="@+id/txt_dialog_message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignTop="@+id/img_dialog_icon"
+            android:layout_marginLeft="8dp"
+            android:layout_toRightOf="@+id/img_dialog_icon"
+            android:ellipsize="end"
+            android:paddingTop="5dp"
+            android:paddingBottom="15dp"
+            android:textColor="@color/cardview_light_background"
+            android:textStyle="normal"
+            android:text="@string/exit_question"/>
+
+        <Button
+            android:id="@+id/exit_button"
+            android:background="@color/colorLegends"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/txt_dialog_message"
+            android:text="@string/action_accept"
+            android:textColor="@color/cardview_dark_background"
+            />
+    </RelativeLayout>
+
+    <!-- layout dialog buttons -->
+
+    <!--<LinearLayout
+        android:id="@+id/layout_dialog_buttons"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_margin="4dp"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/btn_close"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_margin="2dp"
+            android:layout_weight="1"
+            android:background="#434343"
+            android:gravity="center"
+            android:text="@string/ok_dialog"
+            android:textAppearance="?android:attr/textAppearanceButton"
+            android:textColor="@color/cardview_light_background" />
+
+    </LinearLayout>-->
+</LinearLayout>

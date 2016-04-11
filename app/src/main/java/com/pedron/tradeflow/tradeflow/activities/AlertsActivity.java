@@ -43,7 +43,7 @@ public class AlertsActivity extends AppCompatActivity {
         View v = inflator.inflate(R.layout.custom_imageview, null);
         actionBar.setCustomView(v);
         textView = (TextView) findViewById(R.id.screen_title);
-        textView.setText("Alertas");
+        textView.setText(R.string.alert_header);
 
         Intent intent = getIntent();
         Bundle b = intent.getExtras();

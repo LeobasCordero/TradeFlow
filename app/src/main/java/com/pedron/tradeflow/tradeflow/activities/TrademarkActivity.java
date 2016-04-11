@@ -18,6 +18,7 @@ import com.pedron.tradeflow.tradeflow.adapters.AdapterTrademark;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -28,12 +29,14 @@ public class TrademarkActivity extends AppCompatActivity implements AdapterTrade
     private RecyclerView recycler;
     private List<String> trademarkList;
     TextView textView;
+    String idMarca, opMenu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.trademark_list);
 
+        //Header
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowTitleEnabled(false);
         actionBar.setDisplayShowCustomEnabled(true);
@@ -41,7 +44,12 @@ public class TrademarkActivity extends AppCompatActivity implements AdapterTrade
         View v = inflator.inflate(R.layout.custom_imageview, null);
         actionBar.setCustomView(v);
         textView = (TextView) findViewById(R.id.screen_title);
-        textView.setText("Marcas");
+        textView.setText(R.string.trademarks_header);
+
+        //Toma parametros
+        Intent intent = getIntent();
+        Bundle bundle = intent.getExtras();
+        opMenu = bundle.getString("opMenu");
 
         recycler = (RecyclerView) findViewById(R.id.recycler);
         recycler.hasFixedSize();
@@ -65,6 +73,7 @@ public class TrademarkActivity extends AppCompatActivity implements AdapterTrade
 
             if (f.isAbsolute())
                 tmList.add(f.getAbsolutePath());
+                Collections.sort(tmList);
         }
 
         return tmList;
@@ -74,14 +83,14 @@ public class TrademarkActivity extends AppCompatActivity implements AdapterTrade
         String directory = "";
 
         File folder = new File(Environment.getExternalStorageDirectory() +
-                File.separator + "TRADEFLOW");
+                File.separator + R.string.title_app);
         boolean success = true;
         if (!folder.exists()) {
             success = folder.mkdir();
         }
         if (success) {
             File subfolder = new File(Environment.getExternalStorageDirectory() +
-                    File.separator + "TRADEFLOW" + File.separator + "TRADEMARK");
+                    File.separator + R.string.title_app + File.separator + "TRADEMARK");
 
 
             if (!subfolder.exists()) {
@@ -89,7 +98,7 @@ public class TrademarkActivity extends AppCompatActivity implements AdapterTrade
                 directory = subfolder.getAbsolutePath();
             }else{
                 directory = subfolder.getAbsolutePath();
-                Log.i("Leo","Directorio ya creado: " + directory);
+//                Log.i("Leo","Directorio ya creado: " + directory);
             }
         } else {
             new Throwable("No se puede crear el directorio");
@@ -100,8 +109,13 @@ public class TrademarkActivity extends AppCompatActivity implements AdapterTrade
 
     @Override
     public void onItemClick(AdapterTrademark.ViewHolder item, int position) {
-        Intent intent = new Intent(TrademarkActivity.this, ProductsActivity.class);
-
-        startActivity(intent);
+        Intent launchActivity = new Intent(TrademarkActivity.this, ProductsActivity.class);
+        Bundle extras = new Bundle();
+        position++;
+        idMarca = String.valueOf(position);
+        extras.putString("idMarca", idMarca);
+        extras.putString("opMenu", opMenu);
+        launchActivity.putExtras(extras);
+        startActivity(launchActivity);
     }
 }

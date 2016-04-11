@@ -4,23 +4,28 @@
     <!-- Strings related to login -->
     <string name="prompt_user">Usuario</string>
     <string name="prompt_title_login">ACCESO</string>
-    <string name="prompt_title_stores">TIENDAS</string>
+    <string name="stores_header">Tiendas</string>
+    <string name="title_app">TRADEFLOW</string>
     <string name="prompt_password">Contraseña</string>
     <string name="action_sign_in">ENTRAR</string>
+    <string name="action_accept">Aceptar</string>
     <string name="action_sign_in_short">Entrar</string>
     <string name="action_next">Siguiente</string>
     <string name="error_invalid_user">Usuario invalido</string>
     <string name="error_invalid_password">Contraseña muy corta</string>
     <string name="error_incorrect_password">Contraseña incorrecta</string>
     <string name="error_field_required">Campo requerido</string>
-    <string name="alert_header">ALERTAS</string>
-    <string name="clients_header">CLIENTES</string>
-    <string name="products_header">PRODUCTOS</string>
-    <string name="activities_header">ACTIVIDADES</string>
-    <string name="resurtido_header">PISO DE VENTA RESURTIDO</string>
+    <string name="alert_header">Alertas</string>
+    <string name="clients_header">Clientes</string>
+    <string name="products_header">Productos</string>
+    <string name="trademarks_header">Marcas</string>
+    <string name="activities_header">Tareas</string>
+    <string name="news_header">Noticias</string>
+    <string name="resurtido_header">Resurtido</string>
     <string name="piso_header">PISO DE VENTA</string>
     <string name="bodega_header">BODEGA</string>
     <string name="check_in_toast">Check In Exitoso</string>
+    <string name="exit_question">¿Desea Salir de la Aplicación?</string>
     <string name="new_not_found">No hay Noticias para este Cliente</string>
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."

@@ -17,6 +17,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.provider.Settings;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -37,6 +38,7 @@ import com.pedron.tradeflow.tradeflow.R;
 import com.pedron.tradeflow.tradeflow.adapters.AdapterStores;
 import com.pedron.tradeflow.tradeflow.entity.Store;
 import com.pedron.tradeflow.tradeflow.util.DatabaseHandler;
+import com.pedron.tradeflow.tradeflow.util.DialogClass;
 import com.pedron.tradeflow.tradeflow.util.HelperUtilities;
 import com.pedron.tradeflow.tradeflow.util.LocationHelper;
 
@@ -62,6 +64,7 @@ public class StoresActivity extends AppCompatActivity {
     TextView textView, dateFooter;
     private View mProgressView, mStoresView, mSFooterView;
     private CheckinTask mCheckinTask = null;
+    private Boolean exit = false;
 
 
     @Override
@@ -87,7 +90,7 @@ public class StoresActivity extends AppCompatActivity {
         View v = inflator.inflate(R.layout.custom_imageview, null);
         actionBar.setCustomView(v);
         textView = (TextView) findViewById(R.id.screen_title);
-        textView.setText("Tiendas");
+        textView.setText(R.string.stores_header);
 
         turnGPSOn();
 
@@ -416,4 +419,10 @@ public class StoresActivity extends AppCompatActivity {
         }
     }
 
+
+    @Override
+    public void onBackPressed() {
+        DialogClass dialog = new DialogClass(StoresActivity.this);
+        dialog.showCustomDialog();
+    }
 }

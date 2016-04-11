@@ -78,12 +78,14 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         setContentView(R.layout.activity_login);
         // Set up the login form.
         mUserView = (AutoCompleteTextView) findViewById(R.id.user);
+        mUserView.setText("");
         populateAutoComplete();
         db = new DatabaseHandler(this);
         // add usr to database
         populateDB();
 
         mPasswordView = (EditText) findViewById(R.id.password);
+        mPasswordView.setText("");
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
@@ -374,12 +376,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         db = new DatabaseHandler(this);
 
         int x = db.checkTables("usuarios_tradeflow");
-        //db.checkTables("tiendas_tradeflow");
-        //db.checkTables("alertas_tradeflow");
-        //db.checkTables("actividades_tradeflow");
-        //db.checkTables("visitas_tradeflow");
-
-
 
         if(x != Constant.DBVERSION) {
             db.addUserTradeflow("12345", "admin123", "admin", "0");
@@ -441,19 +437,52 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             db.addClientTradeflow("6", "15");
             db.addClientTradeflow("7", "21");
 
-            db.addProductTradeflow("1", "1", "CANDIMON");
-            db.addProductTradeflow("2", "1", "PASTA DE LASSAR");
-            db.addProductTradeflow("3", "1", "HIPOGLOS");
-            db.addProductTradeflow("4", "1", "CHIPOTLE ADOBADO");
-            db.addProductTradeflow("5", "1", "JALAPENOS");
-            db.addProductTradeflow("6", "1", "JALAPENOS RELLENOS");
-            db.addProductTradeflow("7", "1", "AGUA CIEL");
-            db.addProductTradeflow("8", "1", "RAJAS ROJAS");
-            db.addProductTradeflow("9", "1", "RAJAS VERDES");
-            db.addProductTradeflow("10", "1", "RODAJAS NACHOS");
+            db.addProductTradeflow("1", "1", "Candimon");
+            db.addProductTradeflow("2", "1", "Pasta de Lassar");
+            db.addProductTradeflow("3", "1", "Hipoglos");
+            db.addProductTradeflow("4", "1", "Chipotle Adobado");
+            db.addProductTradeflow("5", "1", "Jalapeños");
+            db.addProductTradeflow("6", "1", "Jalapeños Rellenos");
+            db.addProductTradeflow("7", "2", "Rajas Rojas");
+            db.addProductTradeflow("8", "2", "Rajas Verdes");
+            db.addProductTradeflow("9", "2", "Rodajas Nachos");
+            db.addProductTradeflow("10", "3", "Frijoles Bayos");
+            db.addProductTradeflow("11", "3", "Frijoles Negros");
+            db.addProductTradeflow("12", "3", "Piña");
+            db.addProductTradeflow("13", "3", "Mango");
+            db.addProductTradeflow("14", "3", "Durazno");
+            db.addProductTradeflow("15", "3", "Salsa Roja");
+            db.addProductTradeflow("16", "3", "Salsa Picante");
+            db.addProductTradeflow("17", "4", "Salsa Verde");
+            db.addProductTradeflow("18", "5", "Zanahoria");
+            db.addProductTradeflow("19", "5", "Pure de Tomate");
+            db.addProductTradeflow("20", "5", "Brochas");
+            db.addProductTradeflow("21", "5", "Rodillos");
+            db.addProductTradeflow("22", "5", "Solvente");
+            db.addProductTradeflow("23", "5", "Impermeabilizantes");
+            db.addProductTradeflow("24", "6", "Aerosoles");
+            db.addProductTradeflow("25", "6", "Premier 10 años");
+            db.addProductTradeflow("26", "6", "Plus 5 años");
+            db.addProductTradeflow("27", "6", "Excedrin");
+            db.addProductTradeflow("28", "6", "Capent");
+            db.addProductTradeflow("29", "6", "Lamisil");
+            db.addProductTradeflow("30", "7", "Voltaren");
+            db.addProductTradeflow("31", "7", "Tesalon");
+            db.addProductTradeflow("32", "7", "Teraflu");
+            db.addProductTradeflow("33", "7", "Senokot");
+            db.addProductTradeflow("34", "7", "Corega");
+            db.addProductTradeflow("35", "8", "Eclipsol");
+
         }
 //        db.addActivityTradeflow("", "", "");
         db.close();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mPasswordView.setText("");
+        mUserView.setText("");
     }
 }
 

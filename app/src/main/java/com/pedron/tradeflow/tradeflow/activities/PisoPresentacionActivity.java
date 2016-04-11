@@ -70,7 +70,6 @@ public class PisoPresentacionActivity extends AppCompatActivity {
     public void save(View v) {
         Intent intent = new Intent(PisoPresentacionActivity.this, BodegaActivity.class);
 
-
         intent.putExtra("producto", prod);
         startActivity(intent);
 

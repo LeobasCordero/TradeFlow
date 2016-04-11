@@ -32,8 +32,7 @@ public class MenuActivity extends AppCompatActivity {
         View v = inflator.inflate(R.layout.custom_imageview, null);
         actionBar.setCustomView(v);
         textView = (TextView) findViewById(R.id.screen_title);
-        textView.setText("Tareas");
-//        textView.setPadding(75,10,0,10);
+        textView.setText(R.string.activities_header);
 
         piso = (ImageView)findViewById(R.id.piso_clic);
         bodega = (ImageView)findViewById(R.id.bodega_clic);
@@ -50,6 +49,7 @@ public class MenuActivity extends AppCompatActivity {
                 Intent launchActivity = new Intent(MenuActivity.this, NewsActivity.class);
                 Bundle extras = new Bundle();
                 extras.putString("idCliente", idCliente);
+                extras.putString("opMenu", "1");
                 launchActivity.putExtras(extras);
                 startActivity(launchActivity);
             }
@@ -58,16 +58,22 @@ public class MenuActivity extends AppCompatActivity {
         bodega.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent act = new Intent(MenuActivity.this, TrademarkActivity.class);
-                startActivity(act);
+                Intent launchActivity = new Intent(MenuActivity.this, TrademarkActivity.class);
+                Bundle extras = new Bundle();
+                extras.putString("opMenu", "2");
+                launchActivity.putExtras(extras);
+                startActivity(launchActivity);
             }
         });
 
         resurtido.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent act = new Intent(MenuActivity.this, TrademarkActivity.class);
-                startActivity(act);
+                Intent launchActivity = new Intent(MenuActivity.this, TrademarkActivity.class);
+                Bundle extras = new Bundle();
+                extras.putString("opMenu", "3");
+                launchActivity.putExtras(extras);
+                startActivity(launchActivity);
             }
         });
 
@@ -77,6 +83,7 @@ public class MenuActivity extends AppCompatActivity {
                 Intent launchActivity = new Intent(MenuActivity.this, NewsActivity.class);
                 Bundle extras = new Bundle();
                 extras.putString("idCliente", idCliente);
+                extras.putString("opMenu", "4");
                 launchActivity.putExtras(extras);
                 startActivity(launchActivity);
             }

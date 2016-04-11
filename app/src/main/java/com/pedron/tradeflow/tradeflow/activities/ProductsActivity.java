@@ -6,43 +6,37 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.pedron.tradeflow.tradeflow.R;
+import com.pedron.tradeflow.tradeflow.util.DatabaseHandler;
+
+import java.util.List;
 
 /**
  * Created by leocg on 17/03/2016.
  */
 public class ProductsActivity extends AppCompatActivity {
-/*
-    ListView listProducts;
-    EditText inputSearch;
-*/
-    TextView textView, candimon, pasta, hipo;
-    ArrayAdapter<String> adapter;
-    String products[] = {
-            "Hinds Clasica","Hinds Mama","Cloralex 250ml","Pinol 1L","Jabon Zest 180g", "Fabuloso 500ml",
-            "Head & Shoulders 970ml","Jabon Polvo Foca","Rocainol","Ariel 500g","Alcohol San Jose",
-            "Cerillos Talisman","Sardinas El Puerto"};
 
-    public void onClick(View v) {
-        Intent intent = new Intent(ProductsActivity.this, ResurtidoActivity.class);
-        TextView tv = (TextView)v;
-//        Log.i("producto", tv.getText().toString());
-//        Log.i("producto", ((TextView) v).getText().toString());
-        intent.putExtra("producto", ((TextView) v).getText().toString());
-        startActivity(intent);
-    }
+    ListView listProducts;
+
+    TextView textView;// , candimon, pasta, hipo;
+    ArrayAdapter<String> adapter;
+    String idMarca, opMenu;
+    List productList;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_products);
-/*
+
         listProducts = (ListView) findViewById(R.id.list_view_products);
-        inputSearch = (EditText) findViewById(R.id.search_products);
-*/
+
+        //Header
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowTitleEnabled(false);
         actionBar.setDisplayShowCustomEnabled(true);
@@ -50,13 +44,18 @@ public class ProductsActivity extends AppCompatActivity {
         View v = inflator.inflate(R.layout.custom_imageview, null);
         actionBar.setCustomView(v);
         textView = (TextView) findViewById(R.id.screen_title);
-        textView.setText("Productos");
+        textView.setText(R.string.products_header);
 
-        candimon = (TextView)findViewById(R.id.candimon);
-        pasta = (TextView)findViewById(R.id.pasta);
-        hipo = (TextView)findViewById(R.id.hipo);
+        Intent intent = getIntent();
+        Bundle b = intent.getExtras();
+        idMarca = b.getString("idMarca");
+        opMenu = b.getString("opMenu");
+//        productText = (TextView) findViewById(R.id.product_center);
+//        candimon = (TextView)findViewById(R.id.candimon);
+//        pasta = (TextView)findViewById(R.id.pasta);
+//        hipo = (TextView)findViewById(R.id.hipo);
 
-        candimon.setOnClickListener(new View.OnClickListener() {
+        /*candimon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent act = new Intent(ProductsActivity.this, ResurtidoActivity.class);
@@ -80,37 +79,44 @@ public class ProductsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent act = new Intent(ProductsActivity.this, PisoPresentacionActivity.class);
-//                TextView tv = (TextView)v;
-                act.putExtra("producto", ((TextView) v).getText().toString());
                 startActivity(act);
             }
-        });
+        });*/
+        DatabaseHandler db = new DatabaseHandler(this);
+        productList = db.getProducts(idMarca);
 
-/*
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1 ,products);
+        adapter = new ArrayAdapter<String>(this, R.layout.custom_list_element ,R.id.product_center, productList);
         listProducts.setAdapter(adapter);
 
-        inputSearch.addTextChangedListener(new TextWatcher() {
-
+        listProducts.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3) {
-                // When user changed the Text
-                adapter.getFilter().filter(cs);
-            }
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                int op = Integer.valueOf(opMenu);
+                switch (op){
+                    case 1:
+                        Intent act = new Intent(ProductsActivity.this, PisoPresentacionActivity.class);
+                        startActivity(act);
+                        break;
+                    case 2:
+                        act = new Intent(ProductsActivity.this, BodegaActivity.class);
+                        startActivity(act);
+                        break;
+                    case 3:
+                        act = new Intent(ProductsActivity.this, ResurtidoActivity.class);
+                        startActivity(act);
+                        break;
+                    case 4:
+//                        act = new Intent(ProductsActivity.this, PrecioActivity.class);
+//                        startActivity(act);
+                        break;
+                    default:
+                        setContentView(R.layout.no_elements_found);
+                        break;
 
-            @Override
-            public void beforeTextChanged(CharSequence arg0, int arg1, int arg2,
-                                          int arg3) {
-                // TODO Auto-generated method stub
 
-            }
-
-            @Override
-            public void afterTextChanged(Editable arg0) {
-                // TODO Auto-generated method stub
+                }
             }
         });
-        */
     }
 
     }
