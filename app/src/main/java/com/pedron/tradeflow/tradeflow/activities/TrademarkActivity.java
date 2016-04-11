@@ -83,15 +83,14 @@ public class TrademarkActivity extends AppCompatActivity implements AdapterTrade
         String directory = "";
 
         File folder = new File(Environment.getExternalStorageDirectory() +
-                File.separator + R.string.title_app);
+                File.separator + "TRADEFLOW");
         boolean success = true;
         if (!folder.exists()) {
             success = folder.mkdir();
         }
         if (success) {
             File subfolder = new File(Environment.getExternalStorageDirectory() +
-                    File.separator + R.string.title_app + File.separator + "TRADEMARK");
-
+                    File.separator + "TRADEFLOW" + File.separator + "TRADEMARK");
 
             if (!subfolder.exists()) {
                 subfolder.mkdir();

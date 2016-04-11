@@ -92,7 +92,7 @@ public class StoresActivity extends AppCompatActivity {
         textView = (TextView) findViewById(R.id.screen_title);
         textView.setText(R.string.stores_header);
 
-        turnGPSOn();
+//        turnGPSOn();
 
         config.setOnClickListener(new View.OnClickListener() {
             @Override
