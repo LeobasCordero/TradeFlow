@@ -3,6 +3,7 @@ package com.pedron.tradeflow.tradeflow.activities;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -57,14 +58,16 @@ import java.util.Locale;
 public class StoresActivity extends AppCompatActivity {
 
     ListView lv;
-    ArrayAdapter adapter;
+    ArrayAdapter adapter, adapterAll;
     EditText inputSearch;
-    List<Store> storeList;
+    List<Store> storeList, allStores;
     ImageView config;
     TextView textView, dateFooter;
     private View mProgressView, mStoresView, mSFooterView;
     private CheckinTask mCheckinTask = null;
     private Boolean exit = false;
+    String idUser;
+    Dialog listDialog;
 
 
     @Override
@@ -92,6 +95,10 @@ public class StoresActivity extends AppCompatActivity {
         textView = (TextView) findViewById(R.id.screen_title);
         textView.setText(R.string.stores_header);
 
+        Intent intent = getIntent();
+        Bundle b = intent.getExtras();
+        idUser = b.getString("usuario");
+
 //        turnGPSOn();
 
         config.setOnClickListener(new View.OnClickListener() {
@@ -109,6 +116,8 @@ public class StoresActivity extends AppCompatActivity {
         });
 
         storeList = getStores();
+        allStores = getAllStores();
+
         // Adding items to listview
         adapter = new AdapterStores(this, storeList);
         lv.setAdapter(adapter);
@@ -121,8 +130,8 @@ public class StoresActivity extends AppCompatActivity {
                     return;
                 }
 
-                ImageView imR = (ImageView)view.findViewById(R.id.sem_rojo);
-                ImageView imA = (ImageView)view.findViewById(R.id.sem_ama);
+                ImageView imR = (ImageView) view.findViewById(R.id.sem_rojo);
+                ImageView imA = (ImageView) view.findViewById(R.id.sem_ama);
                 imR.setVisibility(View.INVISIBLE);
                 imA.setVisibility(View.VISIBLE);
 
@@ -194,12 +203,47 @@ public class StoresActivity extends AppCompatActivity {
 /**
  * TODO El texto descriptivo ya no funciona
  */
-        inputSearch.addTextChangedListener(new TextWatcher() {
+
+        inputSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listDialog = new Dialog(StoresActivity.this);
+                listDialog.setTitle("Seleccione la Tienda");
+                LayoutInflater li = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                v = li.inflate(R.layout.all_stores_list, null, false);
+                listDialog.setContentView(v);
+                listDialog.setCancelable(true);
+                //there are a lot of settings, for dialog, check them all out!
+
+
+                ListView list1 = (ListView) listDialog.findViewById(R.id.allstoreslistview);
+                adapterAll = new AdapterStores(getApplicationContext(), allStores);
+                list1.setAdapter(adapterAll);
+                listDialog.show();
+
+                list1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        Store newStore;
+                        int lastPos = storeList.size();
+                        newStore = allStores.get(position);
+                        storeList.add(lastPos, newStore);
+//                        adapter = new AdapterStores(getApplicationContext(), storeList);
+//                        lv.setAdapter(adapter);
+                        adapter.notifyDataSetChanged();
+
+                        listDialog.hide();
+                    }
+                });
+
+            }
+        });
+        /*inputSearch.addTextChangedListener(new TextWatcher() {
 
             @Override
             public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3) {
                 // When user changed the Text
-                adapter.getFilter().filter(cs);
+
             }
 
             @Override
@@ -212,11 +256,14 @@ public class StoresActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable arg0) {
                 // TODO Auto-generated method stub
+
             }
-        });
+        });*/
 
 
     }
+
+
 
     public void turnGPSOn(){
         Intent intent = new Intent("android.location.GPS_ENABLED_CHANGE");
@@ -249,7 +296,13 @@ public class StoresActivity extends AppCompatActivity {
     public List<Store> getStores(){
         DatabaseHandler db = new DatabaseHandler(this);
 
-        return db.getStores();
+        return db.getStoresPerUser(idUser);
+    }
+
+    public List<Store> getAllStores(){
+        DatabaseHandler db = new DatabaseHandler(this);
+
+        return db.getStores(idUser);
     }
 
     public String getFecha(){
@@ -404,7 +457,7 @@ public class StoresActivity extends AppCompatActivity {
                 launchActivity.putExtras(extras);
                 turnGPSOff();
                 startActivity(launchActivity);
-//                Toast.makeText(getApplicationContext(), R.string.check_in_toast, Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), R.string.check_in_toast, Toast.LENGTH_LONG).show();
             } else {
                 Log.i("Leobas", "10");
                 //Seria regresar los foquitos como estaban

@@ -28,7 +28,7 @@
                     android:layout_height="wrap_content"
                     android:text="Falta       OK"
                     android:layout_gravity="right"
-                    android:layout_marginLeft="80dp"
+                    android:layout_marginLeft="50dp"
                     android:id="@+id/producto1"/>
 
                 <TextView
@@ -49,7 +49,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="horizontal"
-                    android:layout_marginLeft="50dp"
+                    android:layout_marginLeft="20dp"
                     android:layout_span="2"
                     android:layout_gravity="right"
                     android:id="@+id/radioGroup"
@@ -68,7 +68,12 @@
                         android:id="@+id/radioButton2" />
                 </RadioGroup>
             </TableRow>
-
+            <TableRow>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    />
+            </TableRow>
             <TableRow>
                 <TextView
                     android:layout_width="wrap_content"
@@ -80,7 +85,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_span="2"
-                    android:layout_marginLeft="50dp"
+                    android:layout_marginLeft="20dp"
                     android:layout_gravity="right"
                     android:orientation="horizontal">
 
@@ -110,12 +115,16 @@
             android:layout_width="158dp"
             android:layout_height="158dp"
             android:id="@+id/imagen1"
+            android:contextClickable="true"
+            android:onClick="picRetake1"
             android:clickable="true" />
 
         <ImageView
             android:layout_width="158dp"
             android:layout_height="158dp"
             android:id="@+id/imagen2"
+            android:contextClickable="true"
+            android:onClick="picRetake1"
             android:clickable="true" />
     </LinearLayout>
 
@@ -143,21 +152,22 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_gravity="center_vertical"
+                android:id="@+id/camara"
+                android:clickable="true"
+                android:onClick="onClickPicture"
                 android:src="@drawable/camara" />
 
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:layout_marginLeft="10dp"
-                android:layout_gravity="center_vertical"
-                android:src="@drawable/home" />
+
 
             <ImageView
                 android:layout_marginLeft="10dp"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:layout_gravity="center_vertical"
-                android:src="@drawable/configuraw" />
+                android:clickable="true"
+                android:onClick="save"
+                android:id="@+id/save"
+                android:src="@drawable/save" />
 
         </LinearLayout>
 
@@ -207,12 +217,13 @@
         <ImageView
             android:layout_width="200dp"
             android:layout_height="200dp"
-android:clickable="true"
-            android:onClick="save"
+
             android:src="@drawable/save"
             android:layout_alignTop="@+id/camara"
             android:layout_toRightOf="@+id/camara"
             android:layout_toEndOf="@+id/camara"
+            android:clickable="true"
+            android:onClick="save"
             android:id="@+id/save" />
         <ImageView
             android:layout_width="wrap_content"

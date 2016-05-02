@@ -20,7 +20,7 @@ import android.widget.Toast;
 
 import com.pedron.tradeflow.tradeflow.R;
 
-public class BodegaActivity extends AppCompatActivity {
+public class PrecioActivity extends AppCompatActivity {
     TextView textView, subtitle;
     ImageView btnTackPic;
     Bitmap bitMap;
@@ -56,7 +56,7 @@ public class BodegaActivity extends AppCompatActivity {
         }
 
         if(check) {
-            Intent intent = new Intent(BodegaActivity.this, MenuActivity.class);
+            Intent intent = new Intent(PrecioActivity.this, MenuActivity.class);
 
             intent.putExtra("producto", prod);
             startActivity(intent);
@@ -68,43 +68,7 @@ public class BodegaActivity extends AppCompatActivity {
         boolean hasDraw=(ivThumbnailPhoto.getDrawable() != null);
         if(hasDraw)
         {
-          //  Toast.makeText(getApplicationContext(),"retake", Toast.LENGTH_LONG).show();
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setMessage("¿Desea volver a tomar la fotografia?")
-                    .setCancelable(false)
-                    .setPositiveButton("Si", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            //TODO
-                            ivThumbnailPhoto.setImageDrawable(null);
-                            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-
-                            // start camera activity
-                            startActivityForResult(intent, TAKE_PICTURE);
-                        }
-                    })
-                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            dialog.cancel();
-                        }
-                    });
-            AlertDialog alert = builder.create();
-            alert.show();
-
-        }
-        else
-        {
-          //  Toast.makeText(getApplicationContext(),"draw false", Toast.LENGTH_LONG).show();
-
-        }
-
-    }
-
-    public void picRetake2(View v) {
-        ivThumbnailPhoto = (ImageView) findViewById(R.id.imagen2);
-        boolean hasDraw=(ivThumbnailPhoto.getDrawable() != null);
-        if(hasDraw)
-        {
-           // Toast.makeText(getApplicationContext(),"retake", Toast.LENGTH_LONG).show();
+            //Toast.makeText(getApplicationContext(),"retake", Toast.LENGTH_LONG).show();
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setMessage("¿Desea volver a tomar la fotografia?")
                     .setCancelable(false)
@@ -134,6 +98,42 @@ public class BodegaActivity extends AppCompatActivity {
         }
 
     }
+
+    public void picRetake2(View v) {
+        ivThumbnailPhoto = (ImageView) findViewById(R.id.imagen2);
+        boolean hasDraw=(ivThumbnailPhoto.getDrawable() != null);
+        if(hasDraw)
+        {
+            //Toast.makeText(getApplicationContext(),"retake", Toast.LENGTH_LONG).show();
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("¿Desea volver a tomar la fotografia?")
+                    .setCancelable(false)
+                    .setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            //TODO
+                            ivThumbnailPhoto.setImageDrawable(null);
+                            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+                            // start camera activity
+                            startActivityForResult(intent, TAKE_PICTURE);
+                        }
+                    })
+                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.cancel();
+                        }
+                    });
+            AlertDialog alert = builder.create();
+            alert.show();
+
+        }
+        else
+        {
+          //  Toast.makeText(getApplicationContext(),"draw false", Toast.LENGTH_LONG).show();
+
+        }
+
+    }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
 
@@ -141,8 +141,8 @@ public class BodegaActivity extends AppCompatActivity {
             boolean hasDraw=(ivThumbnailPhoto.getDrawable() != null);
             if(hasDraw)
             {
-               // Toast.makeText(getApplicationContext(),"TAKE_PICTURE="+TAKE_PICTURE, Toast.LENGTH_LONG).show();
-               // Toast.makeText(getApplicationContext(),"draw true", Toast.LENGTH_LONG).show();
+              //  Toast.makeText(getApplicationContext(),"TAKE_PICTURE="+TAKE_PICTURE, Toast.LENGTH_LONG).show();
+              //  Toast.makeText(getApplicationContext(),"draw true", Toast.LENGTH_LONG).show();
                 ivThumbnailPhoto = (ImageView) findViewById(R.id.imagen2);
             }
             else
@@ -168,7 +168,7 @@ public class BodegaActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_bodega);
+        setContentView(R.layout.activity_precio);
         Intent i = getIntent();
 
         btnTackPic = (ImageView) findViewById(R.id.camara);
@@ -182,9 +182,9 @@ public class BodegaActivity extends AppCompatActivity {
         }
 
         textView = (TextView) findViewById(R.id.producto0);
-        textView.setText(prod+ " pza");
+        textView.setText(prod+" 100 ml");
         textView = (TextView) findViewById(R.id.producto2);
-        textView.setText(prod+ "pza");
+        textView.setText(prod+"150 ml");
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowTitleEnabled(false);
         actionBar.setDisplayShowCustomEnabled(true);
@@ -193,7 +193,7 @@ public class BodegaActivity extends AppCompatActivity {
         actionBar.setCustomView(v);
 
         textView = (TextView)findViewById(R.id.screen_title);
-        textView.setText(R.string.bodega_header);
+        textView.setText("Precios");
         subtitle = (TextView)findViewById(R.id.screen_subtitle);
         subtitle.setText(prod);
 

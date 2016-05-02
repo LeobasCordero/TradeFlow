@@ -95,7 +95,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         String CREATE_TIENDAS_TABLE = "CREATE TABLE " + TIENDAS_TRADEFLOW_TABLE + "("
                 + NUM_TIENDAS + " TEXT, " + NOM_TIENDA + " TEXT, "
                 + CADENA + " TEXT, " + FORMATO + " TEXT, " + ID_TIENDA + " TEXT, "
-                + DIRECCION + " TEXT);";
+                + DIRECCION + " TEXT, " + USUARIO + " TEXT);";
         db.execSQL(CREATE_TIENDAS_TABLE);
 
         String CREATE_ALERTAS_TABLE = "CREATE TABLE " + ALERTAS_TRADEFLOW_TABLE + "("
@@ -233,7 +233,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     // Adding new Store
     public void addStoreTradeflow(String num, String nom, String cad, String fo,
-                                  String id, String di) {
+                                  String id, String di, String us) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(NUM_TIENDAS, num);
@@ -243,6 +243,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(ID_TIENDA, id);
 //        values.put(CALLE, ca);
         values.put(DIRECCION, di);
+        values.put(USUARIO, us);
         // Inserting Row
         db.insert(TIENDAS_TRADEFLOW_TABLE, null, values);
         db.close(); // Closing database connection
@@ -346,14 +347,14 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return listUsers;
     }
 
-    // Getting Stores
-    public List<Store> getStores() {
+    // Getting All Stores
+    public List<Store> getStores(String user) {
         SQLiteDatabase db = this.getReadableDatabase();
         List<Store> listStores = new ArrayList<>();
 
         Cursor cursor = db.rawQuery(" SELECT " + NUM_TIENDAS + ", " + NOM_TIENDA +
-                ", " + CADENA + ", " + FORMATO + ", " + ID_TIENDA + ", " + DIRECCION +
-                " FROM " + TIENDAS_TRADEFLOW_TABLE + "; ", null);
+                ", " + CADENA + ", " + FORMATO + ", " + ID_TIENDA + ", " + DIRECCION + ", " + USUARIO +
+                " FROM " + TIENDAS_TRADEFLOW_TABLE + " WHERE " + USUARIO + " != '" + user + "' ; ", null);
 
         if (cursor.moveToFirst()) {
             do {
@@ -365,6 +366,37 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 u.setIdTienda(cursor.getString(4));
 //                u.setCalle(cursor.getString(5));
                 u.setDireccion(cursor.getString(5));
+                u.setUsuario(cursor.getString(6));
+                listStores.add(u);
+            }while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+
+        return listStores;
+    }
+
+    // Getting Stores per user
+    public List<Store> getStoresPerUser(String user) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        List<Store> listStores = new ArrayList<>();
+
+        Cursor cursor = db.rawQuery(" SELECT " + NUM_TIENDAS + ", " + NOM_TIENDA +
+                ", " + CADENA + ", " + FORMATO + ", " + ID_TIENDA + ", " + DIRECCION + ", " + USUARIO +
+                " FROM " + TIENDAS_TRADEFLOW_TABLE + " WHERE " + USUARIO + " = '" + user + "' ; ", null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                Store u = new Store();
+                u.setNumTiendas(cursor.getString(0));
+                u.setNombreTienda(cursor.getString(1));
+                u.setCadena(cursor.getString(2));
+                u.setFormato(cursor.getString(3));
+                u.setIdTienda(cursor.getString(4));
+//                u.setCalle(cursor.getString(5));
+                u.setDireccion(cursor.getString(5));
+                u.setUsuario(cursor.getString(6));
                 listStores.add(u);
             }while (cursor.moveToNext());
         }
@@ -386,7 +418,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         if (cursor.moveToFirst()) {
             do {
-                Log.i("Leobas", cursor.getString(0));
                 listAlerts.add(cursor.getString(0));
             }while (cursor.moveToNext());
         }
