@@ -19,9 +19,12 @@ import android.provider.Settings;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -49,7 +52,7 @@ import java.util.List;
  */
 public class StoresActivity extends AppCompatActivity {
 
-    ListView lv;
+    ListView lv, lva;
     ArrayAdapter adapter, adapterAll;
     EditText inputSearch;
     List<Store> storeList, allStores;
@@ -86,6 +89,7 @@ public class StoresActivity extends AppCompatActivity {
                 .show();
 
         lv = (ListView) findViewById(R.id.list_view_stores);
+        lva = (ListView) findViewById(R.id.list_view_all_stores);
         inputSearch = (EditText) findViewById(R.id.inputSearch);
         config = (ImageView) findViewById(R.id.config);
         dateFooter = (TextView)findViewById(R.id.date_footer);
@@ -138,7 +142,7 @@ public class StoresActivity extends AppCompatActivity {
 
                 if (view.findViewById(R.id.img_cruz).isPressed()) {
                     storeList.remove(position);
-                    adapter.notifyDataSetChanged();
+//                    adapter.notifyDataSetChanged();
                 } else {
                     if (mCheckinTask != null) {
                         return;
@@ -218,7 +222,7 @@ public class StoresActivity extends AppCompatActivity {
 /**
  * TODO El texto descriptivo ya no funciona
  */
-
+/*
         inputSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -253,13 +257,50 @@ public class StoresActivity extends AppCompatActivity {
                 });
 
             }
-        });
-        /*inputSearch.addTextChangedListener(new TextWatcher() {
+        });*/
+        inputSearch.addTextChangedListener(new TextWatcher() {
 
             @Override
             public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3) {
                 // When user changed the Text
+                /*if(inputSearch.getText().length() > 3){
+                    lv.setVisibility(View.INVISIBLE);
+                    lva.setVisibility(View.VISIBLE);
 
+                    adapterAll = new AdapterAllStores(getApplicationContext(), allStores);
+                    lva.setAdapter(adapterAll);
+
+                    adapterAll.notifyDataSetChanged();
+
+                    lva.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            Store newStore;
+                            int lastPos = storeList.size();
+                            newStore = allStores.get(position);
+                            newStore.setCruz(Constant.CRUZ_TRUE);
+                            storeList.add(lastPos, newStore);
+                            allStores.remove(position);
+
+                            lva.setVisibility(View.INVISIBLE);
+                            lv.setVisibility(View.VISIBLE);
+//                            adapter = new AdapterStores(getApplicationContext(), storeList);
+
+//                            LayoutInflater li = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+//                            View v = li.inflate(R.layout.lis, null, false);
+                            lv.setAdapter(adapter);
+
+//                            this.setContentView(lv);
+//                            lv.setVisibility(View.VISIBLE);
+                            Log.i("Leobas", "clic");
+//                            lv.setAdapter(adapter);
+                            adapter.notifyDataSetChanged();
+//                            inputSearch.setText("");
+                        }
+                    });
+
+
+                }*/
             }
 
             @Override
@@ -272,9 +313,54 @@ public class StoresActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable arg0) {
                 // TODO Auto-generated method stub
+                if(inputSearch.getText().length() >= 3){
+                    lv.setVisibility(View.INVISIBLE);
+                    lva.setVisibility(View.VISIBLE);
 
+                    adapterAll = new AdapterAllStores(getApplicationContext(), allStores);
+                    lva.setAdapter(adapterAll);
+
+                    adapterAll.notifyDataSetChanged();
+
+                    lva.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            Store newStore;
+                            int lastPos = storeList.size();
+                            newStore = allStores.get(position);
+                            newStore.setCruz(Constant.CRUZ_TRUE);
+                            storeList.add(lastPos, newStore);
+                            allStores.remove(position);
+
+                            lva.setVisibility(View.INVISIBLE);
+                            lv.setVisibility(View.VISIBLE);
+//                            adapter = new AdapterStores(getApplicationContext(), storeList);
+                            inputSearch.setText("");
+                            lv.setAdapter(adapter);
+
+                            /*LayoutInflater inflater = (LayoutInflater) getApplicationContext()
+                                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+                            View listItemView = inflater.inflate(
+                                    R.layout.list_item_stores,
+                                    parent,
+                                    false);*/
+//                            this.setContentView(lv);
+//                            lv.setVisibility(View.VISIBLE);
+                            Log.i("Leobas", "clic");
+//                            lv.setAdapter(adapter);
+//                            adapter.notifyDataSetChanged();
+
+                        }
+                    });
+                }else if(inputSearch.getText().length() == 0){
+                    Log.i("Leobas", "zero");
+                    lva.setVisibility(View.INVISIBLE);
+                    lv.setVisibility(View.VISIBLE);
+                    adapter.notifyDataSetChanged();
+                }
             }
-        });*/
+        });
 
     }
 

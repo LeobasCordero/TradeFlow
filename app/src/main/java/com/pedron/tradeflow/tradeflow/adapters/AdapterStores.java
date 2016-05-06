@@ -1,6 +1,7 @@
 package com.pedron.tradeflow.tradeflow.adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,9 +61,15 @@ public class AdapterStores extends ArrayAdapter<Store> {
 //        calle.setText(store.getCalle());
 //        noExt.setText(store.getNumTiendas());
         colonia.setText(store.getDireccion());
-
+//        Log.i("Leobas", "position: " + position + " cruz: " + store.getCruz());
         if(store.getCruz().equals(Constant.CRUZ_TRUE)){
-            convertView.findViewById(R.id.img_cruz).setVisibility(View.VISIBLE);
+            if(convertView != null) {
+                Log.i("Leobas", "position: " + position + " nombre: " + store.getNombreTienda());
+                if(listItemView.findViewById(R.id.img_cruz).getVisibility() != View.VISIBLE)
+                    listItemView.findViewById(R.id.img_cruz).setVisibility(View.VISIBLE);
+            }else{
+                Log.i("Leobas", "nulo");
+            }
         }
 //        if(store.getUsuario().equals()){
 //

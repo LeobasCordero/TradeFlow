@@ -46,6 +46,11 @@ public class MenuActivity extends AppCompatActivity {
         piso.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ImageView img1 = (ImageView)findViewById(R.id.bodega_clic_gris);
+                img1.setVisibility(View.INVISIBLE);
+                ImageView img2 = (ImageView)findViewById(R.id.bodega_clic);
+                img2.setVisibility(View.VISIBLE);
+
                 Intent launchActivity = new Intent(MenuActivity.this, NewsActivity.class);
                 Bundle extras = new Bundle();
                 extras.putString("idCliente", idCliente);
@@ -58,6 +63,11 @@ public class MenuActivity extends AppCompatActivity {
         bodega.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ImageView img3 = (ImageView)findViewById(R.id.resurtido_clic_gris);
+                img3.setVisibility(View.INVISIBLE);
+                ImageView img4 = (ImageView)findViewById(R.id.resurtido_clic);
+                img4.setVisibility(View.VISIBLE);
+
                 Intent launchActivity = new Intent(MenuActivity.this, TrademarkActivity.class);
                 Bundle extras = new Bundle();
                 extras.putString("opMenu", "2");

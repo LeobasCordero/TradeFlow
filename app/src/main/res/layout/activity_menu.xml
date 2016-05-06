@@ -39,19 +39,47 @@
                     android:padding="10dp"
                     android:src="@drawable/piso_venta" />
 
-                <ImageView
-                    android:id="@+id/bodega_clic"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:padding="10dp"
-                    android:src="@drawable/bodega" />
+                <RelativeLayout
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content">
 
-                <ImageView
-                    android:id="@+id/resurtido_clic"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:padding="10dp"
-                    android:src="@drawable/resurtido" />
+                    <ImageView
+                        android:id="@+id/bodega_clic"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:padding="10dp"
+                        android:src="@drawable/bodega"
+                        android:visibility="invisible"/>
+
+                    <ImageView
+                        android:id="@+id/bodega_clic_gris"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:padding="10dp"
+                        android:src="@drawable/bodega_gris"
+                        />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content">
+                    <ImageView
+                        android:id="@+id/resurtido_clic"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:padding="10dp"
+                        android:src="@drawable/resurtido"
+                        android:visibility="invisible"/>
+
+                    <ImageView
+                        android:id="@+id/resurtido_clic_gris"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:padding="10dp"
+                        android:src="@drawable/resurtido_gris" />
+                </RelativeLayout>
+
 
             </TableRow>
 
