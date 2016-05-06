@@ -1,6 +1,7 @@
 package com.pedron.tradeflow.tradeflow.activities;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -15,6 +16,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
@@ -32,9 +34,11 @@ public class PisoPresentacionActivity extends AppCompatActivity {
     ImageView ivThumbnailPhoto;
     static int TAKE_PICTURE = 1;
     boolean pict = false;
-
+    final Context context = this;
     String prod = "";
+    String idMarca = "";
     String idProducto="";
+    String opMenu="";
     List presentacionList;
 
 
@@ -62,7 +66,9 @@ public class PisoPresentacionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_piso_presentacion);
         Intent i =getIntent();
         prod = i.getStringExtra("producto");
+        idMarca = i.getStringExtra("idMarca");
         idProducto=i.getStringExtra("idProducto");
+        opMenu=i.getStringExtra("opMenu");
         Bundle bun=i.getExtras();
        // DatabaseHandler db = new DatabaseHandler(this);
         //presentacionList = db.getPresentation(idProducto);
@@ -186,9 +192,48 @@ public class PisoPresentacionActivity extends AppCompatActivity {
         }
         if(check) {
             Intent intent = new Intent(PisoPresentacionActivity.this, MenuActivity.class);
+            final Dialog dialog = new Dialog(context);
+            dialog.setContentView(R.layout.custom_dialog);
+
+            dialog.setTitle("\t\t\t\t\tPiso de Venta");
+
+
+            // set the custom dialog components - text, image and button
+            TextView text = (TextView) dialog.findViewById(R.id.text);
+            //text.setText("Android custom dialog example!");
+            ImageView image = (ImageView) dialog.findViewById(R.id.image);
+            ImageView image2 = (ImageView) dialog.findViewById(R.id.image2);
+            //image.setImageResource(R.drawable.save);
+
+           // Button dialogButton = (Button) dialog.findViewById(R.id.dialogButtonOK);
+            // if button is clicked, close the custom dialog
+            image2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(PisoPresentacionActivity.this, ProductsActivity.class);
+                    dialog.dismiss();
+                    intent.putExtra("producto", prod);
+                    intent.putExtra("idMarca",idMarca);
+                    intent.putExtra("opMenu",opMenu);
+                        startActivity(intent);
+                }
+            });
+            image.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(PisoPresentacionActivity.this, BodegaActivity.class);
+                    dialog.dismiss();
+                    intent.putExtra("producto", prod);
+                    intent.putExtra("idMarca",idMarca);
+                    intent.putExtra("opMenu",opMenu);
+                    startActivity(intent);
+                }
+            });
+            dialog.show();
+
 
             intent.putExtra("producto", prod);
-            startActivity(intent);
+        //    startActivity(intent);
         }
     }
 

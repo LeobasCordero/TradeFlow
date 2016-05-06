@@ -13,13 +13,14 @@ public class Store {
 //    private String colonia;
     private String direccion;
     private String usuario;
+    private String cruz;
 
 
     public Store(){
     }
 
     public Store(String numTiendas, String nombreTienda, String cadena, String formato,
-                 String idTienda, String direccion, String usuario){
+                 String idTienda, String direccion, String usuario, String cruz){
         this.numTiendas = numTiendas;
         this.nombreTienda = nombreTienda;
         this.cadena = cadena;
@@ -27,6 +28,7 @@ public class Store {
         this.idTienda = idTienda;
         this.direccion = direccion;
         this.usuario = usuario;
+        this.cruz = cruz;
     }
 
     public String getNumTiendas() {
@@ -83,5 +85,13 @@ public class Store {
 
     public void setUsuario(String usuario) {
         this.usuario = usuario;
+    }
+
+    public String getCruz() {
+        return cruz;
+    }
+
+    public void setCruz(String cruz) {
+        this.cruz = cruz;
     }
 }

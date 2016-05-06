@@ -92,27 +92,43 @@ public class ProductsActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 int op = Integer.valueOf(opMenu);
+
                 switch (op){
                     case 1:
                         Intent act = new Intent(ProductsActivity.this, PisoPresentacionActivity.class);
+                        act.putExtra("producto", productList.get(position).toString());
+                        act.putExtra("idProducto", position);
+                        act.putExtra("idMarca",idMarca);
+                        act.putExtra("opMenu",opMenu);
                         startActivity(act);
                         break;
                     case 2:
                         act = new Intent(ProductsActivity.this, BodegaActivity.class);
+                        act.putExtra("producto", productList.get(position).toString());
+                        act.putExtra("idProducto", position);
+                        act.putExtra("idMarca",idMarca);
+                        act.putExtra("opMenu",opMenu);
                         startActivity(act);
                         break;
                     case 3:
                         act = new Intent(ProductsActivity.this, ResurtidoActivity.class);
+                        act.putExtra("producto", productList.get(position).toString());
+                        act.putExtra("idProducto", position);
+                        act.putExtra("idMarca",idMarca);
+                        act.putExtra("opMenu",opMenu);
                         startActivity(act);
                         break;
                     case 4:
-//                        act = new Intent(ProductsActivity.this, PrecioActivity.class);
-//                        startActivity(act);
+                        act = new Intent(ProductsActivity.this, PrecioActivity.class);
+                        act.putExtra("producto", productList.get(position).toString());
+                        act.putExtra("idProducto", position);
+                        act.putExtra("idMarca",idMarca);
+                        act.putExtra("opMenu",opMenu);
+                        startActivity(act);
                         break;
                     default:
                         setContentView(R.layout.no_elements_found);
                         break;
-
 
                 }
             }

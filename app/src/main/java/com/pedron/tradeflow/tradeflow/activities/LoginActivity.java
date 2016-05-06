@@ -31,18 +31,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
 import com.pedron.tradeflow.tradeflow.R;
 import com.pedron.tradeflow.tradeflow.entity.User;
 import com.pedron.tradeflow.tradeflow.util.Constant;
 import com.pedron.tradeflow.tradeflow.util.DatabaseHandler;
-
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -342,37 +334,14 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
             Boolean okLogin = false;
 
-            /*for (int i = 0 ; i < uList.size() ; i++){
+            for (int i = 0 ; i < uList.size() ; i++){
                 User u = uList.get(i);
                 if(mUser.equals(u.getUsuario())){
                     if(mPassword.equals(u.getContrasena())){
                         okLogin = true;
                     }
                 }
-            }*/
-
-            RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
-            String url = "http://189.208.32.186:8080/wsTradeFlow/servicios.php";
-
-            JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
-
-                @Override
-                public void onResponse(JSONObject response) {
-                    // TODO Auto-generated method stub
-//                    txtDisplay.setText("Response => "+response.toString());
-//                    findViewById(R.id.progressBar1).setVisibility(View.GONE);
-                }
-            }, new Response.ErrorListener() {
-
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    // TODO Auto-generated method stub
-
-                }
-            });
-
-            queue.add(jsObjRequest);
-
+            }
 
 
             // TODO: register the new account here.
@@ -414,12 +383,13 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         if(x != Constant.DBVERSION) {
             db.addUserTradeflow("12345", "admin123", "admin", "0");
 
-            db.addStoreTradeflow("441", "Ruiz Cortinez (3512)", "Walmart", "Supermercado", "1225", "Rodesia del Nte #402, col. San Roque, cp. 65008, San Pedro, Nuevo Leon", "12345");
-            db.addStoreTradeflow("610", "Centro (3022)", "Soriana", "Almacen", "855", "Jacarandas #233, col. Linda Vista, cp. 63005, Guadalupe, Nuevo Leon", "12345");
-            db.addStoreTradeflow("9405", "Los Angeles (5114)", "HEB", "Supermercado", "322", "Romulo Garza #2988, col. Los Morales, cp. 24452, San Nicolas de los Garza, Nuevo Leon", "12345");
-            db.addStoreTradeflow("102", "Escobedo (9663)", "OXXO", "CEDIS", "650", "Lazaro Cardenas #2011, col. Centrito Valle, cp. 66305, San Pedro, Nuevo Leon", "12345");
-            db.addStoreTradeflow("3365", "Universidad (1025)", "Famosa", "Almacen", "100", "Cuahutemoc #522, col. Centro, cp.68000, Monterrey, Nuevo Leon", "12345");
-            db.addStoreTradeflow("6631", "Juarez(9085)", "Comercial Treviño", "Almacen", "600", "Mariano Escobedo #2223, col. Santa Fe, cp. 69908, Santa Catarina, Nuevo Leon", "23456");
+            db.addStoreTradeflow("441", "Ruiz Cortinez (3512)", "Walmart", "Supermercado", "1225", "Rodesia del Nte #402, col. San Roque, cp. 65008, San Pedro, Nuevo Leon", "12345", "n");
+            db.addStoreTradeflow("610", "Centro (3022)", "Soriana", "Almacen", "855", "Jacarandas #233, col. Linda Vista, cp. 63005, Guadalupe, Nuevo Leon", "12345", "n");
+            db.addStoreTradeflow("9405", "Los Angeles (5114)", "HEB", "Supermercado", "322", "Romulo Garza #2988, col. Los Morales, cp. 24452, San Nicolas de los Garza, Nuevo Leon", "12345", "n");
+            db.addStoreTradeflow("102", "Escobedo (9663)", "OXXO", "CEDIS", "650", "Lazaro Cardenas #2011, col. Centrito Valle, cp. 66305, San Pedro, Nuevo Leon", "12345", "n");
+            db.addStoreTradeflow("3365", "Universidad (1025)", "Famosa", "Almacen", "100", "Cuahutemoc #522, col. Centro, cp.68000, Monterrey, Nuevo Leon", "12345", "n");
+            db.addStoreTradeflow("6631", "Juarez(9085)", "Comercial Treviño", "Almacen", "600", "Mariano Escobedo #2223, col. Santa Fe, cp. 69908, Santa Catarina, Nuevo Leon", "23456", "n");
+            db.addStoreTradeflow("4461", "Guadalajara(2235)", "Mi Tiendita", "Supermercado", "325", "San Roque #390, col. Metropolitana, cp. 69830, El Carmen, Nuevo Leon", "23456", "n");
 
 
             db.addAlertTradeflow("100", "SQL completo, donde indicamos los campos", "0");

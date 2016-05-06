@@ -9,16 +9,15 @@ import android.widget.TextView;
 
 import com.pedron.tradeflow.tradeflow.R;
 import com.pedron.tradeflow.tradeflow.entity.Store;
-import com.pedron.tradeflow.tradeflow.util.Constant;
 
 import java.util.List;
 
 /**
  * Created by leocg on 13/03/2016.
  */
-public class AdapterStores extends ArrayAdapter<Store> {
+public class AdapterAllStores extends ArrayAdapter<Store> {
 
-    public AdapterStores(Context context, List<Store> storeList) {
+    public AdapterAllStores(Context context, List<Store> storeList) {
         super(context, 0, storeList);
     }
 
@@ -36,37 +35,25 @@ public class AdapterStores extends ArrayAdapter<Store> {
         if (null == convertView) {
             //Si no existe, entonces inflarlo con two_line_list_item.xml
             listItemView = inflater.inflate(
-                    R.layout.list_item_stores,
+                    R.layout.list_item_all_stores,
                     parent,
                     false);
         }
 
         //Obteniendo instancias de los text views
-        TextView nombreTienda = (TextView) listItemView.findViewById(R.id.nombre_tienda);
-//        TextView idTienda = (TextView) listItemView.findViewById(R.id.id_tienda);
-        TextView cadena = (TextView) listItemView.findViewById(R.id.cadena_tienda);
-        TextView formato = (TextView) listItemView.findViewById(R.id.formato_tienda);
-//        TextView calle = (TextView) listItemView.findViewById(R.id.calle_tienda);
-//        TextView noExt = (TextView) listItemView.findViewById(R.id.numero_tienda);
-        TextView colonia = (TextView) listItemView.findViewById(R.id.direccion_tienda);
+        TextView nombreTienda = (TextView) listItemView.findViewById(R.id.nombre_tienda_s);
+        TextView cadena = (TextView) listItemView.findViewById(R.id.cadena_tienda_s);
+        TextView formato = (TextView) listItemView.findViewById(R.id.formato_tienda_s);
+        TextView colonia = (TextView) listItemView.findViewById(R.id.direccion_tienda_s);
 
         //Obteniendo instancia de la Tarea en la posición actual
         Store store = (Store) getItem(position);
 
         nombreTienda.setText(store.getNombreTienda());
-//        idTienda.setText(store.getIdTienda());
         cadena.setText(store.getCadena());
         formato.setText(store.getFormato());
-//        calle.setText(store.getCalle());
-//        noExt.setText(store.getNumTiendas());
         colonia.setText(store.getDireccion());
 
-        if(store.getCruz().equals(Constant.CRUZ_TRUE)){
-            convertView.findViewById(R.id.img_cruz).setVisibility(View.VISIBLE);
-        }
-//        if(store.getUsuario().equals()){
-//
-//        }
         //Devolver al ListView la fila creada
         return listItemView;
     }

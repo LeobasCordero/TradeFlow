@@ -1,5 +1,6 @@
 package com.pedron.tradeflow.tradeflow.activities;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -26,8 +27,11 @@ public class BodegaActivity extends AppCompatActivity {
     Bitmap bitMap;
     ImageView ivThumbnailPhoto;
     static int TAKE_PICTURE = 1;
-
+    final Context context = this;
     String prod = "";
+    String idMarca = "";
+    String idProducto="";
+    String opMenu="";
     boolean pict = false;
 
     public void onClickPicture(View view) {
@@ -57,9 +61,46 @@ public class BodegaActivity extends AppCompatActivity {
 
         if(check) {
             Intent intent = new Intent(BodegaActivity.this, MenuActivity.class);
+            final Dialog dialog = new Dialog(context);
+            dialog.setContentView(R.layout.custom_dialog);
+            dialog.setTitle("\t\t\t\t\t\t\tBodega");
 
+
+            // set the custom dialog components - text, image and button
+            TextView text = (TextView) dialog.findViewById(R.id.text);
+            //text.setText("Android custom dialog example!");
+            text.setText("¿Desea continuar hacia resurtido o regresar a bodega?");
+            ImageView image = (ImageView) dialog.findViewById(R.id.image);
+            ImageView image2 = (ImageView) dialog.findViewById(R.id.image2);
+            image2.setImageResource(R.drawable.resurtido);
+            image2.getLayoutParams().width=100;
+            // Button dialogButton = (Button) dialog.findViewById(R.id.dialogButtonOK);
+            // if button is clicked, close the custom dialog
+            image2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(BodegaActivity.this, ResurtidoActivity.class);
+                    dialog.dismiss();
+                    intent.putExtra("producto", prod);
+                    intent.putExtra("idMarca", idMarca);
+                    intent.putExtra("opMenu", "2");
+                    startActivity(intent);
+                }
+            });
+            image.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(BodegaActivity.this, ProductsActivity.class);
+                    dialog.dismiss();
+                    intent.putExtra("producto", prod);
+                    intent.putExtra("idMarca", idMarca);
+                    intent.putExtra("opMenu", "3");
+                    startActivity(intent);
+                }
+            });
+            dialog.show();
             intent.putExtra("producto", prod);
-            startActivity(intent);
+            //startActivity(intent);
         }
     }
 
@@ -169,7 +210,11 @@ public class BodegaActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bodega);
-        Intent i = getIntent();
+        Intent i =getIntent();
+        prod = i.getStringExtra("producto");
+        idMarca = i.getStringExtra("idMarca");
+        idProducto=i.getStringExtra("idProducto");
+        opMenu=i.getStringExtra("opMenu");
 
         btnTackPic = (ImageView) findViewById(R.id.camara);
         prod = i.getStringExtra("producto");

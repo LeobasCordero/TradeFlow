@@ -5,25 +5,20 @@ import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.location.Address;
-import android.location.Criteria;
-import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.location.LocationProvider;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.provider.Settings;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,21 +31,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.pedron.tradeflow.tradeflow.R;
+import com.pedron.tradeflow.tradeflow.adapters.AdapterAllStores;
 import com.pedron.tradeflow.tradeflow.adapters.AdapterStores;
 import com.pedron.tradeflow.tradeflow.entity.Store;
+import com.pedron.tradeflow.tradeflow.util.Constant;
 import com.pedron.tradeflow.tradeflow.util.DatabaseHandler;
 import com.pedron.tradeflow.tradeflow.util.DialogClass;
+import com.pedron.tradeflow.tradeflow.util.GPSTracker;
 import com.pedron.tradeflow.tradeflow.util.HelperUtilities;
-import com.pedron.tradeflow.tradeflow.util.LocationHelper;
 
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
-import java.util.Locale;
 
 /**
  * Created by leocg on 11/03/2016.
@@ -74,6 +66,24 @@ public class StoresActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_stores);
+
+        new AlertDialog.Builder(StoresActivity.this)
+                .setTitle("Locacion")
+                .setMessage("¿Desea habilitar el GPS?")
+                .setPositiveButton("Habilitar GPS", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent callGPSSettingIntent = new Intent(
+                                android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+                        startActivity(callGPSSettingIntent);
+                    }
+                })
+                .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                })
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
 
         lv = (ListView) findViewById(R.id.list_view_stores);
         inputSearch = (EditText) findViewById(R.id.inputSearch);
@@ -126,9 +136,13 @@ public class StoresActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                if (mCheckinTask != null) {
-                    return;
-                }
+                if (view.findViewById(R.id.img_cruz).isPressed()) {
+                    storeList.remove(position);
+                    adapter.notifyDataSetChanged();
+                } else {
+                    if (mCheckinTask != null) {
+                        return;
+                    }
 
                 ImageView imR = (ImageView) view.findViewById(R.id.sem_rojo);
                 ImageView imA = (ImageView) view.findViewById(R.id.sem_ama);
@@ -199,6 +213,7 @@ public class StoresActivity extends AppCompatActivity {
 //                turnGPSOff();
 //                startActivity(launchActivity);
             }
+            }
         });
 /**
  * TODO El texto descriptivo ya no funciona
@@ -215,9 +230,8 @@ public class StoresActivity extends AppCompatActivity {
                 listDialog.setCancelable(true);
                 //there are a lot of settings, for dialog, check them all out!
 
-
                 ListView list1 = (ListView) listDialog.findViewById(R.id.allstoreslistview);
-                adapterAll = new AdapterStores(getApplicationContext(), allStores);
+                adapterAll = new AdapterAllStores(getApplicationContext(), allStores);
                 list1.setAdapter(adapterAll);
                 listDialog.show();
 
@@ -227,9 +241,11 @@ public class StoresActivity extends AppCompatActivity {
                         Store newStore;
                         int lastPos = storeList.size();
                         newStore = allStores.get(position);
+                        newStore.setCruz(Constant.CRUZ_TRUE);
                         storeList.add(lastPos, newStore);
 //                        adapter = new AdapterStores(getApplicationContext(), storeList);
 //                        lv.setAdapter(adapter);
+                        allStores.remove(position);
                         adapter.notifyDataSetChanged();
 
                         listDialog.hide();
@@ -259,7 +275,6 @@ public class StoresActivity extends AppCompatActivity {
 
             }
         });*/
-
 
     }
 
@@ -431,7 +446,7 @@ public class StoresActivity extends AppCompatActivity {
                 startActivity(launchActivity);*/
 //                viewRed.setVisibility(View.INVISIBLE);
 //                viewYellow.setVisibility(View.VISIBLE);
-                Thread.sleep(5000);
+                Thread.sleep(4000);
 //                Log.i("Stores", "9");
             } catch (Exception e) {
                 Log.i("Leobas", e.getMessage());
@@ -448,6 +463,17 @@ public class StoresActivity extends AppCompatActivity {
 
             Log.i("Leobas", "1");
             if (success) {
+                GPSTracker gps = new GPSTracker(getApplicationContext());
+                if(gps.canGetLocation())
+                {
+                    gps.getLatitude(); // returns latitude
+                    gps.getLongitude(); // returns longitude
+                    Toast.makeText(getApplicationContext(), "Locacion: "+gps.getLatitude()+", "+gps.getLongitude(), Toast.LENGTH_LONG).show();
+                }
+                else
+                {
+                    Toast.makeText(getApplicationContext(), "No se puede obtener la ubicacion", Toast.LENGTH_LONG).show();
+                }
                 //finish();
                 Intent launchActivity = new Intent(StoresActivity.this, AlertsActivity.class);
                 Bundle extras = new Bundle();

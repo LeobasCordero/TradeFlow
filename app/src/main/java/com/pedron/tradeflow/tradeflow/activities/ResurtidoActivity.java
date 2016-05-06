@@ -26,7 +26,9 @@ public class ResurtidoActivity extends AppCompatActivity {
     Bitmap bitMap;
     ImageView ivThumbnailPhoto;
     static int TAKE_PICTURE = 1;
-
+    String idMarca = "";
+    String idProducto="";
+    String opMenu="";
     String prod = "";
     boolean pict = false;
 
@@ -56,8 +58,9 @@ public class ResurtidoActivity extends AppCompatActivity {
         }
 
         if(check) {
-            Intent intent = new Intent(ResurtidoActivity.this, MenuActivity.class);
-
+            Intent intent = new Intent(ResurtidoActivity.this, ProductsActivity.class);
+            intent.putExtra("idMarca", idMarca);
+            intent.putExtra("opMenu", "3");
             intent.putExtra("producto", prod);
             startActivity(intent);
         }
@@ -171,6 +174,10 @@ public class ResurtidoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_resurtido);
         Intent i = getIntent();
 
+        prod = i.getStringExtra("producto");
+        idMarca = i.getStringExtra("idMarca");
+        idProducto=i.getStringExtra("idProducto");
+        opMenu=i.getStringExtra("opMenu");
         btnTackPic = (ImageView) findViewById(R.id.camara);
         prod = i.getStringExtra("producto");
 

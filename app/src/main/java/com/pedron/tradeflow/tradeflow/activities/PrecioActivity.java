@@ -26,7 +26,9 @@ public class PrecioActivity extends AppCompatActivity {
     Bitmap bitMap;
     ImageView ivThumbnailPhoto;
     static int TAKE_PICTURE = 1;
-
+    String idMarca = "";
+    String idProducto="";
+    String opMenu="";
     String prod = "";
     boolean pict = false;
 
@@ -56,9 +58,12 @@ public class PrecioActivity extends AppCompatActivity {
         }
 
         if(check) {
-            Intent intent = new Intent(PrecioActivity.this, MenuActivity.class);
+            Intent intent = new Intent(PrecioActivity.this, ProductsActivity.class);
 
             intent.putExtra("producto", prod);
+            intent.putExtra("idMarca", idMarca);
+            intent.putExtra("opMenu", "4");
+
             startActivity(intent);
         }
     }
@@ -173,7 +178,9 @@ public class PrecioActivity extends AppCompatActivity {
 
         btnTackPic = (ImageView) findViewById(R.id.camara);
         prod = i.getStringExtra("producto");
-
+        idMarca = i.getStringExtra("idMarca");
+        idProducto=i.getStringExtra("idProducto");
+        opMenu=i.getStringExtra("opMenu");
         if(!pict){
             ivThumbnailPhoto = (ImageView) findViewById(R.id.imagen1);
             pict=true;

@@ -50,6 +50,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 //    private static final String CALLE = "calle";
     private static final String ID_TIENDA = "id_tienda";
     private static final String DIRECCION = "direccion";
+    private static final String CRUZ = "cruz";
 
     // Alerts Table Columns names
     private static final String ALERTA = "alerta";
@@ -95,7 +96,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         String CREATE_TIENDAS_TABLE = "CREATE TABLE " + TIENDAS_TRADEFLOW_TABLE + "("
                 + NUM_TIENDAS + " TEXT, " + NOM_TIENDA + " TEXT, "
                 + CADENA + " TEXT, " + FORMATO + " TEXT, " + ID_TIENDA + " TEXT, "
-                + DIRECCION + " TEXT, " + USUARIO + " TEXT);";
+                + DIRECCION + " TEXT, " + USUARIO + " TEXT, " + CRUZ + " TEXT);";
         db.execSQL(CREATE_TIENDAS_TABLE);
 
         String CREATE_ALERTAS_TABLE = "CREATE TABLE " + ALERTAS_TRADEFLOW_TABLE + "("
@@ -105,7 +106,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         String CREATE_ACTIVIDADES_TABLE = "CREATE TABLE " + ACTIVIDADES_TRADEFLOW_TABLE + "("
                 + PERFIL + " TEXT, " + ACTIVIDAD + " TEXT, " + ID_CLIENTE + " TEXT);";
         db.execSQL(CREATE_ACTIVIDADES_TABLE);
-        //populateDB(db);
+
         String CREATE_VISITAS_TABLE = "CREATE TABLE " + VISITAS_TRADEFLOW_TABLE + "("
                 + USUARIO + " TEXT, " + FECHA + " TEXT, " + UBICACION + " TEXT, " + ID_TIENDA + " TEXT, "
                 + ESTATUS + " TEXT);";
@@ -124,67 +125,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.execSQL(CREATE_PRODUCTOS_TABLE);
     }
 
-    /*public void populateDB(){
-
-        SQLiteDatabase db = this.getReadableDatabase();
-        addUserTradeflow("12345", "admin123", "admin", "0");
-
-        addStoreTradeflow("441", "Ruiz Cortinez(1522)", "Walmart", "Supermercado", "1225", "Rodesia del Nte #402, col. San Roque, cp. 65008, San Pedro, Nuevo Leon");
-        addStoreTradeflow("610", "Centro(3323)", "Soriana", "Almacen", "855", "Jacarandas #233, col. Linda Vista, cp. 63005, Guadalupe, Nuevo Leon");
-        addStoreTradeflow("9405", "Los Angeles(1982)", "HEB", "Supermercado", "322", "Romulo Garza #2988, col. Los Morales, cp. 24452, San Nicolas de los Garza, Nuevo Leon");
-        addStoreTradeflow("102", "Escobedo(3004)", "OXXO", "CEDIS", "650", "Lazaro Cardenas #2011, col. Centrito Valle, cp. 66305, San Pedro, Nuevo Leon");
-        addStoreTradeflow("3365", "Universidad(1800)", "Famosa", "Almacen", "100", "Cuahutemoc #522, col. Centro, cp.68000, Monterrey, Nuevo Leon");
-        addStoreTradeflow("6631", "Juarez(9085)", "Comercial Treviño", "Almacen", "600", "Mariano Escobedo #2223, col. Santa Fe, cp. 69908, Santa Catarina, Nuevo Leon");
-
-        addAlertTradeflow("100", "SQL completo, donde indicamos los campos", "0");
-        addAlertTradeflow("100", "La polémica por la manera en la que son tratados los refugiados ", "0");
-        addAlertTradeflow("100", "Developing a custom adapter", "0");
-        addAlertTradeflow("322", "Como en el caso de los métodos de modificación de datos", "0");
-        addAlertTradeflow("650", "Tutorial describes how to use the ListView view together with activities and fragments in A", "0");
-        addAlertTradeflow("650", "Above syntax is calling startActivity method", "0");
-        addAlertTradeflow("1225", "Intent is an abstract description of an operation", "0");
-        addAlertTradeflow("855", "Existen 5 continentes, no 2. solo por que seas un continente con gran cultura", "0");
-        addAlertTradeflow("855", "Durante un breve periodo de tiempo la solidaridad con el pueblo", "0");
-        addAlertTradeflow("600", "Todo comenzó mal con el nuevo plan de Hoy No Circula, pues en el primer día de operación se registraron nuevamente niveles altos de partículas", "0");
-        addAlertTradeflow("600", "Se registró un índice de contaminación superior a los 150 puntos IMECA", "0");
-        addAlertTradeflow("600", "Entre las medidas que se podrían aplicar en la Fase 1 de Contingencia, se contempla el Doble No Circula", "0");
-
-        addNewsTradeflow("1", "MES DEL BEBE = Capent Participará en las promociones que implemente la campaña de Comercial Mexicana");
-        addNewsTradeflow("1", "Asegurar precio de venta de HINDS nutritiva (Edicion especial)");
-        addNewsTradeflow("2", "AsyncTask allows you to perform asynchronous work on your user interface");
-        addNewsTradeflow("3", "Las espantosas condiciones en las que vivían los niños conmocionaron al mundo y las organizaciones humanitarias");
-        addNewsTradeflow("22", "Cientos de niños fueron adoptados por familias en Occidente");
-        addNewsTradeflow("14", "Tras poco más de cuatro meses de haber llegado a Colombia, el corresponsal de BBC");
-        addNewsTradeflow("14", "Así lo cuenta en este texto de corte personal y algo lúdico.");
-        addNewsTradeflow("11", "Él intentará evitarlo en su cicla. Y por la noche se juntarán a hacer parche.");
-        addNewsTradeflow("11", "Estas son algunas de ellas, una pequeña muestra, con la aclaración de que, como vivo en Bogotá");
-        addNewsTradeflow("10", "El Breve Diccionario de Colombianismos de la Academia Colombiana de la Lengua la define como encogerse para dormir, hacerse un ovillo");
-        addNewsTradeflow("19", "Tras poco más de cuatro meses de haber llegado a Colombia, el corresponsal de BBC");
-        addNewsTradeflow("8", "Así lo cuenta en este texto de corte personal y algo lúdico.");
-        addNewsTradeflow("9", "Él intentará evitarlo en su cicla. Y por la noche se juntarán a hacer parche.");
-        addNewsTradeflow("25", "Estas son algunas de ellas, una pequeña muestra, con la aclaración de que, como vivo en Bogotá");
-        addNewsTradeflow("22", "El Breve Diccionario de Colombianismos de la Academia Colombiana de la Lengua la define como encogerse para dormir, hacerse un ovillo");
-
-        addClientTradeflow("1", "1");
-        addClientTradeflow("1", "2");
-        addClientTradeflow("1", "3");
-        addClientTradeflow("1", "22");
-        addClientTradeflow("1", "14");
-        addClientTradeflow("2", "11");
-        addClientTradeflow("2", "10");
-        addClientTradeflow("2", "1");
-        addClientTradeflow("3", "19");
-        addClientTradeflow("4", "11");
-        addClientTradeflow("4", "10");
-        addClientTradeflow("4", "8");
-        addClientTradeflow("4", "22");
-        addClientTradeflow("5", "25");
-        addClientTradeflow("5", "18");
-        addClientTradeflow("6", "2");
-        addClientTradeflow("6", "1");
-        addClientTradeflow("6", "15");
-        addClientTradeflow("7", "21");
-    }*/
 
     // Upgrading database
     @Override
@@ -233,7 +173,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     // Adding new Store
     public void addStoreTradeflow(String num, String nom, String cad, String fo,
-                                  String id, String di, String us) {
+                                  String id, String di, String us, String cr) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(NUM_TIENDAS, num);
@@ -244,6 +184,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 //        values.put(CALLE, ca);
         values.put(DIRECCION, di);
         values.put(USUARIO, us);
+        values.put(CRUZ, cr);
         // Inserting Row
         db.insert(TIENDAS_TRADEFLOW_TABLE, null, values);
         db.close(); // Closing database connection
@@ -354,7 +295,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         Cursor cursor = db.rawQuery(" SELECT " + NUM_TIENDAS + ", " + NOM_TIENDA +
                 ", " + CADENA + ", " + FORMATO + ", " + ID_TIENDA + ", " + DIRECCION + ", " + USUARIO +
-                " FROM " + TIENDAS_TRADEFLOW_TABLE + " WHERE " + USUARIO + " != '" + user + "' ; ", null);
+                ", " + CRUZ + " FROM " + TIENDAS_TRADEFLOW_TABLE + " WHERE " + USUARIO + " != '" + user + "' ; ", null);
 
         if (cursor.moveToFirst()) {
             do {
@@ -367,6 +308,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 //                u.setCalle(cursor.getString(5));
                 u.setDireccion(cursor.getString(5));
                 u.setUsuario(cursor.getString(6));
+                u.setCruz(cursor.getString(7));
                 listStores.add(u);
             }while (cursor.moveToNext());
         }
@@ -384,7 +326,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         Cursor cursor = db.rawQuery(" SELECT " + NUM_TIENDAS + ", " + NOM_TIENDA +
                 ", " + CADENA + ", " + FORMATO + ", " + ID_TIENDA + ", " + DIRECCION + ", " + USUARIO +
-                " FROM " + TIENDAS_TRADEFLOW_TABLE + " WHERE " + USUARIO + " = '" + user + "' ; ", null);
+                ", " + CRUZ + " FROM " + TIENDAS_TRADEFLOW_TABLE + " WHERE " + USUARIO + " = '" + user + "' ; ", null);
 
         if (cursor.moveToFirst()) {
             do {
@@ -397,6 +339,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 //                u.setCalle(cursor.getString(5));
                 u.setDireccion(cursor.getString(5));
                 u.setUsuario(cursor.getString(6));
+                u.setCruz(cursor.getString(7));
                 listStores.add(u);
             }while (cursor.moveToNext());
         }
