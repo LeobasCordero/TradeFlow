@@ -33,13 +33,51 @@ public class ResurtidoActivity extends AppCompatActivity {
     boolean pict = false;
 
     public void onClickPicture(View view) {
-
+        ivThumbnailPhoto = (ImageView) findViewById(R.id.imagen2);
+        boolean noDraw=(ivThumbnailPhoto.getDrawable() == null);
         // create intent with ACTION_IMAGE_CAPTURE action
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if(noDraw)
+        {
+            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
-        // start camera activity
-        startActivityForResult(intent, TAKE_PICTURE);
+            // start camera activity
+            startActivityForResult(intent, TAKE_PICTURE);
+        }
+        else
+        {
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("¿Que fotografia desea volver a tomar?")
+                    .setCancelable(false)
+                    .setPositiveButton("Fotografia 1", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            //TODO
+                            ivThumbnailPhoto = (ImageView) findViewById(R.id.imagen1);
+                            boolean hasDraw=(ivThumbnailPhoto.getDrawable() != null);
+                            // Toast.makeText(getApplicationContext(),"retake", Toast.LENGTH_LONG).show();
+                            ivThumbnailPhoto.setImageDrawable(null);
+                            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
+                            // start camera activity
+                            startActivityForResult(intent, TAKE_PICTURE);
+
+
+                        }
+                    })
+                    .setNegativeButton("Fotografia 2", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            ivThumbnailPhoto = (ImageView) findViewById(R.id.imagen2);
+                            boolean hasDraw=(ivThumbnailPhoto.getDrawable() != null);
+                            // Toast.makeText(getApplicationContext(),"retake", Toast.LENGTH_LONG).show();
+                            ivThumbnailPhoto.setImageDrawable(null);
+                            Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+                            // start camera activity
+                            startActivityForResult(intent, TAKE_PICTURE);
+                        }
+                    });
+            AlertDialog alert = builder.create();
+            alert.show();
+        }
     }
     public void save(View v) {
         boolean check=false;

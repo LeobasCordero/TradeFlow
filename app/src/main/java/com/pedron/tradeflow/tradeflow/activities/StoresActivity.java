@@ -24,17 +24,17 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.pedron.tradeflow.tradeflow.R;
-import com.pedron.tradeflow.tradeflow.adapters.AdapterAllStores;
 import com.pedron.tradeflow.tradeflow.adapters.AdapterStores;
 import com.pedron.tradeflow.tradeflow.entity.Store;
 import com.pedron.tradeflow.tradeflow.util.Constant;
@@ -43,6 +43,7 @@ import com.pedron.tradeflow.tradeflow.util.DialogClass;
 import com.pedron.tradeflow.tradeflow.util.GPSTracker;
 import com.pedron.tradeflow.tradeflow.util.HelperUtilities;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -56,13 +57,14 @@ public class StoresActivity extends AppCompatActivity {
     ArrayAdapter adapter, adapterAll;
     EditText inputSearch;
     List<Store> storeList, allStores;
+    List<String> allStoreString;
     ImageView config;
     TextView textView, dateFooter;
     private View mProgressView, mStoresView, mSFooterView;
-    private CheckinTask mCheckinTask = null;
+    public CheckinTask mCheckinTask = null;
     private Boolean exit = false;
     String idUser;
-    Dialog listDialog;
+//    Dialog listDialog;
 
 
     @Override
@@ -131,6 +133,7 @@ public class StoresActivity extends AppCompatActivity {
 
         storeList = getStores();
         allStores = getAllStores();
+        allStoreString = getStringFromAllStores(allStores);
 
         // Adding items to listview
         adapter = new AdapterStores(this, storeList);
@@ -139,168 +142,83 @@ public class StoresActivity extends AppCompatActivity {
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                if (view.findViewById(R.id.img_cruz).isPressed()) {
-                    storeList.remove(position);
-//                    adapter.notifyDataSetChanged();
-                } else {
-                    if (mCheckinTask != null) {
-                        return;
-                    }
-
-                ImageView imR = (ImageView) view.findViewById(R.id.sem_rojo);
+               /* ImageView imR = (ImageView) view.findViewById(R.id.sem_rojo);
                 ImageView imA = (ImageView) view.findViewById(R.id.sem_ama);
+                ImageView imC = (ImageView) view.findViewById(R.id.img_cruz);
                 imR.setVisibility(View.INVISIBLE);
                 imA.setVisibility(View.VISIBLE);
+                if(imC.getVisibility() == View.VISIBLE)
+                    imC.setVisibility(View.INVISIBLE);
 
                 showProgress(true);
                 mCheckinTask = new CheckinTask(position);
-                mCheckinTask.execute((Void) null);
+                mCheckinTask.execute((Void) null);*/
+                /*Log.i("Leobas", "view tag: " + view.getTag());
+                switch(view.getId()){
+                    case R.id.img_cruz:
+                        Log.i("Leobas", "entro a la cruz");
+                        break;
+                    case R.id.element_list_store:
+                        ImageView imR = (ImageView) view.findViewById(R.id.sem_rojo);
+                        ImageView imA = (ImageView) view.findViewById(R.id.sem_ama);
+                        ImageView imC = (ImageView) view.findViewById(R.id.img_cruz);
+                        imR.setVisibility(View.INVISIBLE);
+                        imA.setVisibility(View.VISIBLE);
+                        if(imC.getVisibility() == View.VISIBLE)
+                            imC.setVisibility(View.INVISIBLE);
 
-                /*LocationManager locManager = (LocationManager)getSystemService(LOCATION_SERVICE);
-
-                LocationListener locListener = new LocationListener() {
-
-                    public void onLocationChanged(Location location) {
-                        //Hacer la insercion del registro en BDD
-//                        Log.i("Leobas", "location " + location.getLongitude() + ", " + location.getAltitude());
-                    }
-
-                    public void onProviderDisabled(String provider){
-                        Log.i("Leobas", "GPS apagado");
-                    }
-
-                    public void onProviderEnabled(String provider){
-                        Log.i("Leobas", "GPS encendido");
-                    }
-
-                    public void onStatusChanged(String provider, int status, Bundle extras){
-                        Log.i("Leobas", "Status Changed");
-                    }
-                };
-
-                if ( Build.VERSION.SDK_INT >= 23 &&
-                        ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION ) != PackageManager.PERMISSION_GRANTED &&
-                        ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-//                    return true;
-                }
-
-//                Log.i("Leobas", "GPS encendido: " + locManager.isProviderEnabled(LocationManager.GPS_PROVIDER));
-                locManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locListener);
-                Location loc = locManager.getLastKnownLocation("gps");
-
-//                Log.i("Leobas", "Location: " + loc.getProvider());
-                locListener.onLocationChanged(loc);
-
-//                Log.i("Leobas", "Location " + loc.getAltitude() + ", " + loc.getLongitude());
-                try {
-                    // Simulate network access.
-                    Thread.sleep(2000);
-                } catch (InterruptedException e) {
-                    Log.i("Leobas", e.getMessage());
+                        showProgress(true);
+                        mCheckinTask = new CheckinTask(position);
+                        mCheckinTask.execute((Void) null);
+                        break;
                 }*/
-
-//                Toast.makeText(getApplicationContext(), R.string.check_in_toast, Toast.LENGTH_LONG).show();
-//                Log.i("Leobas", "location " + location.getLongitude() + ", " + location.getAltitude());
-
-            /*    Intent launchActivity = new Intent(StoresActivity.this, AlertsActivity.class);
-                Bundle extras = new Bundle();
-                storeList.get(position);
-                Log.i("Leobas", "idTienda: " + storeList.get(position).getIdTienda());
-                extras.putString("idTienda", storeList.get(position).getIdTienda());
-                launchActivity.putExtras(extras);*/
-
-//                ImageView imR = (ImageView)view.findViewById(R.id.sem_rojo);
-//                ImageView imA = (ImageView)view.findViewById(R.id.sem_ama);
-//                imR.setVisibility(View.INVISIBLE);
-//                imA.setVisibility(View.VISIBLE);
-//                turnGPSOff();
-//                startActivity(launchActivity);
+                /*showProgress(true);
+                mCheckinTask = new CheckinTask(position);
+                mCheckinTask.execute((Void) null);*/
             }
-            }
+
         });
-/**
- * TODO El texto descriptivo ya no funciona
- */
-/*
-        inputSearch.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                listDialog = new Dialog(StoresActivity.this);
-                listDialog.setTitle("Seleccione la Tienda");
-                LayoutInflater li = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                v = li.inflate(R.layout.all_stores_list, null, false);
-                listDialog.setContentView(v);
-                listDialog.setCancelable(true);
-                //there are a lot of settings, for dialog, check them all out!
 
-                ListView list1 = (ListView) listDialog.findViewById(R.id.allstoreslistview);
-                adapterAll = new AdapterAllStores(getApplicationContext(), allStores);
-                list1.setAdapter(adapterAll);
-                listDialog.show();
 
-                list1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        Store newStore;
-                        int lastPos = storeList.size();
-                        newStore = allStores.get(position);
-                        newStore.setCruz(Constant.CRUZ_TRUE);
-                        storeList.add(lastPos, newStore);
-//                        adapter = new AdapterStores(getApplicationContext(), storeList);
-//                        lv.setAdapter(adapter);
-                        allStores.remove(position);
-                        adapter.notifyDataSetChanged();
-
-                        listDialog.hide();
-                    }
-                });
-
-            }
-        });*/
         inputSearch.addTextChangedListener(new TextWatcher() {
 
             @Override
             public void onTextChanged(CharSequence cs, int arg1, int arg2, int arg3) {
-                // When user changed the Text
-                /*if(inputSearch.getText().length() > 3){
-                    lv.setVisibility(View.INVISIBLE);
-                    lva.setVisibility(View.VISIBLE);
+                if(inputSearch.getText().length() >= 3){
+                    if(lv.getVisibility() == View.VISIBLE)
+                        verifyVisibility(true);
 
-                    adapterAll = new AdapterAllStores(getApplicationContext(), allStores);
+                    adapterAll = new ArrayAdapter(getApplicationContext(), R.layout.list_item_all_stores, R.id.nombre_tienda_s, allStoreString);
                     lva.setAdapter(adapterAll);
 
-                    adapterAll.notifyDataSetChanged();
+//                    adapterAll.notifyDataSetChanged();
 
                     lva.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+//                            Log.i(TAG, "onListItemClick: " + position);
                             Store newStore;
                             int lastPos = storeList.size();
-                            newStore = allStores.get(position);
+                            //enviar el nombre que voy a borrar
+                            TextView v = (TextView)view.findViewById(R.id.nombre_tienda_s);
+                            newStore = getStoreToAddRemove(v.getText().toString());
                             newStore.setCruz(Constant.CRUZ_TRUE);
                             storeList.add(lastPos, newStore);
-                            allStores.remove(position);
 
-                            lva.setVisibility(View.INVISIBLE);
-                            lv.setVisibility(View.VISIBLE);
-//                            adapter = new AdapterStores(getApplicationContext(), storeList);
+                            if(lv.getVisibility() == View.INVISIBLE)
+                                verifyVisibility(false);
 
-//                            LayoutInflater li = (LayoutInflater) getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-//                            View v = li.inflate(R.layout.lis, null, false);
+                            inputSearch.setText("");
                             lv.setAdapter(adapter);
-
-//                            this.setContentView(lv);
-//                            lv.setVisibility(View.VISIBLE);
-                            Log.i("Leobas", "clic");
-//                            lv.setAdapter(adapter);
-                            adapter.notifyDataSetChanged();
-//                            inputSearch.setText("");
                         }
                     });
+                    adapterAll.getFilter().filter(cs);
+                }else if(inputSearch.getText().length() == 0){
+                    if(lv.getVisibility() == View.INVISIBLE)
+                        verifyVisibility(false);
+                }
 
-
-                }*/
             }
 
             @Override
@@ -313,57 +231,17 @@ public class StoresActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable arg0) {
                 // TODO Auto-generated method stub
-                if(inputSearch.getText().length() >= 3){
-                    lv.setVisibility(View.INVISIBLE);
-                    lva.setVisibility(View.VISIBLE);
 
-                    adapterAll = new AdapterAllStores(getApplicationContext(), allStores);
-                    lva.setAdapter(adapterAll);
-
-                    adapterAll.notifyDataSetChanged();
-
-                    lva.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                        @Override
-                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                            Store newStore;
-                            int lastPos = storeList.size();
-                            newStore = allStores.get(position);
-                            newStore.setCruz(Constant.CRUZ_TRUE);
-                            storeList.add(lastPos, newStore);
-                            allStores.remove(position);
-
-                            lva.setVisibility(View.INVISIBLE);
-                            lv.setVisibility(View.VISIBLE);
-//                            adapter = new AdapterStores(getApplicationContext(), storeList);
-                            inputSearch.setText("");
-                            lv.setAdapter(adapter);
-
-                            /*LayoutInflater inflater = (LayoutInflater) getApplicationContext()
-                                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-                            View listItemView = inflater.inflate(
-                                    R.layout.list_item_stores,
-                                    parent,
-                                    false);*/
-//                            this.setContentView(lv);
-//                            lv.setVisibility(View.VISIBLE);
-                            Log.i("Leobas", "clic");
-//                            lv.setAdapter(adapter);
-//                            adapter.notifyDataSetChanged();
-
-                        }
-                    });
-                }else if(inputSearch.getText().length() == 0){
-                    Log.i("Leobas", "zero");
-                    lva.setVisibility(View.INVISIBLE);
-                    lv.setVisibility(View.VISIBLE);
-                    adapter.notifyDataSetChanged();
-                }
+                /*if(inputSearch.getText().length() == 0){
+                    if(lva.getVisibility() == View.VISIBLE) {
+                        Log.i("Leobas", "zero");
+                        lva.setVisibility(View.INVISIBLE);
+                        lv.setVisibility(View.VISIBLE);
+                    }
+                }*/
             }
         });
-
     }
-
 
 
     public void turnGPSOn(){
@@ -466,11 +344,10 @@ public class StoresActivity extends AppCompatActivity {
         protected Boolean doInBackground(Void... params) {
             // TODO: attempt authentication against a network service.
 
-            Log.i("Stores", "1");
             try {
                 // Simulate network access.
                 LocationManager locManager = (LocationManager)getSystemService(LOCATION_SERVICE);
-                Log.i("Stores", "2");
+
                 LocationListener locListener = new LocationListener() {
                     public void onLocationChanged(Location location) {
                         //Hacer la insercion del registro en BDD
@@ -489,51 +366,14 @@ public class StoresActivity extends AppCompatActivity {
                         Log.i("Leobas", "Status Changed");
                     }
                 };
-                Log.i("Stores", "3");
+
                 if ( Build.VERSION.SDK_INT >= 23 &&
                         ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.ACCESS_FINE_LOCATION ) != PackageManager.PERMISSION_GRANTED &&
                         ContextCompat.checkSelfPermission(getApplicationContext(), android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 //                    return true;
-                    Log.i("Stores", "4");
                 }
-                Log.i("Stores", "5");
 
-//                Log.i("Leobas", "GPS encendido: " + locManager.isProviderEnabled(LocationManager.GPS_PROVIDER));
-//                locManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locListener);
-//                Log.i("Stores", "6");
-//                Location loc = locManager.getLastKnownLocation("gps");
-//                Log.i("Stores", "7");
-//                Log.i("Leobas", "Location: " + loc.getProvider());
-//                locListener.onLocationChanged(loc);
-//                Log.i("Stores", "8");
-//                Log.i("Leobas", "Location " + loc.getAltitude() + ", " + loc.getLongitude());
-                /*try {
-                    // Simulate network access.
-                    Thread.sleep(2000);
-                } catch (InterruptedException e) {
-                    Log.i("Leobas", e.getMessage());
-                }*/
-//                Log.i("Leobas", "location " + location.getLongitude() + ", " + location.getAltitude());
-/*                Toast.makeText(getApplicationContext(), R.string.check_in_toast, Toast.LENGTH_LONG).show();
-
-
-                Intent launchActivity = new Intent(StoresActivity.this, AlertsActivity.class);
-                Bundle extras = new Bundle();
-                storeList.get(position);
-                Log.i("Leobas", "idTienda: " + storeList.get(position).getIdTienda());
-                extras.putString("idTienda", storeList.get(position).getIdTienda());
-                launchActivity.putExtras(extras);
-
-                ImageView imR = (ImageView)view.findViewById(R.id.sem_rojo);
-                ImageView imA = (ImageView)view.findViewById(R.id.sem_ama);
-                imR.setVisibility(View.INVISIBLE);
-                imA.setVisibility(View.VISIBLE);
-                turnGPSOff();
-                startActivity(launchActivity);*/
-//                viewRed.setVisibility(View.INVISIBLE);
-//                viewYellow.setVisibility(View.VISIBLE);
                 Thread.sleep(4000);
-//                Log.i("Stores", "9");
             } catch (Exception e) {
                 Log.i("Leobas", e.getMessage());
                 return false;
@@ -547,7 +387,6 @@ public class StoresActivity extends AppCompatActivity {
             mCheckinTask = null;
             showProgress(false);
 
-            Log.i("Leobas", "1");
             if (success) {
                 GPSTracker gps = new GPSTracker(getApplicationContext());
                 if(gps.canGetLocation())
@@ -555,9 +394,8 @@ public class StoresActivity extends AppCompatActivity {
                     gps.getLatitude(); // returns latitude
                     gps.getLongitude(); // returns longitude
                     Toast.makeText(getApplicationContext(), "Locacion: "+gps.getLatitude()+", "+gps.getLongitude(), Toast.LENGTH_LONG).show();
-                }
-                else
-                {
+                    Toast.makeText(getApplicationContext(), R.string.check_in_toast, Toast.LENGTH_LONG).show();
+                }else {
                     Toast.makeText(getApplicationContext(), "No se puede obtener la ubicacion", Toast.LENGTH_LONG).show();
                 }
                 //finish();
@@ -569,7 +407,7 @@ public class StoresActivity extends AppCompatActivity {
                 launchActivity.putExtras(extras);
                 turnGPSOff();
                 startActivity(launchActivity);
-                Toast.makeText(getApplicationContext(), R.string.check_in_toast, Toast.LENGTH_LONG).show();
+//                Toast.makeText(getApplicationContext(), R.string.check_in_toast, Toast.LENGTH_LONG).show();
             } else {
                 Log.i("Leobas", "10");
                 //Seria regresar los foquitos como estaban
@@ -590,4 +428,66 @@ public class StoresActivity extends AppCompatActivity {
         DialogClass dialog = new DialogClass(StoresActivity.this);
         dialog.showCustomDialog();
     }
+
+    public List<String> getStringFromAllStores(List<Store> allStoresList){
+        List<String> allNameStores = new ArrayList<String>();
+        for(Store s : allStoresList){
+            allNameStores.add(s.getNombreTienda());
+        }
+
+        return allNameStores;
+    }
+
+    public void verifyVisibility(boolean visibility){
+        if(visibility){
+            lv.setVisibility(View.INVISIBLE);
+            lva.setVisibility(View.VISIBLE);
+        }else{
+            lva.setVisibility(View.INVISIBLE);
+            lv.setVisibility(View.VISIBLE);
+        }
+    }
+
+    public Store getStoreToAddRemove(String nom){
+        Store storeToRemove = new Store();
+
+        for(int i = 0; i <= allStores.size(); i++){
+            if(allStores.get(i).getNombreTienda().equals(nom)){
+                storeToRemove = allStores.get(i);
+                storeToRemove.setCruz(Constant.CRUZ_TRUE);
+                allStores.remove(i);
+                allStoreString.clear();
+                allStoreString = getStringFromAllStores(allStores);
+                break;
+            }
+        }
+
+        return storeToRemove;
+    }
+
+    public void removeStoreFromList(int position){
+        Store s = storeList.get(position);
+        allStores.add(s);
+        allStoreString = getStringFromAllStores(allStores);
+        storeList.remove(position);
+        adapter.notifyDataSetChanged();
+    }
+
+    public void nextTask(View parent, int position){
+        ImageView imR = (ImageView) parent.findViewById(R.id.sem_rojo);
+        ImageView imA = (ImageView) parent.findViewById(R.id.sem_ama);
+        ImageView imC = (ImageView) parent.findViewById(R.id.img_cruz);
+
+        if(imR.getVisibility() == View.VISIBLE) {
+            imR.setVisibility(View.INVISIBLE);
+            imA.setVisibility(View.VISIBLE);
+        }
+        if(imC.getVisibility() == View.VISIBLE)
+            imC.setVisibility(View.INVISIBLE);
+
+        showProgress(true);
+        mCheckinTask = new CheckinTask(position);
+        mCheckinTask.execute((Void) null);
+    }
+
 }

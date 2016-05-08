@@ -22,8 +22,12 @@
     <string name="activities_header">Tareas</string>
     <string name="news_header">Noticias</string>
     <string name="resurtido_header">Resurtido</string>
-    <string name="piso_header">PISO DE VENTA</string>
-    <string name="bodega_header">BODEGA</string>
+    <string name="piso_header">Piso de Venta</string>
+    <string name="piso_venta"><u><b>PISO DE VENTA</b></u></string>
+    <string name="piso_bodega"><u><b>BODEGA</b></u></string>
+    <string name="piso_resurtido"><u><b>RESURTIDO</b></u></string>
+    <string name="piso_precio"><u><b>PRECIO</b></u></string>
+    <string name="bodega_header">Bodega</string>
     <string name="check_in_toast">Check In Exitoso</string>
     <string name="exit_question">¿Desea Salir de la Aplicación?</string>
     <string name="new_not_found">No hay Noticias para este Cliente</string>

@@ -233,7 +233,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(ID_CLIENTE, i);
         values.put(NOTICIA, n);
-        Log.i("Leobas", "ID: " + i + " NOTICIA " + n);
+
         // Inserting Row
         db.insert(NOTICIAS_TRADEFLOW_TABLE, null, values);
         db.close(); // Closing database connection

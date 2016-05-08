@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:descendantFocusability="blocksDescendants">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -24,6 +25,7 @@
         </RelativeLayout>
 
         <LinearLayout
+            android:id="@+id/element_list_store"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -36,6 +38,7 @@
                 android:orientation="horizontal">-->
 
             <RelativeLayout
+                android:id="@+id/rel_layout"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 >
@@ -108,6 +111,7 @@
                         </LinearLayout>-->
 
             <TableLayout
+                android:id="@+id/table_list"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="10dp">

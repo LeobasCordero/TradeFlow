@@ -2,24 +2,25 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:id="@+id/item_all_stores">
 
-    <LinearLayout
+   <!-- <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal">-->
 
-        <LinearLayout
+        <!--<LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingLeft="5dp"
-            android:paddingRight="5dp">
+            android:paddingRight="5dp">-->
 
-            <RelativeLayout
+            <!--<RelativeLayout
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
-                >
+                >-->
 
                 <TextView
                     android:id="@+id/nombre_tienda_s"
@@ -31,16 +32,16 @@
                     android:textSize="15sp"
                     android:textStyle="bold" />
 
-                <ImageView
+               <!-- <ImageView
                     android:layout_width="15dp"
                     android:layout_height="15dp"
                     android:layout_gravity="center_vertical"
                     android:layout_alignParentRight="true"
                     android:src="@drawable/add" />
 
-            </RelativeLayout>
+            </RelativeLayout>-->
 
-            <TableLayout
+            <!--<TableLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="10dp">
@@ -90,9 +91,9 @@
                         android:textStyle="bold" />
 
                 </TableRow>
-            </TableLayout>
+            </TableLayout>-->
 
-        </LinearLayout>
+        <!--</LinearLayout>-->
 
-    </LinearLayout>
+    <!--</LinearLayout>-->
 </LinearLayout>

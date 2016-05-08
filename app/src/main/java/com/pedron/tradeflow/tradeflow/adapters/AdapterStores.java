@@ -1,14 +1,20 @@
 package com.pedron.tradeflow.tradeflow.adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TableLayout;
 import android.widget.TextView;
 
 import com.pedron.tradeflow.tradeflow.R;
+import com.pedron.tradeflow.tradeflow.activities.StoresActivity;
 import com.pedron.tradeflow.tradeflow.entity.Store;
 import com.pedron.tradeflow.tradeflow.util.Constant;
 
@@ -19,9 +25,17 @@ import java.util.List;
  */
 public class AdapterStores extends ArrayAdapter<Store> {
 
+    /*ImageView imR;
+    ImageView imA;
+    ImageView imC;*/
+
+    public int pos;
+
     public AdapterStores(Context context, List<Store> storeList) {
         super(context, 0, storeList);
+        Context con = context;
     }
+
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -30,17 +44,11 @@ public class AdapterStores extends ArrayAdapter<Store> {
         LayoutInflater inflater = (LayoutInflater) getContext()
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        //Salvando la referencia del View de la fila
-        View listItemView = convertView;
-
-        //Comprobando si el View no existe
-        if (null == convertView) {
-            //Si no existe, entonces inflarlo con two_line_list_item.xml
-            listItemView = inflater.inflate(
+          final View listItemView = inflater.inflate(
                     R.layout.list_item_stores,
                     parent,
                     false);
-        }
+        pos = position;
 
         //Obteniendo instancias de los text views
         TextView nombreTienda = (TextView) listItemView.findViewById(R.id.nombre_tienda);
@@ -71,11 +79,50 @@ public class AdapterStores extends ArrayAdapter<Store> {
                 Log.i("Leobas", "nulo");
             }
         }
-//        if(store.getUsuario().equals()){
-//
-//        }
+
+        //Handle buttons and add onClickListeners
+        ImageView imgCruz = (ImageView)listItemView.findViewById(R.id.img_cruz);
+        LinearLayout linearLis = (LinearLayout)listItemView.findViewById(R.id.element_list_store);
+        RelativeLayout relativeLayout = (RelativeLayout)listItemView.findViewById(R.id.rel_layout);
+        TableLayout tabLay = (TableLayout)listItemView.findViewById(R.id.table_list);
+
+        /*imA = (ImageView)listItemView.findViewById(R.id.sem_ama);
+        imR = (ImageView)listItemView.findViewById(R.id.sem_rojo);
+        imC = (ImageView)listItemView.findViewById(R.id.img_cruz);*/
+
+        imgCruz.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                StoresActivity a = (StoresActivity) getContext();
+                a.removeStoreFromList(pos);
+            }
+        });
+        linearLis.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                StoresActivity a = (StoresActivity) getContext();
+                a.nextTask(listItemView, pos);
+
+            }
+        });
+        relativeLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                StoresActivity a = (StoresActivity) getContext();
+                a.nextTask(listItemView, pos);
+
+            }
+        });
+        tabLay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                StoresActivity a = (StoresActivity) getContext();
+                a.nextTask(listItemView, pos);
+            }
+        });
+
         //Devolver al ListView la fila creada
         return listItemView;
     }
-
 }

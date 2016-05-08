@@ -42,17 +42,17 @@ public class AdapterAllStores extends ArrayAdapter<Store> {
 
         //Obteniendo instancias de los text views
         TextView nombreTienda = (TextView) listItemView.findViewById(R.id.nombre_tienda_s);
-        TextView cadena = (TextView) listItemView.findViewById(R.id.cadena_tienda_s);
-        TextView formato = (TextView) listItemView.findViewById(R.id.formato_tienda_s);
-        TextView colonia = (TextView) listItemView.findViewById(R.id.direccion_tienda_s);
+//        TextView cadena = (TextView) listItemView.findViewById(R.id.cadena_tienda_s);
+//        TextView formato = (TextView) listItemView.findViewById(R.id.formato_tienda_s);
+//        TextView colonia = (TextView) listItemView.findViewById(R.id.direccion_tienda_s);
 
         //Obteniendo instancia de la Tarea en la posición actual
         Store store = (Store) getItem(position);
 
         nombreTienda.setText(store.getNombreTienda());
-        cadena.setText(store.getCadena());
-        formato.setText(store.getFormato());
-        colonia.setText(store.getDireccion());
+//        cadena.setText(store.getCadena());
+//        formato.setText(store.getFormato());
+//        colonia.setText(store.getDireccion());
 
         //Devolver al ListView la fila creada
         return listItemView;
