@@ -31,7 +31,7 @@ public class ClientsActivity extends AppCompatActivity implements AdapterClient.
     private RecyclerView recycler;
     private List<String> clientList;
     TextView textView;
-    String idTienda, idCliente;
+    String idTienda, idCliente, usuario;
     List clientes;
 
     @Override
@@ -49,6 +49,7 @@ public class ClientsActivity extends AppCompatActivity implements AdapterClient.
         Intent intent = getIntent();
         Bundle b = intent.getExtras();
         idTienda = b.getString("idTienda");
+        usuario = b.getString("usuario");
 
         //obtengo la lista de clientes de la BDD
         DatabaseHandler db = new DatabaseHandler(this);
@@ -119,6 +120,7 @@ public class ClientsActivity extends AppCompatActivity implements AdapterClient.
         Bundle extras = new Bundle();
         position++;
         extras.putString("idCliente", String.valueOf(position));
+        extras.putString("usuario", usuario);
         launchActivity.putExtras(extras);
         startActivity(launchActivity);
     }

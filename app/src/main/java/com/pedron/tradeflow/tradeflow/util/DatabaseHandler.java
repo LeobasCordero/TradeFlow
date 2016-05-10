@@ -10,6 +10,7 @@ import android.util.Log;
 import com.pedron.tradeflow.tradeflow.entity.Alert;
 import com.pedron.tradeflow.tradeflow.entity.Store;
 import com.pedron.tradeflow.tradeflow.entity.User;
+import com.pedron.tradeflow.tradeflow.entity.Visit;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,6 +63,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     // Visits Table Column names
     private static final String FECHA = "fecha";
     private static final String UBICACION = "ubicacion";
+    private static final String ETAPA = "etapa";
 
     // News Table Columns names
     private static final String NOTICIA = "noticia";
@@ -109,7 +111,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         String CREATE_VISITAS_TABLE = "CREATE TABLE " + VISITAS_TRADEFLOW_TABLE + "("
                 + USUARIO + " TEXT, " + FECHA + " TEXT, " + UBICACION + " TEXT, " + ID_TIENDA + " TEXT, "
-                + ESTATUS + " TEXT);";
+                + ESTATUS + " TEXT, " +ETAPA + " TEXT);";
         db.execSQL(CREATE_VISITAS_TABLE);
 
         String CREATE_NOTICIAS_TABLE = "CREATE TABLE " + NOTICIAS_TRADEFLOW_TABLE + "("
@@ -214,7 +216,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     }
 
     // Adding new Visit
-    public void addVisitTradeflow(String u, String f, String ub, String t, String s) {
+    public void addVisitTradeflow(String u, String f, String ub, String t, String s, String e) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(USUARIO, u);
@@ -222,6 +224,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(UBICACION, ub);
         values.put(ID_TIENDA, t);
         values.put(ESTATUS, s);
+        values.put(ETAPA, e);
         // Inserting Row
         db.insert(VISITAS_TRADEFLOW_TABLE, null, values);
         db.close(); // Closing database connection
@@ -457,4 +460,49 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         return listProductos;
     }
+
+    // Getting Visits
+    public List<Visit> getVisits(String usuario) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        List<Visit> listVisit = new ArrayList<>();
+
+        Cursor cursor = db.rawQuery(" SELECT " + FECHA + ", " + UBICACION + ", " +
+                ID_TIENDA + ", " + ESTATUS + ", " + ETAPA + " FROM " + VISITAS_TRADEFLOW_TABLE
+                + " WHERE " + USUARIO + "='" + usuario + "' ; ", null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                Visit visit = new Visit();
+                visit.setFecha(cursor.getString(0));
+                visit.setUbicacion(cursor.getString(1));
+                visit.setId_tienda(cursor.getString(2));
+                visit.setEstatus(cursor.getString(3));
+                visit.setEtapa(cursor.getString(4));
+                listVisit.add(visit);
+            }while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+
+        return listVisit;
+    }
+
+    public void deleteRegistryFromVisits(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        db.delete(VISITAS_TRADEFLOW_TABLE, USUARIO + " = 12345" , null);
+    }
+
+    public void updateVisits(String etapa, String usuario){
+        SQLiteDatabase db = this.getReadableDatabase();
+        //Establecemos los campos-valores a actualizar
+        ContentValues valores = new ContentValues();
+        valores.put(ETAPA,etapa);
+
+        //Actualizamos el registro en la base de datos
+        db.update(VISITAS_TRADEFLOW_TABLE, valores, USUARIO + "= " + usuario, null);
+    }
+/**
+ * TODO falta el metodo update para Visitas
+  */
 }

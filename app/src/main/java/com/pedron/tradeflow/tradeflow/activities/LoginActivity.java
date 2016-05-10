@@ -33,6 +33,7 @@ import android.widget.TextView;
 
 import com.pedron.tradeflow.tradeflow.R;
 import com.pedron.tradeflow.tradeflow.entity.User;
+import com.pedron.tradeflow.tradeflow.entity.Visit;
 import com.pedron.tradeflow.tradeflow.util.Constant;
 import com.pedron.tradeflow.tradeflow.util.DatabaseHandler;
 
@@ -355,6 +356,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             showProgress(false);
 
             if (success) {
+               List<Visit> l = db.getVisits(mUser);
+                if(l != null && l.size() > 0){
+                    db.deleteRegistryFromVisits();
+                    db.addVisitTradeflow("12345", "true", "ubicacion", "idTienda", "0", "0");
+                }
+
                 //finish();
                 Intent intent = new Intent(LoginActivity.this, StoresActivity.class);
                 Bundle extras = new Bundle();
@@ -478,6 +485,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             db.addProductTradeflow("34", "7", "Corega");
             db.addProductTradeflow("35", "8", "Eclipsol");
 
+            db.addVisitTradeflow("12345", "true", "ubicacion", "idTienda", "0", "0");
         }
 //        db.addActivityTradeflow("", "", "");
         db.close();

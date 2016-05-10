@@ -64,6 +64,7 @@ public class StoresActivity extends AppCompatActivity {
     public CheckinTask mCheckinTask = null;
     private Boolean exit = false;
     String idUser;
+    private DatabaseHandler db;
 //    Dialog listDialog;
 
 
@@ -284,6 +285,13 @@ public class StoresActivity extends AppCompatActivity {
         return db.getStores(idUser);
     }
 
+    public void addVisit(){
+        DatabaseHandler db = new DatabaseHandler(this);
+        //0 = pendiente / 0 = 1tarea
+        Log.i("Leobas", idUser);
+        db.addVisitTradeflow(idUser, "true", "ubicacion", "idTienda", "0", "0");
+    }
+
     public String getFecha(){
         String date;
         Calendar cal = GregorianCalendar.getInstance();
@@ -398,12 +406,14 @@ public class StoresActivity extends AppCompatActivity {
                 }else {
                     Toast.makeText(getApplicationContext(), "No se puede obtener la ubicacion", Toast.LENGTH_LONG).show();
                 }
+
                 //finish();
                 Intent launchActivity = new Intent(StoresActivity.this, AlertsActivity.class);
                 Bundle extras = new Bundle();
                 storeList.get(position);
 //                Log.i("Leobas", "idTienda: " + storeList.get(position).getIdTienda());
                 extras.putString("idTienda", storeList.get(position).getIdTienda());
+                extras.putString("usuario", idUser);
                 launchActivity.putExtras(extras);
                 turnGPSOff();
                 startActivity(launchActivity);

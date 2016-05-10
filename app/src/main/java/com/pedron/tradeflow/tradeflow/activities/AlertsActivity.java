@@ -29,7 +29,7 @@ public class AlertsActivity extends AppCompatActivity {
     List alertas;
     ListView listView;
     TextView textView;
-    String idTienda;
+    String idTienda, usuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +48,7 @@ public class AlertsActivity extends AppCompatActivity {
         Intent intent = getIntent();
         Bundle b = intent.getExtras();
         idTienda = b.getString("idTienda");
+        usuario = b.getString("usuario");
 
         DatabaseHandler db = new DatabaseHandler(this);
         alertas = db.getAlerts(idTienda);
@@ -63,6 +64,7 @@ public class AlertsActivity extends AppCompatActivity {
                 Intent launchActivity = new Intent(AlertsActivity.this, ClientsActivity.class);
                 Bundle extras = new Bundle();
                 extras.putString("idTienda", idTienda);
+                extras.putString("usuario", usuario);
                 launchActivity.putExtras(extras);
                 startActivity(launchActivity);
             }

@@ -235,7 +235,6 @@ public class PisoPresentacionActivity extends AppCompatActivity {
 
             dialog.setTitle("\t\t\t\t\tPiso de Venta");
 
-
             // set the custom dialog components - text, image and button
             TextView text = (TextView) dialog.findViewById(R.id.text);
             //text.setText("Android custom dialog example!");
